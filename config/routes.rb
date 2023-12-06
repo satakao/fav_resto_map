@@ -10,19 +10,25 @@ Rails.application.routes.draw do
   sessions: 'admin/sessions'
   }
 
+  devise_scope :user do
+    post "member/guest_sign_in", to: "member/sessions#guest_sign_in"
+  end
+
   root to: 'member/homes#top'
 
   scope module: :member do
+    get 'users/mypage' => 'users#mypage'
+    get 'users/information/edit' => 'users#edit'
+    get 'users/confirm' => 'users#confirm'
     resources :users, only:[:show, :edit, :update, :destroy]do
       resources :relationships, only:[:create, :destroy]
       member do
         get :followings, :followers
       end
     end
-    get 'users/information/edit' => 'users#edit'
-    get 'users/confirm' => 'users#confirm'
-    get 'users/mypage' => 'users#mypage'
-      
+
+
+
     resources :posts, only:[:index, :show, :edit, :create, :update, :destroy]do
       resources :post_comments, only:[:create, :destroy]
       resource :favorite, only:[:create, :destroy]

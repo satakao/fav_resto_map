@@ -2,8 +2,14 @@ class Member::UsersController < ApplicationController
   def show
   end
 
+  def mypage
+    @user = current_user
+    @post = Post.new
+  end
+
   def edit
   end
+
 
   def update
   end
@@ -13,4 +19,5 @@ class Member::UsersController < ApplicationController
 
   def destroy
   end
+
 end
