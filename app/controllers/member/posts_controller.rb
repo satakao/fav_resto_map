@@ -3,6 +3,8 @@ class Member::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
+    @user = @post.user
   end
 
   def destroy
@@ -16,15 +18,17 @@ class Member::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    if @post.save
+    @post.user_id = current_user.id
+    if @post.save!
       @posts = Post.all
     else
-      render mypage
+      @user =current_user
+      render "member/users/mypage"
     end
   end
-  
+
   private
   def post_params
-    params.require(:post).permit(:store_name, :description, :is_published)
+    params.require(:post).permit(:store_name, :description, :is_published, :image)
   end
 end

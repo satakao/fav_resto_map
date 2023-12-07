@@ -1,2 +1,11 @@
-<h1>Member::Posts#show</h1>
-<p>Find me in app/views/member/posts/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <%= @user.name %><br>
+      <%= image_tag @post.image, size:"300x300" %><br>
+      <%= @post.store_name %><br>
+      <%= @post.description %>
+    </div>
+  </div>
+</div>
+

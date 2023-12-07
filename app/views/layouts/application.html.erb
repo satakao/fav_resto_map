@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>RestaurantMap</title>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,8 +14,10 @@
   </head>
 
   <body style="min-height:100vh ;position: relative;padding-bottom:50px;box-sizing:border-box;">
+
     <header>
       <nav class="navbar navbar-expand-lg navbar-light" style="background: #ffce6d; color: #291b25">
+
         <div class="container-fluid">
           <a href="/" class="navbar-brand ml-5">fav_resto_map</a>
 
@@ -24,58 +29,87 @@
               aria-label="Toggle navigation">
               <span class="navbar-toggler-icon" style="color: #291b25"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
               <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
+
                 <li>
                   <%= link_to users_mypage_path, class: 'nav-link' do %><i class="fa-regular fa-face-smile"></i> マイページ<% end %>
                 </li>
+
                 <li>
                   <%= link_to posts_path, class: 'nav-link' do %><i class="fa-solid fa-cake-candles"></i> 投稿一覧<% end %>
                 </li>
+
                 <li>
                   <%= link_to user_path(current_user), class: 'nav-link' do %><i class="fa-solid fa-cart-shopping"></i> 投稿内容<% end %>
                 </li>
+
                 <li>
                   <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link' do %><i class="fa-solid fa-right-from-bracket"></i> ログアウト<% end %>
                 </li>
+
               <% elsif admin_signed_in? %>
+
                 <li>
                   <%= link_to"投稿一覧",admin_items_path,class: 'nav-link' %>
                 </li>
+
                 <li>
                   <%= link_to"ユーザー一覧",admin_customers_path,class: 'nav-link' %>
                 </li>
+
                  <li>
                   <%= link_to"ログアウト",destroy_admin_session_path,class: 'nav-link' %>
                 </li>
+
               <% else %>
+
                 <li>
                   <%= link_to posts_path, class: 'nav-link' do %><i class="fa-solid fa-cake-candles"></i> 投稿一覧<% end %>
                 </li>
+
                 <li>
                   <%= link_to new_user_session_path, method: :get,class: 'nav-link' do %><i class="fa-solid fa-right-from-bracket"></i> ログイン<% end %>
                 </li>
+
               <% end %>
               </ul>
+
               <%= form_with do |f| %>
-                <%= f.text_field placeholder: "商品検索" %>
+
+                <%= f.text_field placeholder: "検索" %>
                 <%= f.submit "検索" %>
+
               <% end %>
+
             </div>
+
           </div>
+
         </div>
+
       </nav>
     </header>
+
     <main>
       <p id="notice"><%= notice %></p>
+
       <p class="alert"><%= alert %></p>
+
       <%= yield %>
     </main>
+
     <footer>
+
       <div class="fixed-bottom" style="background: #ffce6d">
-        <p class="text-center" style="color: #291b25">nagano cake</p>
+        <p class="text-center" style="color: #291b25">fav_resto_map</p>
       </div>
+
     </footer>
+
   </body>
+
 </html>

@@ -1,8 +1,24 @@
 <div class="container">
+
   <div class="row">
+
     <div class="col">
       <h1>ユーザー投稿内容</h1>
+      <%= render "member/users/show" posts: @posts %>
+      <% @posts.each do |post| %>
+
+        <%=link_to post_path(post.id) do %>
+          <%=image_tag post.image, size:'100x100' %>
+        <% end %>
       
+      <% end %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+       新規投稿
+      </button>
+
+      <%= render 'member/posts/form', post: @post %>
     </div>
+
   </div>
+
 </div>

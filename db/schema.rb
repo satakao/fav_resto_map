@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(version: 2023_12_05_053744) do
     t.integer "user_id", null: false
     t.string "store_name", null: false
     t.text "description", null: false
-    t.float "latitude", null: false
-    t.float "longitude", null: false
-    t.string "address", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
     t.boolean "is_published", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
