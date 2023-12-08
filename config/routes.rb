@@ -20,14 +20,12 @@ Rails.application.routes.draw do
     get 'users/mypage' => 'users#mypage'
     get 'users/information/edit' => 'users#edit'
     get 'users/confirm' => 'users#confirm'
-    resources :users, only:[:show, :edit, :update, :destroy]do
+    resources :users, only:[:show, :index, :edit, :update, :destroy]do
       resources :relationships, only:[:create, :destroy]
       member do
         get :followings, :followers
       end
     end
-
-
 
     resources :posts, only:[:index, :show, :edit, :create, :update, :destroy]do
       resources :post_comments, only:[:create, :destroy]

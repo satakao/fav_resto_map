@@ -1,2 +1,29 @@
-<h1>Member::Posts#index</h1>
-<p>Find me in app/views/member/posts/index.html.erb</p>
+<div class="container">
+
+  <div class="row">
+
+    <div class="col text-center">
+      <% @posts.each do |post| %>
+
+        <%= image_tag post.user.get_profile_image %>
+
+        <%=link_to user_path(post.user) do %>
+          <%= post.user.name %>
+        <% end %><br>
+
+          <%=link_to post_path(post.id) do %>
+
+          <%= image_tag post.image, size:"300x300" %><br>
+
+          <%= post.store_name %><br>
+
+          <%= post.description %><br>
+
+        <% end %>
+
+      <% end %>
+    </div>
+
+  </div>
+
+</div>

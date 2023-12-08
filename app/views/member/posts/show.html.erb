@@ -1,11 +1,21 @@
 <div class="container">
+
   <div class="row">
+
     <div class="col text-center">
       <%= @user.name %><br>
+
       <%= image_tag @post.image, size:"300x300" %><br>
+
       <%= @post.store_name %><br>
-      <%= @post.description %>
+
+      <%= @post.description %><br>
+
+      <%= render "member/posts/post_comment", post: @post, post_comment: @post_comment %>
+
     </div>
+
   </div>
+
 </div>
 

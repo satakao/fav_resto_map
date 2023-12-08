@@ -2,21 +2,51 @@
 
   <div class="row">
 
-    <div class="col">
-      <h1>ユーザー投稿内容</h1>
-      <%= render "member/users/show" posts: @posts %>
-      <% @posts.each do |post| %>
+    <div class="col text-center">
 
-        <%=link_to post_path(post.id) do %>
-          <%=image_tag post.image, size:'100x100' %>
+      <%= image_tag @user.get_profile_image %>
+
+      <%= @user.name %>
+
+      フォロワー<%=  @user.followers.count %>人
+
+      フォロー<%=  @user.followings.count %>人
+
+      <% if @user == current_user %>
+
+        <%= link_to users_information_edit_path, class: "btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-user-cog"></i>
         <% end %>
-      
+
+      <% else %>
+
+        <% if current_user.following?(@user) %>
+
+          <%= link_to user_relationship_path(@user,current_user), method: :delete, class:"btn btn-danger" do %>
+            フォローを外す
+          <% end %>
+
+        <% else %>
+
+          <%=link_to user_relationships_path(@user), method: :post, class:"btn btn-primary" do %>
+            フォローする
+        　<% end %>
+
+        <% end %>
+
       <% end %>
+
+
+      <h1><%= @user.name %>さんの投稿内容</h1>
+
+      <%= render "member/users/show", posts: @posts %>
+
+
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
        新規投稿
       </button>
 
-      <%= render 'member/posts/form', post: @post %>
+      <%= render "member/posts/form", post: @post %>
     </div>
 
   </div>
