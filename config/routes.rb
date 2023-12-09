@@ -18,8 +18,6 @@ Rails.application.routes.draw do
   
   scope module: :member do
     get 'users/mypage' => 'users#mypage'
-    get 'users/information/edit' => 'users#edit'
-    get 'users/confirm' => 'users#confirm'
     resources :users, only:[:show, :index, :edit, :update, :destroy]do
       resources :relationships, only:[:create, :destroy]
       member do
