@@ -8,5 +8,8 @@ class Post < ApplicationRecord
   validates :store_name, presence:true
   validates :description, presence:true,length:{maximum:100}
   validates :is_published, presence:true
-
+  
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
 end

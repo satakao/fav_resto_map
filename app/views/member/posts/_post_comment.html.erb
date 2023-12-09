@@ -10,7 +10,7 @@
     コメント：<%= post_comment.comment %>
 
     <%if post_comment.user_id == current_user.id %>
-      <%=link_to "削除する", post_post_comment_path(post,post_comment.id), method: :delete, class:"btn btn-danger" %><br>
+      <%=link_to "削除する", post_post_comment_path(post,post_comment.id), method: :delete, class:"btn btn-danger" %>
     <% end %>
 
   <% end %>

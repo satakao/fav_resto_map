@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
   sessions: 'admin/sessions'
   }
-
+  
   devise_scope :user do
     post "member/guest_sign_in", to: "member/sessions#guest_sign_in"
   end
-
+  
   root to: 'member/homes#top'
-
+  
   scope module: :member do
     get 'users/mypage' => 'users#mypage'
     get 'users/information/edit' => 'users#edit'
