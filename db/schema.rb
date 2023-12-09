@@ -52,17 +52,16 @@ ActiveRecord::Schema.define(version: 2023_12_09_071015) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "favorites", force: :cascade do |t|
+  create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "maps", force: :cascade do |t|
-    t.float "latitude"
-    t.float "longitude"
-    t.string "address"
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -79,6 +78,9 @@ ActiveRecord::Schema.define(version: 2023_12_09_071015) do
     t.integer "user_id", null: false
     t.string "store_name", null: false
     t.text "description", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
     t.boolean "is_published", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
