@@ -14,7 +14,7 @@
 
       <% if @user == current_user %>
 
-        <%= link_to users_information_edit_path, class: "btn btn-outline-secondary btn-block" do %>
+        <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
           <i class="fas fa-user-cog"></i>
         <% end %>
 

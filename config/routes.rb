@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'bookmarks/create'
+  get 'bookmarks/destroy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #使用するコントローラ指定、不要なパスワード変更のルーティング削除
   devise_for :users,skip: [:passwords],controllers: {
@@ -9,13 +11,13 @@ Rails.application.routes.draw do
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
   sessions: 'admin/sessions'
   }
-  
+
   devise_scope :user do
     post "member/guest_sign_in", to: "member/sessions#guest_sign_in"
   end
-  
+
   root to: 'member/homes#top'
-  
+
   scope module: :member do
     get 'users/mypage' => 'users#mypage'
     resources :users, only:[:show, :index, :edit, :update, :destroy]do
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
     resources :posts, only:[:index, :show, :edit, :create, :update, :destroy]do
       resources :post_comments, only:[:create, :destroy]
       resource :favorite, only:[:create, :destroy]
+      resource :bookmark, only:[:create, :destroy]
     end
   end
 

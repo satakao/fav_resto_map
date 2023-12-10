@@ -23,9 +23,13 @@
 
       <!--いいねボタン-->
       <%= render "member/favorites/favorite_btn", post: @post %>
+      <!--ブックマークボタン-->
+      <%= render "member/bookmarks/bookmark_btn", post: @post %>
 
 
       <%= @post.store_name %><br>
+
+      <%= @post.address %><br>
 
       <%= @post.description %><br>
 
