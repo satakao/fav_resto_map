@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'bookmarks/create'
-  get 'bookmarks/destroy'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #使用するコントローラ指定、不要なパスワード変更のルーティング削除
   devise_for :users,skip: [:passwords],controllers: {
@@ -17,6 +16,8 @@ Rails.application.routes.draw do
   end
 
   root to: 'member/homes#top'
+
+  get 'searches/search'
 
   scope module: :member do
     get 'users/mypage' => 'users#mypage'

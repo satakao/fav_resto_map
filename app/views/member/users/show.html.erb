@@ -8,9 +8,13 @@
 
       <%= @user.name %>
 
-      フォロワー<%=  @user.followers.count %>人
+      <%=link_to followers_user_path(@user.id) do %>
+        フォロワー<%=  @user.followers.count %>人
+      <% end %>
 
-      フォロー<%=  @user.followings.count %>人
+      <%=link_to followings_user_path(@user.id) do %>
+        フォロー<%=  @user.followings.count %>人
+      <% end %>
 
       <% if @user == current_user %>
 

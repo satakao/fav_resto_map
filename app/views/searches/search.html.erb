@@ -1,0 +1,27 @@
+<h1>Books search for "<span><%= @search %></span>"</h1>
+
+<table class="table table-hover table-inverse">
+  <% if @range == "User" %>
+
+    <tbody>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+      </tr>
+
+      <% @users.each do |user| %>
+
+      <tr>
+        <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+        <td>
+          <%=link_to user_path(user.id) do %>
+            <%= user.name %>
+          <% end %>
+        </td>
+      </tr>
+
+      <% end %>
+    </tbody>
+
+  <% end %>
+</table>

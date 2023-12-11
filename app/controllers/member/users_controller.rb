@@ -28,9 +28,7 @@ class Member::UsersController < ApplicationController
     if @user != current_user
       redirect_to posts_path
     end
-
   end
-
 
   def update
     @user = User.find(params[:id])
@@ -41,7 +39,14 @@ class Member::UsersController < ApplicationController
     end
   end
 
-  def confirm
+  def followings
+    @user = User.find(params[:id])
+    @users = @user.followings
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
   end
 
   def destroy

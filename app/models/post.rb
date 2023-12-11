@@ -20,4 +20,6 @@ class Post < ApplicationRecord
   def bookmarked_by?(user)
     bookmarks.exists?(user_id: user.id)
   end
+
+  
 end
