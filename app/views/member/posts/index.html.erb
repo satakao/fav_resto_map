@@ -11,15 +11,18 @@
           <%= post.user.name %>
         <% end %><br>
 
-          <%=link_to post_path(post.id) do %>
-
+        <%=link_to post_path(post.id) do %>
           <%= image_tag post.image, size:"300x300" %><br>
-
-          <%= post.store_name %><br>
-
-          <%= post.description %><br>
-
         <% end %>
+
+        <!--いいねボタン-->
+        <%= render "member/favorites/favorite_btn", post: post %>
+        <!--ブックマークボタン-->
+        <%= render "member/bookmarks/bookmark_btn", post: post %><br>
+
+        <%= post.store_name %><br>
+
+        <%= post.description %><br>
 
       <% end %>
     </div>

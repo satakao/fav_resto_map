@@ -1,2 +1,30 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="container">
+
+  <div class="row">
+
+    <div class="col text-center">
+      <% @posts.each do |post| %>
+
+        <%= image_tag post.user.get_profile_image %>
+
+        <%=link_to admin_user_path(post.user) do %>
+          <%= post.user.name %>
+        <% end %><br>
+
+        <%= image_tag post.image, size:"300x300" %><br>
+
+        <i class="fa-regular fa-heart"></i><%= post.favorites.count %>
+
+        <i class="fa-regular fa-bookmark"></i><%= post.bookmarks.count %><br>
+
+        <%= post.store_name %><br>
+
+        <%= post.description %><br>
+
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>

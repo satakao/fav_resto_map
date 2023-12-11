@@ -1,2 +1,29 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+
+  <div class="row">
+
+    <div class="col text-center">
+
+      <%= image_tag @user.get_profile_image %>
+
+      <%= @user.name %>
+
+      フォロワー<%=  @user.followers.count %>人
+
+      フォロー<%=  @user.followings.count %>人<br>
+
+      <% if @user.is_active %>
+        <%= link_to "ユーザー利用中", admin_user_deactivate_path(@user), method: :patch, data: { confirm: "このユーザーを利用停止にしますか?" } %>
+      <% else %>
+        <%= link_to "ユーザー利用停止中", admin_user_activate_path(@user), method: :patch, data: { confirm: "このユーザーの利用停止を解除しますか?" } %>
+      <% end %>
+
+      <h1><%= @user.name %>さんの投稿内容</h1>
+
+      <%= render "member/users/show", posts: @posts %>
+
+    </div>
+
+  </div>
+
+</div>

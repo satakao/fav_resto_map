@@ -4,23 +4,23 @@ Rails.application.routes.draw do
   #使用するコントローラ指定、不要なパスワード変更のルーティング削除
   devise_for :users,skip: [:passwords],controllers: {
   registrations: "member/registrations",
-  sessions: 'member/sessions'
+  sessions: "member/sessions"
   }
   #使用するコントローラ指定、不要なパスワード変更と管理者登録のルーティング削除
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
-  sessions: 'admin/sessions'
+  sessions: "admin/sessions"
   }
 
   devise_scope :user do
     post "member/guest_sign_in", to: "member/sessions#guest_sign_in"
   end
 
-  root to: 'member/homes#top'
+  root to: "member/homes#top"
 
-  get 'searches/search'
+  get "searches/search"
 
   scope module: :member do
-    get 'users/mypage' => 'users#mypage'
+    get "users/mypage" => "users#mypage"
     resources :users, only:[:show, :index, :edit, :update, :destroy]do
       resources :relationships, only:[:create, :destroy]
       member do
@@ -35,8 +35,12 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'admin' => 'admin/homes#top'
+  get "admin" => "admin/homes#top"
   namespace :admin do
-    resources :users, only:[:index, :show, :update]
+    resources :users, only:[:index, :show] do
+      patch "activate"
+      patch "deactivate"
+    end
   end
+
 end

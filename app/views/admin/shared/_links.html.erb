@@ -3,7 +3,8 @@
 <% end %>
 
 <!--現状未使用のため下記コメントアウト-->
-<% comment_ do %>
+<%
+=begin %>
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
     <%= link_to "Sign up", new_registration_path(resource_name) %><br />
   <% end %>
@@ -25,4 +26,5 @@
       <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
     <% end %>
   <% end %>
-<% end %>
+<%
+=end %>

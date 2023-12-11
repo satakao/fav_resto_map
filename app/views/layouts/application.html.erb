@@ -62,22 +62,18 @@
               <% elsif admin_signed_in? %>
 
                 <li>
-                  <%= link_to"投稿一覧",admin_items_path,class: 'nav-link' %>
+                  <%= link_to admin_path, class: 'nav-link' do %> 投稿一覧<% end %>
                 </li>
 
                 <li>
-                  <%= link_to"ユーザー一覧",admin_customers_path,class: 'nav-link' %>
+                  <%= link_to admin_users_path, class: 'nav-link' do %> ユーザー一覧<% end %>
                 </li>
 
                  <li>
-                  <%= link_to"ログアウト",destroy_admin_session_path,class: 'nav-link' %>
+                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link' do %> ログアウト<% end %>
                 </li>
 
               <% else %>
-
-                <li>
-                  <%= link_to posts_path, class: 'nav-link' do %>投稿一覧<% end %>
-                </li>
 
                 <li>
                   <%= link_to new_user_session_path, method: :get,class: 'nav-link' do %>ログイン<% end %>
