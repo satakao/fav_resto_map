@@ -1,7 +1,8 @@
 class Member::PostsController < ApplicationController
   def index
     # 利用有効になっているユーザーの投稿一覧を表示
-    @posts = Post.joins(:user).where(users: { is_active: true })
+    @posts = Post.includes(:user).joins(:user).where(users: { is_active: true })
+
   end
 
   def show

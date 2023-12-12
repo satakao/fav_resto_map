@@ -24,7 +24,9 @@
       <!--いいねボタン-->
       <%= render "member/favorites/favorite_btn", post: @post %>
       <!--ブックマークボタン-->
-      <%= render "member/bookmarks/bookmark_btn", post: @post %>
+      <div id="bookmark_button_<%= @post.id %>">
+        <%= render "member/bookmarks/bookmark_btn", post: @post %>
+      </div>
 
 
       <%= @post.store_name %><br>
@@ -33,7 +35,15 @@
 
       <%= @post.description %><br>
 
-      <%= render "member/posts/post_comment", post: @post, post_comment: @post_comment %>
+      <!--コメント数表示-->
+      <div id="post_comments_count">
+        <%= render 'member/post_comments/count', post: @post %>
+      </div>
+
+      <!--コメント一覧-->
+      <div id="post_comments_index">
+        <%= render "member/post_comments/post_comment", post: @post, post_comment: @post_comment %>
+      </div>
 
     </div>
 

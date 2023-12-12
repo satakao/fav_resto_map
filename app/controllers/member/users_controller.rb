@@ -3,6 +3,7 @@ class Member::UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.all
     @post = Post.new
+    @bookmarked_posts = Post.bookmarked_posts(current_user)
   end
 
   def mypage

@@ -42,15 +42,38 @@
 
 
       <h1><%= @user.name %>さんの投稿内容</h1>
+      <!--タブ部分-->
+      <div class="wrap">
+        <ul id = "tab-menu">
+          <li><a href="#tab1" class="active">My_post</a></li>
 
-      <%= render "member/users/show", posts: @posts %>
+          <li><a href="#tab2" class="">Favorite</a></li>
 
+        </ul>
+        <!--タブごとのページ遷移先-->
+        <div id = "tab-contents">
+
+          <div id = "tab1" class="tab">
+            <%= render "member/users/show", posts: @posts %>
+          </div>
+
+          <div id = "tab2" class="tab">
+            <%= render "member/users/favorite_posts",bookmarked_posts: @bookmarked_posts %>
+          </div>
+
+        </div>
+
+      </div>
 
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
        新規投稿
       </button>
 
       <%= render "member/posts/form", post: @post %>
+
+      <div class="d-flex justify-content-center">
+
+      </div>
     </div>
 
   </div>
