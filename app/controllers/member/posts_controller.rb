@@ -36,6 +36,16 @@ class Member::PostsController < ApplicationController
       render "member/users/mypage"
     end
   end
+  
+  def search
+    pins = Post.where(latitude: params[:lat]).where(longitude: params[:lng])
+    @marker_arr =[]
+    pins.each do |pin|
+            #pushメソッドは配列に値を入れるメソッド
+      @marker_arr.push(pin.post)
+    end
+  end
+
 
   private
   def post_params

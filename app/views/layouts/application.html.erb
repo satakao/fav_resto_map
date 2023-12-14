@@ -15,10 +15,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style="min-height:100vh ;position: relative;padding-bottom:50px;box-sizing:border-box;">
-
+  <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light" style="background: #ffce6d; color: #291b25">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background: #ffce6d; color: #291b25">
 
         <div class="container-fluid">
           <a href="/" class="navbar-brand ml-5">fav_resto_map</a>
@@ -100,14 +99,10 @@
       </nav>
     </header>
 
-    <main>
-      <p id="notice"><%= notice %></p>
-
-      <p class="alert"><%= alert %></p>
+    <main style="min-height:120vh ;position: relative;padding-bottom:50px;box-sizing:border-box;">
 
       <%= yield %>
     </main>
-
     <footer>
 
       <div class="fixed-bottom" style="background: #ffce6d">

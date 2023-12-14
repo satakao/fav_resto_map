@@ -18,3 +18,12 @@ $(document).on('turbolinks:load', function() {
     });
   });
 });
+
+// let nav_item1_btn = document.querySelector(".nav_item1");
+// // ファンクション指定
+// const sidebar_nav_item1 = () => {
+//   console.log('ボタンがクリックされました');
+// }
+
+
+// nav_item1_btn.addEventListener('click',sidebar_nav_item1)

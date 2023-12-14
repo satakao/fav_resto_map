@@ -1,8 +1,21 @@
-<div class="container">
-
-  <div class="row">
-
-    <div class="col">
+<div class="container-fluid">
+  <div class="mypage_main row no-gutters">
+    <div class="side col-md-1 col-lg-1 fixed-top">
+      <div class="sidebar bg-dark">
+        <ul class="nav flex-column">
+          <li class="nav_item1">
+            <%= link_to posts_path, class: 'nav-link text-light' do %> 投稿一覧<% end %>
+          </li>
+          <li class="nav_item2">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav_item3">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="mypage_main col-9">
 
       <p>ユーザー名：<%= @user.name %></p>
       <h2>My_resto_map</h2>
@@ -59,6 +72,44 @@
           }
         });
       }
+      //マーカークリック時の関数
+      function dispInfo(marker,store_name) {
+        google.maps.event.addListener(marker, 'click',
+          function(event) {
+                  //HTML上の 'id = search_mark' の直下に投稿内容を生成していきます。
+              var search_mark = document.getElementById('search_mark')
+                  //XHRを行う宣言
+            var xhr = new XMLHttpRequest();
+                  //xhrでリクエストするURIをここで書く。latlngsearchはここで定めた任意の値です。
+                  //marker.position.lat()はGoogleMap側のライブラリで定義されているオブジェクトとメソッド。マーカー位置の緯度が取れる。lng()は経度。
+                  //JSON形式にしているのはJSONにしとくと何かと取り回しがきくので。
+            xhr.open('GET', "/latlngsearch/" + marker.position.lat() + "/" + marker.position.lng() + ".json", true)
+            xhr.send(null);
+                  //通信に成功したとき初めて次のステップに行くようにする。
+            xhr.onreadystatechange = function() {
+              if(xhr.readyState === 4 && xhr.status === 200) {
+                var post_datas = JSON.parse(xhr.responseText)
+                if (post_datas === null){
+                  search_mark.textContent = '投稿データがないよ'
+                }else{
+                              //JSONの0項=投稿情報をpost_dataとする。この後で詳しく書く。
+                              var post_data = post_datas[0];
+
+                              //クリックしたマーカー(投稿)のbodyを生成
+                  var div_tag_body = document.createElement('div');
+                  var a_tag_body = document.createElement('a');
+                  var text_body = document.createTextNode(post_data.body);
+                  a_tag_body.appendChild(text_body);
+                  div_tag_body.appendChild(a_tag_body);
+                  search_mark.appendChild(div_tag_body);
+                  console.log
+                          }
+              }
+            }
+          }
+        )
+      }
+
       </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
 
@@ -72,3 +123,6 @@
   </div>
 
 </div>
+
+
+
