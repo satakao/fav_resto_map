@@ -17,10 +17,10 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background: #ffce6d; color: #291b25">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark" style="color: #291b25">
 
         <div class="container-fluid">
-          <a href="/" class="navbar-brand ml-5">fav_resto_map</a>
+          <a href="/" class="navbar-brand ml-5 text-light">fav_resto_map</a>
 
             <button class="navbar-toggler" type="button"
               data-toggle="collapse"
@@ -36,46 +36,49 @@
               <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
 
+
                 <li>
-                  <%= link_to users_mypage_path, class: 'nav-link' do %>
-                    <i class="fa-solid fa-circle-user"></i>
+                  <%= link_to posts_path, class: 'nav-link text-light' do %>
+                  <i class="fa-solid fa-house fa-2x"></i>
                   <% end %>
                 </li>
 
                 <li>
-                  <%= link_to posts_path, class: 'nav-link' do %> 投稿一覧<% end %>
+                  <%= link_to users_path(current_user), class: 'nav-link text-light' do %>
+                  <i class="fa-solid fa-users fa-2x"></i>
+                  <% end %>
                 </li>
 
                 <li>
-                  <%= link_to user_path(current_user), class: 'nav-link' do %> 投稿内容<% end %>
-                </li>
-
-                <li>
-                  <%= link_to users_path(current_user), class: 'nav-link' do %> ユーザー一覧<% end %>
-                </li>
-
-                <li>
-                  <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link' do %> ログアウト<% end %>
+                  <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
+                  <i class="fa-solid fa-right-from-bracket fa-2x"></i>
+                  <% end %>
                 </li>
 
               <% elsif admin_signed_in? %>
 
                 <li>
-                  <%= link_to admin_path, class: 'nav-link' do %> 投稿一覧<% end %>
+                  <%= link_to admin_path, class: 'nav-link text-light' do %><i class="fa-solid fa-house"></i><% end %>
                 </li>
 
                 <li>
-                  <%= link_to admin_users_path, class: 'nav-link' do %> ユーザー一覧<% end %>
+                  <%= link_to admin_users_path, class: 'nav-link text-light' do %>
+                  <i class="fa-solid fa-users fa-2x"></i>
+                  <% end %>
                 </li>
 
                  <li>
-                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link' do %> ログアウト<% end %>
+                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
+                  <i class="fa-solid fa-right-from-bracket fa-2x"></i>
+                  <% end %>
                 </li>
 
               <% else %>
 
                 <li>
-                  <%= link_to new_user_session_path, method: :get,class: 'nav-link' do %>ログイン<% end %>
+                  <%= link_to new_user_session_path, method: :get,class: 'nav-link text-light' do %>
+                  <i class="fa-solid fa-right-to-bracket fa-2x"></i>
+                  <% end %>
                 </li>
 
               <% end %>
@@ -84,7 +87,7 @@
               <%= form_with url: searches_search_path, method: :get do |f| %>
 
                 <%= f.text_field :word %>
-                <%= f.select :range, options_for_select([["User"]]) %>
+                <%= f.select :range, options_for_select([["User"],["Post"]]) %>
                 <%= f.select :search, options_for_select([["完全一致","perfect_match"],["部分一致","partial_match"]]) %>
                 <%= f.submit "検索" %>
 
@@ -99,15 +102,34 @@
       </nav>
     </header>
 
+
     <main style="min-height:120vh ;position: relative;padding-bottom:50px;box-sizing:border-box;">
+      <div class="mypage_main row no-gutters">
+        <div class="side col-md-1 col-lg-1 fixed-top">
+        <div class="sidebar bg-dark">
+          <ul class="nav flex-column">
+            <li class="nav_item1">
+              <%= link_to users_mypage_path, class: 'nav-link text-light' do %>
+                 <i class="fa-solid fa-circle-user fa-2x"></i>
+              <% end %>
+            </li>
+            <li class="nav_item2">
+              <!--content_for :add_content ブロックがある場合その中身を呼び出す-->
+              <% if content_for? :add_content %>
+                <%= yield :add_content %>
+              <% end %>
+
+            </li>
+            <li class="nav_item3">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
       <%= yield %>
     </main>
     <footer>
-
-      <div class="fixed-bottom" style="background: #ffce6d">
-        <p class="text-center" style="color: #291b25">fav_resto_map</p>
-      </div>
 
     </footer>
 

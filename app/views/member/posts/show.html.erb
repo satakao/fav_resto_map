@@ -14,17 +14,17 @@
          投稿編集
         </button>
 
-        <!--投稿モーダルフォーム-->
+
         <%= render 'member/posts/form', post: @post %>
 
       <% end %><br>
 
       <%= image_tag @post.image, size:"300x300" %><br>
 
-      <!--いいねボタン-->
+
       <%= render "member/favorites/favorite_btn", post: @post %>
-      <!--ブックマークボタン-->
-      <div id="bookmark_button_<%= @post.id %>">
+
+      <div class="d-inline-block" id="bookmark_button_<%= @post.id %>">
         <%= render "member/bookmarks/bookmark_btn", post: @post %>
       </div>
 
@@ -35,12 +35,12 @@
 
       <%= @post.description %><br>
 
-      <!--コメント数表示-->
+
       <div id="post_comments_count">
         <%= render 'member/post_comments/count', post: @post %>
       </div>
 
-      <!--コメント一覧-->
+
       <div id="post_comments_index">
         <%= render "member/post_comments/post_comment", post: @post, post_comment: @post_comment %>
       </div>

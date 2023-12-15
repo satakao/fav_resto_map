@@ -1,2 +1,1 @@
-
-json.array! @maker_arr
+json.array! @marker_arr

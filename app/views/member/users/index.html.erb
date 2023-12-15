@@ -1,11 +1,13 @@
 <% @users.each do |user| %>
 
+ <%=link_to user_path(user) do %>
   <%= image_tag user.get_profile_image %>
 
   <%= user.name %>
-  
+ <% end %>
+
   フォロワー<%=  user.followings.count %>人
-  
+
   フォロー<%=  user.followers.count %>人
 
 <% end %>

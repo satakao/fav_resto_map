@@ -6,7 +6,7 @@ body {
 }
 #map {
         height: 580px;
-        width: 1100px;
+        width: 1600px;
       }
 * {
   margin: 0;
@@ -81,4 +81,11 @@ h1 {
 .mypage_main{
   padding-left: 100px;
   padding-top: 30px;
+}
+p.icon-text{
+  font-size: small;
+}
+.modal-mypage,.icon-text{
+
+  padding-left: 1500px;
 }

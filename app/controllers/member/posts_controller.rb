@@ -1,7 +1,9 @@
 class Member::PostsController < ApplicationController
+  before_action :authenticate_user!
   def index
-    # 利用有効になっているユーザーの投稿一覧を表示
-    @posts = Post.includes(:user).joins(:user).where(users: { is_active: true })
+    # 利用有効になっているユーザーで、そのユーザーの投稿で表示にしている投稿一覧を表示
+    @posts = Post.includes(:user).where(users: { is_active: true }).where(is_published: true)
+
 
   end
 
@@ -13,12 +15,13 @@ class Member::PostsController < ApplicationController
   end
 
   def destroy
+
   end
 
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(@post), notice: "You have updated post successfully."
+      redirect_to post_path(@post), notice: "投稿を編集しました"
     end
   end
 
@@ -28,6 +31,14 @@ class Member::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    results = Geocoder.search(post_params[:address])
+
+    if results.present?
+      coordinates = results.first.coordinates
+      @post.latitude = coordinates[0]
+      @post.longitude = coordinates[1]
+    end
+
     if @post.save
       @posts = Post.all
       redirect_to posts_path
@@ -36,13 +47,13 @@ class Member::PostsController < ApplicationController
       render "member/users/mypage"
     end
   end
-  
+
   def search
-    pins = Post.where(latitude: params[:lat]).where(longitude: params[:lng])
+     posts = Post.where(latitude: params[:lat]).where(longitude: params[:lng])
     @marker_arr =[]
-    pins.each do |pin|
+    posts.each do |post|
             #pushメソッドは配列に値を入れるメソッド
-      @marker_arr.push(pin.post)
+      @marker_arr.push(post)
     end
   end
 

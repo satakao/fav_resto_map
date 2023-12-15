@@ -1,3 +1,4 @@
+<p class="pt-5" id="notice"><%= notice %></p>
 <div class="container">
 
   <div class="row">
@@ -16,15 +17,15 @@
         フォロー<%=  @user.followings.count %>人
       <% end %>
 
-      <% if @user == current_user %>
+      <% unless @user.guest_user? %>
 
-        <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i>
-        <% end %>
+        <% if @user == current_user %>
 
-      <% else %>
+          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+            <i class="fas fa-user-cog"></i>
+          <% end %>
 
-        <% if current_user.following?(@user) %>
+        <% elsif current_user.following?(@user) %>
 
           <%= link_to user_relationship_path(@user,current_user), method: :delete, class:"btn btn-danger" do %>
             フォローを外す
@@ -65,9 +66,11 @@
 
       </div>
 
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-       新規投稿
-      </button>
+      <% unless @user.guest_user? %>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+         新規投稿
+        </button>
+      <% end %>
 
       <%= render "member/posts/form", post: @post %>
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::SessionsController < Devise::SessionsController
+  before_action :redirect_if_user_signed_in
   # before_action :configure_sign_in_params, only: [:create]
   def after_sign_in_path_for(resource)
     admin_path
@@ -8,6 +9,12 @@ class Admin::SessionsController < Devise::SessionsController
 
   def after_sign_out_path_for(resource)
     admin_session_path
+  end
+
+  def redirect_if_user_signed_in
+    if user_signed_in?
+      redirect_to root_path, alert: 'ユーザーログアウトしてから管理者にログインしてください.'
+    end
   end
 
   # GET /resource/sign_in
