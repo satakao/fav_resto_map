@@ -1,18 +1,20 @@
 // Place all the styles related to the member/users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-body {
-  padding-top: 50px;
-}
-#map {
-        height: 580px;
-        width: 1600px;
-      }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  padding-top: 50px;
+}
+
+#map {
+        height: 580px;
+        width: 1600px;
+      }
 
 h1 {
   text-align: center;

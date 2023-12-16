@@ -3,39 +3,32 @@
   <div class="row justify-content-center align-items-center">
 
     <div class="col-6 text-center">
+      <!--必要ない？-->
+      <!--<div id="bookmark_posts_most"></div>-->
 
-      <div id="bookmark_posts_most">
+      <% @posts.each do |post| %>
 
-        <% @posts.each do |post| %>
+        <%= image_tag post.user.get_profile_image %>
 
-          <%= image_tag post.user.get_profile_image %>
+        <%=link_to user_path(post.user) do  %>
+          <%= post.user.name %>
+        <% end %><br>
 
-          <%=link_to user_path(post.user) do  %>
-            <%= post.user.name %>
-          <% end %><br>
-
-          <%=link_to post_path(post.id) do %>
-            <%= image_tag post.image, size:"300x300" %><br>
-          <% end %>
-          <p class="post-card" ></p>
-          <!--いいねボタン-->
-          <%= render "member/favorites/favorite_btn", post: post %>
-          <!--ブックマークボタン-->
-          <div class="d-inline-block" id="bookmark_button_<%= post.id %>">
-            <%= render "member/bookmarks/bookmark_btn", post: post %>
-          </div><br>
-
-
-            <%= post.store_name %><br>
-
-
-            <%= post.description %><br>
-
-
-
+        <%=link_to post_path(post.id) do %>
+          <%= image_tag post.image, size:"300x300" %><br>
         <% end %>
+        <p class="post-card" ></p>
 
-      </div>
+        <!--ブックマークボタン-->
+        <div class="d-inline-block" id="bookmark_button_<%= post.id %>">
+          <%= render "member/bookmarks/bookmark_btn", post: post %>
+        </div><br>
+
+          <%= post.store_name %><br>
+
+          <%= post.description %><br>
+
+      <% end %>
 
     </div>
 

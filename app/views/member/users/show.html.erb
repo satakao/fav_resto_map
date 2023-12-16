@@ -5,7 +5,7 @@
 
     <div class="col text-center">
 
-      <%= image_tag @user.get_profile_image %>
+      <%= image_tag @user.get_profile_image,size:"150x150" %>
 
       <%= @user.name %>
 
@@ -17,38 +17,39 @@
         フォロー<%=  @user.followings.count %>人
       <% end %>
 
-      <% unless @user.guest_user? %>
+      <% if @user == current_user %>
 
-        <% if @user == current_user %>
-
-          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
-            <i class="fas fa-user-cog"></i>
-          <% end %>
-
-        <% elsif current_user.following?(@user) %>
-
-          <%= link_to user_relationship_path(@user,current_user), method: :delete, class:"btn btn-danger" do %>
-            フォローを外す
-          <% end %>
-
-        <% else %>
-
-          <%=link_to user_relationships_path(@user), method: :post, class:"btn btn-primary" do %>
-            フォローする
-        　<% end %>
-
+        <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-user-cog"></i>
         <% end %>
 
-      <% end %>
+      <% elsif current_user.following?(@user) %>
 
+        <%= link_to user_relationship_path(@user,current_user), method: :delete, class:"btn btn-danger" do %>
+          フォローを外す
+        <% end %>
 
-      <h1><%= @user.name %>さんの投稿内容</h1>
+      <% else %>
+
+        <%=link_to user_relationships_path(@user), method: :post, class:"btn btn-primary" do %>
+          フォローする
+      　<% end %>
+
+      <% end %><br>
+
+      <h1 class="d-inline-block"><%= @user.name %>さんの投稿内容</h1>
+      <div class="modal-user text-center d-inline-block">
+       <%= link_to  "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-user" do %>
+        <i class="fa-solid fa-circle-plus fa-3x"></i><br>
+        <p class="icon-text-user_show d-inline-block">新規投稿</p>
+      </div>
+       <% end %><br>
       <!--タブ部分-->
       <div class="wrap">
         <ul id = "tab-menu">
           <li><a href="#tab1" class="active">My_post</a></li>
 
-          <li><a href="#tab2" class="">Favorite</a></li>
+          <li><a href="#tab2" class="">Bookmark</a></li>
 
         </ul>
         <!--タブごとのページ遷移先-->
@@ -59,18 +60,13 @@
           </div>
 
           <div id = "tab2" class="tab">
-            <%= render "member/users/favorite_posts",bookmarked_posts: @bookmarked_posts %>
+            <%= render "member/users/bookmark_posts",bookmarked_posts: @bookmarked_posts %>
           </div>
 
         </div>
 
       </div>
 
-      <% unless @user.guest_user? %>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-         新規投稿
-        </button>
-      <% end %>
 
       <%= render "member/posts/form", post: @post %>
 

@@ -5,22 +5,15 @@ class Member::UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.all
     @post = Post.new
-    @bookmarked_posts = Post.bookmarked_posts(current_user)
+    @bookmarked_posts = Post.bookmarked_post(current_user)
   end
 
   def mypage
     @user = current_user
     @post = Post.new
-    @posts = current_user.bookmarks.includes(:post).map(&:post)
-    @latlngs = []
+    posts = current_user.bookmarked_posts
+    @latlngs =latlngs(posts)
     # 投稿住所から変換して緯度と経度に変換、格納する
-    @posts.each do |post|
-      # 緯度経度を配列にして代入
-       coordinates = [post.latitude,post.longitude]
-      # 緯度経度を順次追加
-        @latlngs << coordinates
-
-    end
   end
 
   def index
@@ -70,4 +63,14 @@ class Member::UsersController < ApplicationController
     params.require(:user).permit(:name, :profile_image)
   end
 
+  def latlngs(posts)
+    arr = []
+    posts.each do |post|
+      # 緯度経度を配列にして代入
+       coordinates = [post.latitude,post.longitude]
+      # 緯度経度を順次追加
+        arr << coordinates
+    end
+    arr
+  end
 end

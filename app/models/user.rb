@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts,dependent: :destroy
-  has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_posts, through: :bookmarks, source: :post
   has_many :post_comments, dependent: :destroy
   #フォローする際の記述
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy

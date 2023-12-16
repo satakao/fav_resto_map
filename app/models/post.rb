@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_users, through: :bookmarks, source: :user
   has_many :post_comments, dependent: :destroy
 
   has_one_attached :image
@@ -21,7 +21,7 @@ class Post < ApplicationRecord
     bookmarks.exists?(user_id: user.id)
   end
 
-  def self.bookmarked_posts(user) # 1. モデル内での操作を開始
+  def self.bookmarked_post(user) # 1. モデル内での操作を開始
     includes(:bookmarks) # 2. post_favorites テーブルを結合
       .where(bookmarks: { user_id: user.id }) # 3. ユーザーがいいねしたレコードを絞り込み
       .order(created_at: :desc) # 4. 投稿を作成日時の降順でソート

@@ -21,12 +21,9 @@
 
       <%= image_tag @post.image, size:"300x300" %><br>
 
-
-      <%= render "member/favorites/favorite_btn", post: @post %>
-
       <div class="d-inline-block" id="bookmark_button_<%= @post.id %>">
         <%= render "member/bookmarks/bookmark_btn", post: @post %>
-      </div>
+      </div><br>
 
 
       <%= @post.store_name %><br>

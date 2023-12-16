@@ -31,8 +31,9 @@ class Member::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    # 住所から緯度経度に変換
     results = Geocoder.search(post_params[:address])
-
+    # 緯度経度の変換結果があれば配列から変数に代入
     if results.present?
       coordinates = results.first.coordinates
       @post.latitude = coordinates[0]
@@ -49,10 +50,18 @@ class Member::PostsController < ApplicationController
   end
 
   def search
-     posts = Post.where(latitude: params[:lat]).where(longitude: params[:lng])
+
+    lat = params[:lat].to_f
+    lng = params[:lng].to_f
+
+    #数値の誤差を拾うように範囲指定(geocoderの変換精度を考慮)して該当レコードを持ってくる
+    posts = Post.where("latitude BETWEEN #{lat} - 0.001 AND #{lat} + 0.001")
+                .where("longitude BETWEEN #{lng} - 0.001 AND #{lng} + 0.001")
+
     @marker_arr =[]
     posts.each do |post|
-            #pushメソッドは配列に値を入れるメソッド
+
+      #pushメソッドは配列に値を入れるメソッド
       @marker_arr.push(post)
     end
   end
