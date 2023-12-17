@@ -1,4 +1,14 @@
 @use '~bootstrap/scss/bootstrap';
+@import 'member/bookmark.scss';
+@import 'member/favorites.scss';
+@import 'member/homes.scss';
+@import 'member/post_comments.scss';
+@import 'member/posts.scss';
+@import 'member/relationships.scss';
+@import 'member/searches.scss';
+@import 'member/users.scss';
+@import 'admin/homes.scss';
+@import 'admin/users.scss';
 
 * {
   margin: 0;
