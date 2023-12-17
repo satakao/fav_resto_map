@@ -1,13 +1,37 @@
-<% @users.each do |user| %>
+<div class="container">
+ <div class="row">
+  <div class="col-8">
+   <h2>ユーザー一覧</h2>
+    <table class="table">
+    <% @users.each do |user| %>
+    <tbody>
+     <td>
+      <%=link_to user_path(user) do %>
+       <%= image_tag user.get_profile_image %>
+       <%= user.name %>
+      <% end %>
+     </td>
+     <td>
+      フォロワー<%=  user.followings.count %>人
+     </td>
+     <td>
+      フォロー<%=  user.followers.count %>人
+     </td>
 
- <%=link_to user_path(user) do %>
-  <%= image_tag user.get_profile_image %>
+    </tbody>
+    <% end %>
+   </table>
+  </div>
+ </div>
+</div>
 
-  <%= user.name %>
- <% end %>
 
-  フォロワー<%=  user.followings.count %>人
 
-  フォロー<%=  user.followers.count %>人
 
-<% end %>
+
+
+
+
+
+
+

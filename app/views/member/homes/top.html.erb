@@ -2,10 +2,10 @@
 <p class="alert"><%= alert %></p>
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col text-center">
       <h1>fav_resto_map</h1>
-      <%= link_to "ゲストログイン（閲覧用）", member_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
-      <%=link_to"ユーザー登録して始める", new_user_registration_path, class:"btn btn-success" %><br>
+      <%= link_to "ゲストログイン（閲覧用）", member_guest_sign_in_path, class: "guest btn btn-secondary mt-5 sign_in", method: :post %><br>
+      <%=link_to"ユーザー登録して始める", new_user_registration_path, class:"user btn btn-success mt-5" %><br>
       <%=link_to"ユーザーの方はこちら", new_user_session_path %>
 
     </div>

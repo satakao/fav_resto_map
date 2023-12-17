@@ -29,6 +29,8 @@ class Member::SessionsController < Devise::SessionsController
     flash[:error] = "制限がかけられているためこのアカウントは使用できません。"
     redirect_to new_user_session_path
   end
+
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

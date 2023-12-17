@@ -1,4 +1,4 @@
-<h1>Follow Users</h1>
+<h1><%=@user.name%>フォロー</h1>
 <% if @users.exists? %>
     <table class="table">
       <thead>
@@ -19,8 +19,16 @@
               <%= user.name %>
             <% end %>
           </td>
-          <td>フォロー数: <%= user.followings.count %></td>
-          <td>フォロワー数: <%= user.followers.count %></td>
+          <td>
+            <%=link_to followings_user_path(user.id) do %>
+              フォロー数：<%= user.followings.count %>人
+            <% end %>
+          </td>
+          <td>
+            <%=link_to followers_user_path(user.id) do %>
+              フォロワー数：<%= user.followers.count %>人
+            <% end %>
+          </td>
         </tr>
       </tbody>
       <% end %>

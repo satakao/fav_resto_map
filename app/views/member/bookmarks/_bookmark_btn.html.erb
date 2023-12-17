@@ -1,13 +1,17 @@
 <% if post.bookmarked_by?(current_user) %>
 
   <%=link_to post_bookmark_path(post.id), method: :delete, remote: true do %>
-     <i class="fa-solid fa-bookmark"></i><%= post.bookmarks.count %><br>
+     <i class="fa-solid fa-bookmark"></i>
   <% end %>
+
+  ブックマーク<%= post.bookmarks.count %><br>
 
 <% else %>
 
   <%=link_to post_bookmark_path(post.id), method: :post, remote: true do %>
-   <i class="fa-regular fa-bookmark"></i><%= post.bookmarks.count %><br>
+    <i class="fa-regular fa-bookmark"></i>
   <% end %>
+
+    ブックマーク<%= post.bookmarks.count %><br>
 
 <% end %>

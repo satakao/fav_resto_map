@@ -1,0 +1,93 @@
+// Place all the styles related to the member/users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 50px;
+}
+
+#map {
+        height: 580px;
+        width: 1600px;
+      }
+
+h1 {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.wrap {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#tab-menu {
+  display: flex;
+}
+
+#tab-menu li {
+  list-style-type: none;
+  width: 25%;
+}
+
+#tab-menu li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+  text-align: center;
+  background: #000;
+  border: 1px solid #000;
+  border-bottom: none;
+}
+
+#tab-menu .active {
+  background: #fff;
+  color: #000;
+}
+
+#tab-contents {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#tab-contents .tab {
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #000;
+  border-top: none;
+}
+
+#tab-contents p {
+  color: #000;
+  line-height: 2.5;
+}
+.sidebar{
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 70px;
+}
+.side{
+  padding-top: 56px;
+  padding-left: 0px;
+
+}
+.mypage_main{
+  padding-left: 100px;
+  padding-top: 30px;
+}
+p.icon-text{
+  font-size: small;
+}
+.modal-mypage,.icon-text{
+
+  padding-left: 1500px;
+}
