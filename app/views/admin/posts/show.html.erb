@@ -1,0 +1,48 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col text-center">
+
+      <%= image_tag @user.get_profile_image %>
+
+      <%=link_to user_path do %>
+        <%= @user.name %>
+      <% end %>
+
+        <%=link_to "投稿の削除",admin_post_path, method: :derlete, class:"btn btn-danger",data: { confirm: "この店名：#{@post.store_name}の投稿を削除しますか?" }%><br>
+
+        <%= render 'member/posts/form', post: @post %>
+
+      <%= image_tag @post.image, size:"300x300" %><br>
+
+      <div class="icon">
+        <i class="fa-regular fa-bookmark"></i>ブックマーク<%= @post.bookmarks.count %>
+        &emsp;<i class="fa-regular fa-comment"></i>コメント：<%= @post_comments.count %>
+      </div>
+
+
+      <%= @post.store_name %><br>
+
+      <%= @post.address %><br>
+
+      <%= @post.description %><br>
+
+
+     <% @post_comments.each do |post_comment| %>
+
+      <%=link_to user_path(post_comment.user_id) do %>
+        <%= image_tag post_comment.user.get_profile_image %>
+        <%= post_comment.user.name %>
+      <% end %>
+
+        <%=link_to "削除する", admin_post_post_comment_path(@post,post_comment.id), method: :delete, class:"btn btn-danger",data: { confirm: "この：#{@user.name}のコメントを削除しますか?" } %>
+
+    <% end %>
+
+    </div>
+
+  </div>
+
+</div>
+

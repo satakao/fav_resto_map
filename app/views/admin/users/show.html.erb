@@ -3,24 +3,34 @@
   <div class="row">
 
     <div class="col text-center">
+      <%=link_to user_path do %>
+        <%= image_tag @user.get_profile_image %>
 
-      <%= image_tag @user.get_profile_image %>
-
-      <%= @user.name %>
+        <%= @user.name %>
+      <% end %>
 
       フォロワー<%=  @user.followers.count %>人
 
       フォロー<%=  @user.followings.count %>人<br>
 
+      <!--ユーザー利用可否状態の確認-->
       <% if @user.is_active %>
+
         <%= link_to "ユーザー利用中", admin_user_deactivate_path(@user), method: :patch, data: { confirm: "このユーザーを利用停止にしますか?" } %>
       <% else %>
         <%= link_to "ユーザー利用停止中", admin_user_activate_path(@user), method: :patch, data: { confirm: "このユーザーの利用停止を解除しますか?" } %>
+
       <% end %>
 
       <h1><%= @user.name %>さんの投稿内容</h1>
 
-      <%= render "member/users/show", posts: @posts %>
+      <% @posts.each do |post| %>
+
+        <%=link_to admin_post_path(post.id) do %>
+          <%=image_tag post.image, size:'100x100' %>
+        <% end %>
+
+      <% end %>
 
     </div>
 

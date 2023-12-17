@@ -4,8 +4,6 @@
 
     <div class="col-6 text-center">
 
-
-
       <% @posts.each do |post| %>
 
         <div class="post-card">
@@ -22,9 +20,11 @@
           <p class="post-solid" ></p>
 
           <!--ブックマークボタン-->
-          <div class="bookmark" id="bookmark_button_<%= post.id %>">
+          <div class="d-inline-block" id="bookmark_button_<%= post.id %>">
             <%= render "member/bookmarks/bookmark_btn", post: post %>
-          </div><br>
+          </div>
+
+          &emsp;<i class="fa-regular fa-comment"></i>コメント数：<%= post.post_comments.count %><br>
 
             <%= post.address %><br>
 

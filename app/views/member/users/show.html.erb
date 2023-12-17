@@ -17,25 +17,29 @@
         フォロー<%=  @user.followings.count %>人
       <% end %>
 
-      <% if @user == current_user %>
-
-        <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i>
-        <% end %>
-
-      <% elsif current_user.following?(@user) %>
+       <% if (@user != current_user) && (current_user.following?(@user)) %>
 
         <%= link_to user_relationship_path(@user,current_user), method: :delete, class:"btn btn-danger" do %>
           フォローを外す
         <% end %>
 
-      <% else %>
+      <% elsif @user != current_user %>
 
         <%=link_to user_relationships_path(@user), method: :post, class:"btn btn-primary" do %>
           フォローする
       　<% end %>
 
       <% end %><br>
+
+      <% if @user == current_user %>
+
+        <%= link_to edit_user_path(@user.id), class: "user-cog btn btn-outline-secondary" do %>
+          <i class="fas fa-user-cog fa-2x"></i>
+        <% end %>
+
+      <% end %><br>
+
+
 
       <h1 class="d-inline-block"><%= @user.name %>さんの投稿内容</h1>
       <div class="modal-user text-center d-inline-block">

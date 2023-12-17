@@ -21,9 +21,9 @@
         <p class="icon-text d-inline-block">新規投稿</p>
        <% end %><br>
 
-      <!--サイドバーにこのページを表示した時のみ表示させる内容-->
+      <!--サイドバーにこのmypageを表示した時のみ表示させる-->
       <% content_for :add_content do %>
-         <%= link_to user_path(@user), class: 'nav-link text-light' do %>
+         <%= link_to user_path(@user), class: "nav-link text-light mt-5" do %>
            <i class="fa-solid fa-house-user fa-2x"></i>
          <% end %>
       <% end %>

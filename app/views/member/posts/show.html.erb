@@ -3,10 +3,19 @@
   <div class="row">
 
     <div class="col text-center">
+      <div class="d-inline-block">
+        <%= render "layouts/error_messages", obj: @post_comment %>
 
-      <%= image_tag @user.get_profile_image %>
 
-      <%= @user.name %>
+        <p id="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+
+      <%=link_to user_path(@user) do %>
+        <%= image_tag @user.get_profile_image %>
+
+        <%= @user.name %>
+      <% end %>
 
       <% if @post.user == current_user %>
 
@@ -23,6 +32,10 @@
 
       <div class="d-inline-block" id="bookmark_button_<%= @post.id %>">
         <%= render "member/bookmarks/bookmark_btn", post: @post %>
+      </div>
+
+       <div class="d-inline-block" id="post_comments_count">
+        <%= render 'member/post_comments/count', post: @post %>
       </div><br>
 
 
@@ -31,11 +44,6 @@
       <%= @post.address %><br>
 
       <%= @post.description %><br>
-
-
-      <div id="post_comments_count">
-        <%= render 'member/post_comments/count', post: @post %>
-      </div>
 
 
       <div id="post_comments_index">

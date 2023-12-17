@@ -17,10 +17,13 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark" style="color: #291b25">
-
-        <div class="container-fluid">
-          <a href="/" class="navbar-brand ml-5 text-light">fav_resto_map</a>
+      <% if admin_signed_in?%>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-primary  shadow rounded" >
+      <% else %>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark  shadow rounded" >
+      <% end %>
+          <div class="container-fluid">
+            <a href="/" class="navbar-brand ml-5 text-light">fav_resto_map</a>
 
             <button class="navbar-toggler" type="button"
               data-toggle="collapse"
@@ -39,36 +42,38 @@
 
                 <li>
                   <%= link_to posts_path, class: 'nav-link text-light' do %>
-                  <i class="fa-solid fa-house fa-2x"></i>
+                  <i class="fa-solid fa-house fa-2x mr-5"></i>
                   <% end %>
                 </li>
 
                 <li>
                   <%= link_to users_path(current_user), class: 'nav-link text-light' do %>
-                  <i class="fa-solid fa-users fa-2x"></i>
+                  <i class="fa-solid fa-users fa-2x mr-5"></i>
                   <% end %>
                 </li>
 
                 <li>
                   <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
-                  <i class="fa-solid fa-right-from-bracket fa-2x"></i>
+                  <i class="fa-solid fa-right-from-bracket fa-2x mr-5"></i>
                   <% end %>
                 </li>
 
               <% elsif admin_signed_in? %>
 
                 <li>
-                  <%= link_to admin_path, class: 'nav-link text-light' do %><i class="fa-solid fa-house"></i><% end %>
+                  <%= link_to admin_path, class: 'nav-link text-light mr-5' do %>
+                  <i class="fa-solid fa-house fa-2x"></i>
+                  <% end %>
                 </li>
 
                 <li>
-                  <%= link_to admin_users_path, class: 'nav-link text-light' do %>
+                  <%= link_to admin_users_path, class: 'nav-link text-light mr-5' do %>
                   <i class="fa-solid fa-users fa-2x"></i>
                   <% end %>
                 </li>
 
                  <li>
-                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
+                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light mr-5' do %>
                   <i class="fa-solid fa-right-from-bracket fa-2x"></i>
                   <% end %>
                 </li>
@@ -76,7 +81,7 @@
               <% else %>
 
                 <li>
-                  <%= link_to new_user_session_path, method: :get,class: 'nav-link text-light' do %>
+                  <%= link_to new_user_session_path, method: :get,class: 'nav-link text-light mr-5' do %>
                   <i class="fa-solid fa-right-to-bracket fa-2x"></i>
                   <% end %>
                 </li>
@@ -102,19 +107,22 @@
       </nav>
     </header>
 
-
     <main style="min-height:120vh ;position: relative;padding-bottom:50px;box-sizing:border-box;">
       <div class="mypage_main row no-gutters">
         <div class="side col-md-1 col-lg-1 fixed-top">
-        <div class="sidebar bg-dark">
+         <% if admin_signed_in?%>
+          <div class="sidebar bg-primary shadow rounded">
+        <% else %>
+          <div class="sidebar bg-dark shadow rounded">
+        <% end %>
           <ul class="nav flex-column">
             <li class="nav_item1">
-              <%= link_to users_mypage_path, class: 'nav-link text-light' do %>
+              <%= link_to users_mypage_path, class: 'nav-link text-light mt-5' do %>
                  <i class="fa-solid fa-circle-user fa-2x"></i>
               <% end %>
             </li>
             <li class="nav_item2">
-              <!--content_for :add_content ブロックがある場合その中身を呼び出す-->
+              <!--mypage viewから中身を呼び出し-->
               <% if content_for? :add_content %>
                 <%= yield :add_content %>
               <% end %>

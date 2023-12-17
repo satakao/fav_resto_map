@@ -39,6 +39,9 @@ Rails.application.routes.draw do
 
   get "admin" => "admin/homes#top"
   namespace :admin do
+    resources :posts, only:[:show, :destroy] do
+      resources :post_comments, only:[:destroy]
+    end
     resources :users, only:[:index, :show] do
       patch "activate"
       patch "deactivate"
