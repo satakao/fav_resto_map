@@ -1,8 +1,0 @@
-<% if post_comment.errors.any? %>
-  <%= post_comment.errors.count %>件のエラーが発生しました
-  <ul>
-    <% post_comment.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>

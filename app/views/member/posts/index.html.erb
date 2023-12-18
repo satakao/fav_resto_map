@@ -3,6 +3,15 @@
   <div class="row justify-content-center align-items-center">
 
     <div class="col-6 text-center">
+      <!--タグリスト-->
+      <p class="d-inline-block">タグリスト:</p>
+      <% @tag_list.each do |list|%>
+
+        <%=link_to list.name,post_search_tag_path(list) %>
+
+        <%="(#{list.posts.count})" %>
+
+      <% end %>
 
       <% @posts.each do |post| %>
 
@@ -25,6 +34,9 @@
           </div>
 
           &emsp;<i class="fa-regular fa-comment"></i>コメント数：<%= post.post_comments.count %><br>
+
+            <!--配列に入っているタグを１つずつnameの型にして表示させる-->
+            <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i><br>
 
             <%= post.address %><br>
 

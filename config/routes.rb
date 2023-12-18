@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get "searches/search"
 
   scope module: :member do
+    get "posts/search_tag/:id" => "posts#search_tag", as: :post_search_tag
     get "users/mypage" => "users#mypage"
     resources :users, only:[:show, :index, :edit, :update, :destroy]do
       resources :relationships, only:[:create, :destroy]

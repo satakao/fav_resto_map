@@ -1,0 +1,62 @@
+<div class="container">
+
+  <h5>タグ：<%=@tag.name%>に関する投稿一覧</h5>
+
+
+  <p class="d-inline-block">タグリスト:</p>
+  <!--タグリスト-->
+  <% @tag_list.each do |tag|%>
+
+    <%=link_to tag.name,post_search_tag_path(tag) %>
+
+    <%="(#{tag.posts.count})" %>
+
+  <% end %>
+
+  <p>店名/料理名:</p>
+  <!--選択したタグに関する投稿一覧-->
+  <% @posts.each do |post| %>
+
+  <!--投稿はカードで囲む-->
+  <div class="card">
+
+    <div class="card-body">
+
+      <!--タイトル表示される文字数は２５文字までにしてます-->
+      <h6 class="card-title">
+
+        <%=link_to post_path(post.id) do %>
+
+          <%= post.store_name.truncate(25) %>
+
+        <% end %>
+      </h6>
+
+      <i class="fa-regular fa-bookmark"></i>ブックマーク数：<%= post.bookmarks.count %>
+
+    </div>
+
+  </div>
+
+  <% end %>
+
+<!--<div class="pagination pagination-sm justify-content-center">-->
+<!--       </div>-->
+
+</div>
+
+
+<style>
+.card{
+  padding:0;
+  margin:0;
+  border:none;
+}
+
+
+
+h6 {
+  /*線の種類（実線） 太さ 色*/
+  border-bottom: solid 3px black;
+}
+</style>

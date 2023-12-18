@@ -2,10 +2,11 @@
 
   <div class="row">
 
-    <div class="col text-center">
-      <div class="d-inline-block">
-        <%= render "layouts/error_messages", obj: @post_comment %>
+    <%= render "layouts/errors", obj: @post %>
 
+    <div class="col text-center">
+
+      <div class="d-inline-block">
 
         <p id="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
@@ -38,6 +39,11 @@
         <%= render 'member/post_comments/count', post: @post %>
       </div><br>
 
+      <% @post_tags.each do |tag| %>
+
+         <i class="fas fa-tag"><%= link_to tag.name,post_search_tag_path(tag)%></i>(総タグ数：<%= tag.posts.count %>)
+
+      <% end %><br>
 
       <%= @post.store_name %><br>
 

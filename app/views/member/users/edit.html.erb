@@ -1,8 +1,11 @@
 <div class="container">
 
   <div class="row">
+    <div >
+      <%= render "layouts/errors", obj: @user %>
+    </div>
 
-    <div class="col">
+    <div class="col-12">
       <%= form_with model: @user, method: :patch do |f| %>
 
         <div class="form-group">
@@ -15,12 +18,13 @@
           <%= f.file_field :profile_image, class: "form-control-file user_image", accept: 'image/*' %>
         </div>
 
-        <div class="form-group">
-          <%= f.submit class: 'btn btn-secondary' %>
+        <div class="form-group d-inline-block">
+          <%= f.submit "ユーザー情報更新", class: 'btn btn-success' %>
         </div>
+        <%=link_to "退会する",user_path(@user.id), method: :delete, data: { confirm: "この#{@user.name}のアカウントを削除しますか？"}, class:"btn btn-danger pr-5 pl-5 d-inline-block float-right" %>
       <% end %>
 
-      <%=link_to "退会する",user_path(@user.id), method: :delete, data: { confirm: "このユーザーアカウントを削除しますか？"}, class:"btn btn-danger" %>
+
 
     </div>
   </div>

@@ -10,9 +10,14 @@
   <%if post_comment.user_id == current_user.id %>
     <%=link_to "削除する", post_post_comment_path(post,post_comment.id), method: :delete, remote: true, class:"btn btn-danger" %>
   <% end %><br>
+
 <% end %>
 
-<%= form_with model: post_comment ,url: post_post_comments_path(post.id), method: :post, local: false do |f| %>
+<div id="comments_errors">
+  <%= render "layouts/errors", obj: @post_comment %>
+</div>
+
+<%= form_with model: post_comment, url: post_post_comments_path(post), method: :post, local: false do |f| %>
 
   <div class="form-group">
     <%=f.text_area :comment,placeholder: "コメントをここに",cols:80,rows:5, id: "comment_textarea", class:"form_control" %>

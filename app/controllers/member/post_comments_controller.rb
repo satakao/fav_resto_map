@@ -5,9 +5,10 @@ class Member::PostCommentsController < ApplicationController
     @post_comment = current_user.post_comments.new(post_comment_params)
     @post_comment.post_id = @post.id
     if @post_comment.save
-    else
 
-      render "member/posts/show"
+    else
+      @user = @post.user
+      render 'error', status: :unprocessable_entity
     end
 
   end

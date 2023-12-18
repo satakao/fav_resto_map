@@ -1,18 +1,8 @@
-
-      <!--<div class="col- fixed-top">-->
-
-      <!--    <div class="collapse width" id="collapse_post">-->
-      <!--      <div class="card card-body" style="margin-left: 100px; width: 50px; height: 100vh;">-->
-      <!--        aaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhfaaaaaaaahfouahifiocnriwonraslksnisfflaifhaiochifhaeochnhfochfciniecfhnhfcshflksdhfcshfjhjnsfnknfjkshfjkhf-->
-      <!--      </div>-->
-
-      <!--  </div>-->
-      <!--</div>-->
-
     <div class="mypage_main col-12-fluid">
 
       <p id="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+      <%= render "layouts/errors", obj: @post %>
 
       <h2><%= @user.name %>さんのresto_map</h2>
 
@@ -32,96 +22,101 @@
       <input type="button" value="Encode" onclick="codeAddress()">
       <div id="display"></div>
       <div id='map'></div>
-      <div id='search_mark'>投稿内容</div>
 
 
-      <script>
-      let map
-      // ディスプレイの情報を取得
-      const display = document.getElementById('display')
-      function initMap(){
-        geocoder = new google.maps.Geocoder()
 
-        // latが緯度、lngが経度を表し、zoom(拡大)は0〜21で指定可能
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 35.6894807, lng:139.6916863},
-          zoom: 12,
-        });
+    <!-- 他のHTMLコード -->
 
-        // マップにブックマークした投稿のピンを立てる
-        let latLngArray = <%= raw @latlngs.to_json %>;
+        <script>
+          let map;
+          let infowindow;
+          const markers = [];
 
-        latLngArray.forEach(function(latlng) {
-          (function() {
-            let marker = new google.maps.Marker({
-              position: { lat: latlng[0], lng: latlng[1] },
-              map: map
+          function initMap() {
+            geocoder = new google.maps.Geocoder();
+
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: { lat: 35.6894807, lng: 139.6916863 },
+              zoom: 12,
             });
-              // マーカーをクリックしたら実行
-             google.maps.event.addListener(marker, 'click',
-          function(event) {
-                  //HTML上の 'id = search_mark' の直下に投稿内容を生成していきます。
-              let search_mark = document.getElementById('search_mark')
-                  //XHRを行う宣言
-              const xhr = new XMLHttpRequest();
-                  //xhrでリクエストするURIをここで書く。latlngsearchはここで定めた任意の値です。
-                  //marker.position.lat()はGoogleMap側のライブラリで定義されているオブジェクトとメソッド。マーカー位置の緯度が取れる。lng()は経度。
-                  //JSON形式にしているのはJSONにしとくと何かと取り回しがきくので。
-            xhr.open('GET', "/latlngsearch/" + marker.position.lat() + "/" + marker.position.lng() + ".json", true)
 
-            xhr.send(null);
-                  //通信に成功したとき初めて次のステップに行くようにする。
-              xhr.onreadystatechange = function() {
-              // 通信成功してるかの確認
-              if(xhr.readyState === 4 && xhr.status === 200) {
-                // 返ってきた変数をjson化して左辺に渡す
-                console.log(xhr.responseText)
-                let post_datas = JSON.parse(xhr.responseText)
+            infowindow = new google.maps.InfoWindow();
 
-                if (post_datas.length === 0){
-                  search_mark.textContent = '投稿データがないよ'
-                }else{
-                      //JSONの0項=投稿情報をpost_dataとする。この後で詳しく書く。
-                      let post_data = post_datas[0];
-                      //クリックしたマーカー(投稿)のbodyを生成
-                  let div_tag_body = document.createElement('div');
-                  let a_tag_body = document.createElement('a');
-                  let text_body = document.createTextNode(post_data.store_name);
-                  a_tag_body.appendChild(text_body);
-                  div_tag_body.appendChild(a_tag_body);
-                  search_mark.appendChild(div_tag_body);
-                 }
-              }
-            }
-          }
-        );
-      })();
-    });
-    }
-      let geocoder
-      //検索フォームのボタンが押された時に実行される
-      function codeAddress(){
-        //検索フォームの入力内容を取得
-        let inputAddress = document.getElementById('address').value;
+            let latLngArray = <%= raw @latlngs.to_json %>;
 
-        geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-          //該当する検索結果がヒットした時に、地図の中心を検索結果の緯度経度に更新する
-          if (status == 'OK') {
-            map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
+            latLngArray.forEach(function (latlng, index) {
+              let marker = new google.maps.Marker({
+                position: { lat: latlng[0], lng: latlng[1] },
                 map: map,
-                position: results[0].geometry.location
-            });
-            // 検索結果の表示
-            display.textContent = "検索結果：" + results[ 0 ].geometry.location
-          } else {
-            //検索結果が何もなかった場合に表示
-            alert('該当する結果がありませんでした：' + status);
-          }
-        });
-        }
+                id: index, // マーカーに一意のIDを付与
+              });
 
-      </script>
+              markers.push(marker); // マーカーを配列に保存
+
+              google.maps.event.addListener(marker, 'click', function (event) {
+                showInfoWindow(marker);
+              });
+            });
+          }
+
+          function showInfoWindow(marker) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', "/latlngsearch/" + marker.position.lat() + "/" + marker.position.lng() + ".json", true);
+            xhr.send(null);
+
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                let post_datas = JSON.parse(xhr.responseText);
+
+                if (post_datas.length === 0) {
+                  infowindow.setContent('投稿データがありません');
+                } else {
+                  let post_data = post_datas[0];
+                  infowindow.setContent(
+                    `<div>
+                       <p>投稿者：${post_data.user_name}</p>
+                       <p>店名/料理名：${post_data.store_name}</p>
+                       <p>説明：${post_data.description}</p>
+                       <p>住所：${post_data.address}</p>
+                       <img src="${post_data.image_url}" width="150" height="100">
+                    </div>`
+                  );
+                }
+
+                // 吹き出しをクリックしたマーカーに紐付けて表示
+                infowindow.open(map, marker);
+              }
+            };
+          }
+
+          let geocoder;
+
+          function codeAddress() {
+            let inputAddress = document.getElementById('address').value;
+
+            geocoder.geocode({ 'address': inputAddress }, function (results, status) {
+              if (status == 'OK') {
+                map.setCenter(results[0].geometry.location);
+                let marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location,
+                });
+
+                // 新しく追加されたマーカーにもイベントリスナーを設定
+                google.maps.event.addListener(marker, 'click', function (event) {
+                  showInfoWindow(marker);
+                });
+
+                display.textContent = "検索結果：" + results[0].geometry.location;
+              } else {
+                alert('該当する結果がありませんでした：' + status);
+              }
+            });
+          }
+        </script>
+
+<!-- 他のHTMLコード -->
+
 
       <!--scriptタグが止まれた後にcallback=initMap関数が実行される-->
        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
