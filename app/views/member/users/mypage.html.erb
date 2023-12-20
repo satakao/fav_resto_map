@@ -1,24 +1,36 @@
-    <div class="mypage_main col-12-fluid">
+  <div class="container-fluid">
 
-      <p id="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= render "layouts/errors", obj: @post %>
+    <p id="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
-      <h2><%= @user.name %>さんのresto_map</h2>
+    <%= render "layouts/errors", obj: @post %>
 
-       <%= link_to  "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-mypage ml-auto" do %>
-        <i class="fa-solid fa-circle-plus fa-3x"></i><br>
-        <p class="icon-text d-inline-block">新規投稿</p>
-       <% end %><br>
+    <div class="mypage_main row">
+
+      <div class="col-1 d-inline-block"></div>
+      <div class="col-9 text-center">
+        <h2 class="map-title"><%= @user.name %>さんのresto_map</h2>
+      </div>
+      <div class="col-1 text-center">
+        <%= link_to  "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-mypage ml-auto" do %>
+          <i class="fa-solid fa-circle-plus fa-3x"></i><br>
+          <p class="post-icon-text d-inline-block">新規投稿</p>
+        <% end %><br>
+      </div>
+
 
       <!--サイドバーにこのmypageを表示した時のみ表示させる-->
       <% content_for :add_content do %>
-         <%= link_to user_path(@user), class: "nav-link text-light mt-5" do %>
-           <i class="fa-solid fa-house-user fa-2x"></i>
+      <li class="nav-side-link2">
+         <%= link_to user_path(@user), class: "nav-link mt-5 mb-4" do %>
+           <i class="fa-solid fa-house-user fa-2x"></i><br>
+           <p class="logo-text-side">ユーザー<br>投稿</p>
          <% end %>
+      </li>
       <% end %>
 
-      <input id="address" type="textbox" value="GeekSalon">
+
+      <input id="address" type="textbox" value="東京都庁">
       <input type="button" value="Encode" onclick="codeAddress()">
       <div id="display"></div>
       <div id='map'></div>
@@ -125,7 +137,7 @@
       <%= render 'member/posts/form', post: @post %>
 
     </div>
-
+</div>
 
 
 

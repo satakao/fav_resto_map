@@ -24,11 +24,11 @@
          投稿編集
         </button>
 
-
         <%= render 'member/posts/form', post: @post %>
 
       <% end %><br>
 
+      <h3><%= @post.store_name %></h3>
       <%= image_tag @post.image, size:"300x300" %><br>
 
       <div class="d-inline-block" id="bookmark_button_<%= @post.id %>">
@@ -44,8 +44,6 @@
          <i class="fas fa-tag"><%= link_to tag.name,post_search_tag_path(tag)%></i>(総タグ数：<%= tag.posts.count %>)
 
       <% end %><br>
-
-      <%= @post.store_name %><br>
 
       <%= @post.address %><br>
 

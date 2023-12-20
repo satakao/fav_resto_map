@@ -1,0 +1,98 @@
+<div class="container-fluid">
+
+  <div class="row justify-content-center align-items-center mt-4">
+
+    <div class="col-8">
+      <h1>検索結果 "<span><%= @search %></span>"</h1>
+    </div>
+
+    <div class="col-8">
+
+      <table class="table table-hover table-inverse">
+        <% if @range == "User" %>
+
+            <tbody>
+              <tr>
+                <th>ユーザー画像</th>
+                <th>名前</th>
+              </tr>
+
+              <% @users.each do |user| %>
+
+                <tr>
+                  <td>
+                    <%=link_to user_path(user.id) do %>
+                      <%= image_tag user.get_profile_image, size: '100x100' %>
+                    <% end %>
+                  </td>
+
+                  <td>
+                    <%=link_to user_path(user.id) do %>
+                      <%= user.name %>
+                    <% end %>
+                  </td>
+                </tr>
+
+              <% end %>
+
+            </tbody>
+
+        <% elsif @range == "Post"%>
+
+         <tbody>
+            <tr>
+              <th>ユーザー画像</th>
+              <th>名前</th>
+              <th>店名/料理名</th>
+              <th>投稿画像</th>
+              <th>ブックマーク</th>
+              <th>説明</th>
+            </tr>
+
+            <% @posts.each do |post| %>
+
+            <tr>
+              <td><%= image_tag post.user.get_profile_image, size: '100x100' %></td>
+
+              <td>
+                <%=link_to user_path(post.user.id) do %>
+                  <%= post.user.name %>
+                <% end %>
+              </td>
+
+              <td>
+                <%=link_to post_path(post.id) do %>
+                  <%= post.store_name %>
+                <% end %>
+              </td>
+
+              <td>
+                <%=link_to post_path(post.id) do %>
+                  <%= image_tag post.image, size:"100x100" %>
+                <% end %>
+              </td>
+
+              <td>
+                <div id="bookmark_button_<%= post.id %>">
+                  <%= render "member/bookmarks/bookmark_btn", post: post %>
+                </div>
+              </td>
+
+              <td>
+                <%= post.description %>
+              </td>
+            </tr>
+
+            <% end %>
+
+          </tbody>
+
+        <% end %>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

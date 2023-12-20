@@ -10,12 +10,118 @@
 @import 'admin/homes.scss';
 @import 'admin/users.scss';
 
+// 共通
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  padding-top: 100px;
+  background-color: rgb(255,255,210);
+}
+
+main{
+  margin-top: 20px;
+}
+
 .sign_up,.log_in{
   margin: 100px 0 0 300px;
+}
 
+.table td{
+  vertical-align: middle;
+}
+
+.contents{
+  margin-top: 200px;
+}
+
+// var関連
+.navbar-user{
+  background-color: orange !important;
+  color: black;
+}
+
+.navbar-admin{
+  background-color: gray !important;
+}
+
+.sidebar-user{
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 90px;
+  background-color: orange;
+  color: black;
+}
+
+.sidebar-admin{
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 90px;
+  background-color: gray;
+}
+
+.side{
+  padding-top: 95px;
+  padding-left: 0px;
+}
+
+.logo-text{
+  font-size:10px;
+}
+
+.logo-text-side{
+  font-size:12px;
+}
+
+.main-contents{
+  padding-left: 95px;
+}
+
+.nav-link{
+   color: darkgreen !important;
+}
+
+.nav-link.admin{
+   color: black !important;
+}
+
+.nav-link.admin:hover{
+   color: white !important;
+}
+
+.nav-link:hover{
+   color: forestgreen !important;
+}
+
+
+.nav-side-link1{
+  border-top: groove 6px;
+  border-bottom: groove 6px;
+}
+
+.nav-side-link2{
+  border-bottom: groove 6px;
+}
+
+// var関連 992px以下のサイズでstyleを無効化
+@media screen and (min-width: 992px) {
+  .container-fluid{
+    padding-left: 110px;
+  }
+}
+
+// スクロールトップボタン
+#top-scroll {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+.arrow{
+  width: 50px;
+  height: 50px;
 }

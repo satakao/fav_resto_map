@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -18,83 +19,95 @@
   <body>
     <header>
       <% if admin_signed_in?%>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-primary  shadow rounded" >
+        <nav class="navbar navbar-admin navbar-expand-lg navbar-light fixed-top bg-light shadow rounded" >
       <% else %>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark  shadow rounded" >
+        <!--nav class="navbar-user navbar-expand-lg fixed-top shadow rounded" -->
+        <nav class="navbar navbar-user navbar-expand-lg navbar-light fixed-top bg-light shadow rounded">
       <% end %>
           <div class="container-fluid">
-            <a href="/" class="navbar-brand ml-5 text-light">fav_resto_map</a>
-
-            <button class="navbar-toggler" type="button"
-              data-toggle="collapse"
-              data-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon" style="color: #291b25"></span>
+            <a href="/" class="navbar-brand"><%= image_tag('fav_resto_map.png', size: "70x70") %></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
               <ul class="navbar-nav ml-auto">
-              <% if user_signed_in? %>
+                <% if user_signed_in? %>
 
+                  <li class="nav-item">
+                    <%= link_to posts_path, class: 'nav-link mr-5 text-center' do %>
+                    <i class="fa-solid fa-house fa-2x"></i><br>
+                    <p class="logo-text">投稿一覧</p>
+                    <% end %>
+                  </li>
 
-                <li>
-                  <%= link_to posts_path, class: 'nav-link text-light' do %>
-                  <i class="fa-solid fa-house fa-2x mr-5"></i>
-                  <% end %>
-                </li>
+                  <li class="nav-item">
+                    <%= link_to users_path(current_user), class: 'nav-link mr-5 text-center' do %>
+                    <i class="fa-solid fa-users fa-2x"></i><br>
+                    <p class="logo-text">ユーザー 一覧</p>
+                    <% end %>
+                  </li>
 
-                <li>
-                  <%= link_to users_path(current_user), class: 'nav-link text-light' do %>
-                  <i class="fa-solid fa-users fa-2x mr-5"></i>
-                  <% end %>
-                </li>
+                  <li class="nav-item">
+                    <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link mr-5 text-center' do %>
+                    <i class="fa-solid fa-right-from-bracket fa-2x"></i><br>
+                    <p class="logo-text">ログアウト</p>
+                    <% end %>
+                  </li>
 
-                <li>
-                  <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
-                  <i class="fa-solid fa-right-from-bracket fa-2x mr-5"></i>
-                  <% end %>
-                </li>
+                <% elsif admin_signed_in? %>
+
+                  <li class="nav-item">
+                    <%= link_to admin_path, class: 'nav-link admin text-light mr-5 text-center' do %>
+                    <i class="fa-solid fa-house fa-2x"></i><br>
+                    <p class="logo-text">投稿一覧</p>
+                    <% end %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= link_to admin_users_path, class: 'nav-link admin text-light mr-5 text-center' do %>
+                    <i class="fa-solid fa-users fa-2x"></i><br>
+                    <p class="logo-text">ユーザー 一覧</p>
+                    <% end %>
+                  </li>
+
+                   <li class="nav-item">
+                    <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link admin text-light mr-5 text-center' do %>
+                    <i class="fa-solid fa-right-from-bracket fa-2x"></i><br>
+                    <p class="logo-text">ログアウト</p>
+                    <% end %>
+                  </li>
+
+                <% else %>
+
+                  <li class="nav-item">
+                    <%= link_to new_user_session_path, method: :get, class: 'nav-link mr-5 text-center' do %>
+                    <i class="fa-solid fa-right-to-bracket fa-2x"></i><br>
+                    <p class="logo-text">ログイン</p>
+                    <% end %>
+                  </li>
+
+                <% end %>
+
+              </ul>
+
+              <% if user_signed_in?  %>
+
+                <%= form_with url: searches_search_path, method: :get, class:"text-right" do |f| %>
+                  <%= f.text_field :word %>
+                  <%= f.select :range, options_for_select([["User"],["Post"]]) %>
+                  <%= f.select :search, options_for_select([["完全一致","perfect_match"],["部分一致","partial_match"]]) %>
+                  <%= f.submit "検索" %>
+                <% end %>
 
               <% elsif admin_signed_in? %>
 
-                <li>
-                  <%= link_to admin_path, class: 'nav-link text-light mr-5' do %>
-                  <i class="fa-solid fa-house fa-2x"></i>
-                  <% end %>
-                </li>
-
-                <li>
-                  <%= link_to admin_users_path, class: 'nav-link text-light mr-5' do %>
-                  <i class="fa-solid fa-users fa-2x"></i>
-                  <% end %>
-                </li>
-
-                 <li>
-                  <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light mr-5' do %>
-                  <i class="fa-solid fa-right-from-bracket fa-2x"></i>
-                  <% end %>
-                </li>
-
-              <% else %>
-
-                <li>
-                  <%= link_to new_user_session_path, method: :get,class: 'nav-link text-light mr-5' do %>
-                  <i class="fa-solid fa-right-to-bracket fa-2x"></i>
-                  <% end %>
-                </li>
-
-              <% end %>
-              </ul>
-
-              <%= form_with url: searches_search_path, method: :get do |f| %>
-
-                <%= f.text_field :word %>
-                <%= f.select :range, options_for_select([["User"],["Post"]]) %>
-                <%= f.select :search, options_for_select([["完全一致","perfect_match"],["部分一致","partial_match"]]) %>
-                <%= f.submit "検索" %>
+                <%= form_with url: admin_searches_search_path, method: :get, class:"text-right" do |f| %>
+                  <%= f.text_field :word %>
+                  <%= f.select :range, options_for_select([["User"],["Post"]]) %>
+                  <%= f.select :search, options_for_select([["完全一致","perfect_match"],["部分一致","partial_match"]]) %>
+                  <%= f.submit "検索" %>
+                <% end %>
 
               <% end %>
 
@@ -102,44 +115,53 @@
 
           </div>
 
-        </div>
+        </nav>
 
-      </nav>
     </header>
 
-    <main style="min-height:120vh ;position: relative;padding-bottom:50px;box-sizing:border-box;">
-      <div class="mypage_main row no-gutters">
-        <div class="side col-md-1 col-lg-1 fixed-top">
-         <% if admin_signed_in?%>
-          <div class="sidebar bg-primary shadow rounded">
-        <% else %>
-          <div class="sidebar bg-dark shadow rounded">
-        <% end %>
-          <ul class="nav flex-column">
-            <li class="nav_item1">
-              <%= link_to users_mypage_path, class: 'nav-link text-light mt-5' do %>
-                 <i class="fa-solid fa-circle-user fa-2x"></i>
-              <% end %>
-            </li>
-            <li class="nav_item2">
-              <!--mypage viewから中身を呼び出し-->
-              <% if content_for? :add_content %>
-                <%= yield :add_content %>
-              <% end %>
+    <main>
+     <% unless admin_signed_in? %>
+        <div class="main-contents row-fluid d-none d-lg-block">
 
-            </li>
-            <li class="nav_item3">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-          </ul>
+          <div class="side col-md-1 col-lg-1 fixed-top">
+
+            <div class="sidebar-user navbar-light rounded">
+
+              <ul class="nav flex-column text-center">
+
+                <% if user_signed_in? %>
+                  <li class="nav-side-link1">
+                    <%= link_to users_mypage_path, class: 'nav-link mt-5 mb-4' do %>
+                      <i class="fa-solid fa-circle-user fa-2x"></i><br>
+                      <p class="logo-text-side">マイページ</p>
+                    <% end %>
+                  </li>
+                <% end %>
+
+                <!--各viewから中身を呼び出し-->
+                <% if content_for? :add_content %>
+                  <%= yield :add_content %>
+                <% end %>
+
+              </ul>
+
+            </div>
+
+          </div>
+
         </div>
-      </div>
+      <% end %>
 
       <%= yield %>
-    </main>
-    <footer>
 
-    </footer>
+    </main>
+
+    <span id="top-scroll">
+    <a href="">
+　　  <%= image_tag asset_path("top-scroll.png"), date: {"turbolinks"=>false}, class: "arrow" %>
+　  </a>
+    </span>
+    <footer></footer>
 
   </body>
 

@@ -8,7 +8,7 @@ class Member::HomesController < ApplicationController
 
   def ensure_not_logged_in
     if user_signed_in?
-     redirect_to users_mypage_path, notice:"ホーム画面に行くにはログアウトを行ってください"
+     redirect_to users_mypage_path, notice:"ホーム/ログイン画面に行くにはログアウトを行ってください"
     end
   end
 end

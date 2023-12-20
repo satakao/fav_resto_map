@@ -4,15 +4,16 @@
 
     <div class="col text-center">
 
-      <%= image_tag @user.get_profile_image %>
+      <!--ユーザー-->
+      <%=link_to admin_user_path do %>
+        <%= image_tag @user.get_profile_image %>
 
-      <%=link_to user_path do %>
-        <%= @user.name %>
+        <%= @user.name %><br>
       <% end %>
 
-        <%=link_to "投稿の削除",admin_post_path, method: :derlete, class:"btn btn-danger",data: { confirm: "この店名：#{@post.store_name}の投稿を削除しますか?" }%><br>
-
-        <%= render 'member/posts/form', post: @post %>
+      <!--投稿内容-->
+      <%=link_to "投稿の削除",admin_post_path, method: :derlete, class:"btn btn-danger mt-3 mb-5 pr-5 pl-5",data: { confirm: "この店名：#{@post.store_name}の投稿を管理者権限で削除しますか?" }%><br>
+      <h3><%= @post.store_name %></h3>
 
       <%= image_tag @post.image, size:"300x300" %><br>
 
@@ -21,24 +22,21 @@
         &emsp;<i class="fa-regular fa-comment"></i>コメント：<%= @post_comments.count %>
       </div>
 
-
-      <%= @post.store_name %><br>
-
       <%= @post.address %><br>
 
       <%= @post.description %><br>
 
+      <!--投稿コメント-->
+      <% @post_comments.each do |post_comment| %>
 
-     <% @post_comments.each do |post_comment| %>
+        <%=link_to admin_user_path(post_comment.user_id) do %>
+          <%= image_tag post_comment.user.get_profile_image %>
+          <%= post_comment.user.name %>
+        <% end %>
 
-      <%=link_to user_path(post_comment.user_id) do %>
-        <%= image_tag post_comment.user.get_profile_image %>
-        <%= post_comment.user.name %>
+        <%=link_to "削除する", admin_post_post_comment_path(@post,post_comment.id), method: :delete, class:"btn btn-danger",data: { confirm: "この：#{@user.name}のコメントを管理者権限で削除しますか?" } %><br>
+
       <% end %>
-
-        <%=link_to "削除する", admin_post_post_comment_path(@post,post_comment.id), method: :delete, class:"btn btn-danger",data: { confirm: "この：#{@user.name}のコメントを削除しますか?" } %>
-
-    <% end %>
 
     </div>
 

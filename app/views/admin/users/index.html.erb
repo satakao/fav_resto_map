@@ -1,15 +1,52 @@
-<% @users.each do |user| %>
+<div class="container">
 
-  <%=link_to admin_user_path(user) do %>
-    <%= image_tag user.get_profile_image %>
+  <div class="row justify-content-center align-items-center">
 
-    <%= user.name %>
-  <% end %>
+    <div class="col-12 text-center">
+      <h2>全ユーザー 一覧</h2>
+    </div>
 
-  フォロワー<%=  user.followings.count %>人
+    <div class="col-12">
 
-  フォロー<%=  user.followers.count %>人
+      <table class="table">
 
-  <p>利用ステータス: <%= user.is_active ? '利用中' : '利用停止中' %></p>
+      <% @users.each do |user| %>
 
-<% end %>
+      <tbody>
+        <tr>
+
+          <td>
+            <%=link_to admin_user_path(user) do %>
+              <%= image_tag user.get_profile_image %>
+            <% end %>
+          </td>
+
+          <td>
+            <%=link_to admin_user_path(user) do %>
+              <%= user.name %>
+            <% end %>
+          </td>
+
+          <td>
+              <p>フォロワー<%=  user.followings.count %>人</p>
+          </td>
+
+          <td>
+              <p>フォロー<%=  user.followers.count %>人</p>
+          </td>
+
+          <td>
+            <p>利用ステータス: <%= user.is_active ? '利用中' : '利用停止中' %></p>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>

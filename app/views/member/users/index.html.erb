@@ -1,28 +1,47 @@
-<div class="container">
- <div class="row">
-  <div class="col-8">
-   <h2>ユーザー一覧</h2>
-    <table class="table">
-    <% @users.each do |user| %>
-    <tbody>
-     <td>
-      <%=link_to user_path(user) do %>
-       <%= image_tag user.get_profile_image %>
-       <%= user.name %>
-      <% end %>
-     </td>
-     <td>
-      フォロワー<%=  user.followings.count %>人
-     </td>
-     <td>
-      フォロー<%=  user.followers.count %>人
-     </td>
+<div class="container-fluid">
 
-    </tbody>
-    <% end %>
-   </table>
+ <div class="row justify-content-center align-items-center mt-4">
+
+  <div class="col-8 text-center">
+
+   <h2>全ユーザー 一覧</h2>
+
   </div>
+
+  <div class="col-8">
+    <table class="table">
+
+    <% @users.each do |user| %>
+
+    <tbody>
+     <tr>
+      <td>
+       <%=link_to user_path(user) do %>
+        <%= image_tag user.get_profile_image %>
+        <%= user.name %>
+       <% end %>
+      </td>
+ 
+      <td>
+       フォロワー<%=  user.followings.count %>人
+      </td>
+ 
+      <td>
+       フォロー<%=  user.followers.count %>人
+      </td>
+      
+     </tr>
+     
+    </tbody>
+
+    <% end %>
+
+   </table>
+
+  </div>
+
  </div>
+
 </div>
 
 

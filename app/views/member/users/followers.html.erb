@@ -1,47 +1,68 @@
-<h1><%=@user.name%>フォロワー</h1>
+<div class="container-fluid">
 
-<% if @users.exists? %>
-   <table class="table">
+  <div class="row justify-content-center align-items-center mt-4">
 
-      <thead>
-        <tr>
-          <th>image</th>
-          <th>name</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
+    <div class="col-8">
+      <h1><%=@user.name%>フォロワー</h1>
+    </div>
 
-      <% @users.each do |user| %>
+    <div class="col-8">
 
-      <tbody>
-        <tr>
-          <td><%= image_tag user.get_profile_image, size:'100x100' %></td>
-          <td>
-            <%=link_to user_path(user.id) do %>
-              <%= user.name %>
-            <% end %>
-          </td>
-          <td>
-            <%=link_to followings_user_path(user.id) do %>
-              フォロー数：<%= user.followings.count %>人
-            <% end %>
-          </td>
-          <td>
-             <%=link_to followers_user_path(user.id) do %>
-              フォロワー数：<%= user.followers.count %>人
-             <% end %>
-          </td>
-        </tr>
-      </tbody>
+      <% if @users.exists? %>
+       <table class="table">
+
+          <thead>
+
+            <tr>
+              <th>image</th>
+              <th>name</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+          </thead>
+
+          <% @users.each do |user| %>
+
+          <tbody>
+
+            <tr>
+
+              <td><%= image_tag user.get_profile_image, size:'100x100' %></td>
+
+              <td>
+                <%=link_to user_path(user.id) do %>
+                  <%= user.name %>
+                <% end %>
+              </td>
+
+              <td>
+                <%=link_to followings_user_path(user.id) do %>
+                  フォロー数：<%= user.followings.count %>人
+                <% end %>
+              </td>
+
+              <td>
+                 <%=link_to followers_user_path(user.id) do %>
+                  フォロワー数：<%= user.followers.count %>人
+                 <% end %>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+          <% end %>
+
+        </table>
+      <% else %>
+
+        <p>ユーザーはいません</p>
 
       <% end %>
+    </div>
 
-    </table>
-<% else %>
+  </div>
 
-    <p>ユーザーはいません</p>
-
-<% end %>
-
+</div>

@@ -1,5 +1,6 @@
 <p class="pt-5" id="notice"><%= notice %></p>
-<div class="container">
+
+<div class="container-fluid">
 
   <div class="row">
 
@@ -31,7 +32,7 @@
 
       <% end %><br>
 
-      <% if @user == current_user %>
+      <% if (@user == current_user) && !(@user.guest_user?)%>
 
         <%= link_to edit_user_path(@user.id), class: "user-cog btn btn-outline-secondary" do %>
           <i class="fas fa-user-cog fa-2x"></i>
@@ -39,9 +40,7 @@
 
       <% end %><br>
 
-
-
-      <h1 class="d-inline-block"><%= @user.name %>さんの投稿内容</h1>
+      <h1 class="d-inline-block"><%= @user.name %>さんの投稿/ブックマーク</h1>
       <div class="modal-user text-center d-inline-block">
        <%= link_to  "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-user" do %>
         <i class="fa-solid fa-circle-plus fa-3x"></i><br>

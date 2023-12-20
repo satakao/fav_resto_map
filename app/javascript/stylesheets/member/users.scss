@@ -7,10 +7,6 @@
   box-sizing: border-box;
 }
 
-body {
-  padding-top: 50px;
-}
-
 #map {
         height: 580px;
         width: 100%;
@@ -68,28 +64,19 @@ h1 {
   color: #000;
   line-height: 2.5;
 }
-.sidebar{
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 70px;
-}
-.side{
-  padding-top: 56px;
-  padding-left: 0px;
 
+p.post-icon-text{
+  font-size: 20px;
 }
-.mypage_main{
-  padding-left: 100px;
-  padding-top: 30px;
-}
-p.icon-text{
-  font-size: small;
-}
+
 .modal-mypage,.icon-text{
 
-  padding-left: 1500px;
+  // padding-left: 1500px;
 }
 .user-cog {
-  padding: 20px 300px;
+  padding: 15px 250px;
+}
+
+.map-title{
+  border-bottom: 8px solid rgb(255,165,0,0.5);
 }

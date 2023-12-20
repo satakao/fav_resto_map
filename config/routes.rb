@@ -19,11 +19,10 @@ Rails.application.routes.draw do
 
   root to: "member/homes#top"
 
-  get "searches/search"
-
   scope module: :member do
     get "posts/search_tag/:id" => "posts#search_tag", as: :post_search_tag
     get "users/mypage" => "users#mypage"
+    get "searches/search" => "searches#search", as: :searches_search
     resources :users, only:[:show, :index, :edit, :update, :destroy]do
       resources :relationships, only:[:create, :destroy]
       member do
@@ -40,6 +39,7 @@ Rails.application.routes.draw do
 
   get "admin" => "admin/homes#top"
   namespace :admin do
+    get "searches/search" => "searches#search"
     resources :posts, only:[:show, :destroy] do
       resources :post_comments, only:[:destroy]
     end

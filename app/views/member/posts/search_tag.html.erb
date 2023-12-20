@@ -1,7 +1,4 @@
-<div class="container">
-
-  <h5>タグ：<%=@tag.name%>に関する投稿一覧</h5>
-
+<div class="container-fluid text-center">
 
   <p class="d-inline-block">タグリスト:</p>
   <!--タグリスト-->
@@ -9,54 +6,44 @@
 
     <%=link_to tag.name,post_search_tag_path(tag) %>
 
-    <%="(#{tag.posts.count})" %>
+    <%= tag.posts.count %>
 
   <% end %>
 
+  <h3>タグ：<%=@tag.name%>に関する投稿一覧</h3>
+
   <p>店名/料理名:</p>
-  <!--選択したタグに関する投稿一覧-->
-  <% @posts.each do |post| %>
 
-  <!--投稿はカードで囲む-->
-  <div class="card">
+  <div class="row">
 
-    <div class="card-body">
+    <% @posts.each do |post| %>
 
-      <!--タイトル表示される文字数は２５文字までにしてます-->
-      <h6 class="card-title">
 
-        <%=link_to post_path(post.id) do %>
+      <div class="col-2">
+        <!--投稿カード-->
+        <div class="mini-post-card text-center d-inline-block">
 
-          <%= post.store_name.truncate(25) %>
+          <%=link_to post_path(post.id) do %>
 
-        <% end %>
-      </h6>
+            <%= post.store_name.truncate(10) %><br>
+            <%= image_tag post.image,size:"150x150" %><br>
 
-      <i class="fa-regular fa-bookmark"></i>ブックマーク数：<%= post.bookmarks.count %>
+          <% end %>
 
-    </div>
+          <i class="fa-regular fa-bookmark"></i>ブックマーク数:<%= post.bookmarks.count %><br>
+
+          <%= post.address.truncate(10) %><br>
+
+          <%= post.description.truncate(15) %>
+
+        </div>
+
+      </div>
+
+    <% end %>
 
   </div>
 
-  <% end %>
-
+</div>
 <!--<div class="pagination pagination-sm justify-content-center">-->
 <!--       </div>-->
-
-</div>
-
-
-<style>
-.card{
-  padding:0;
-  margin:0;
-  border:none;
-}
-
-
-
-h6 {
-  /*線の種類（実線） 太さ 色*/
-  border-bottom: solid 3px black;
-}
-</style>
