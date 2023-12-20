@@ -24,6 +24,7 @@ h1 {
 
 #tab-menu {
   display: flex;
+  width: 1600px;
 }
 
 #tab-menu li {
@@ -37,13 +38,13 @@ h1 {
   display: block;
   padding: 20px;
   text-align: center;
-  background: #000;
+  background: rgb(115,88,4);
   border: 1px solid #000;
   border-bottom: none;
 }
 
 #tab-menu .active {
-  background: #fff;
+  background: orange;
   color: #000;
 }
 
@@ -54,10 +55,9 @@ h1 {
 
 #tab-contents .tab {
   width: 100%;
-  padding: 30px;
-  background: #fff;
+  padding-bottom: 300px;
+  background: orange;
   border: 1px solid #000;
-  border-top: none;
 }
 
 #tab-contents p {

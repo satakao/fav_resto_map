@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        is_active: ユーザーステータス
+      post:
+        store_name: 店名または料理名
+        description: 説明文
+        latitude: 緯度
+        longitude: 経度
+        address: 住所
+        is_published: 投稿ステータス
+        image: 画像
+      post_comment:
+        comment: コメント
+
+

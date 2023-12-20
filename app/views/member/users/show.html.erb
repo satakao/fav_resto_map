@@ -6,7 +6,7 @@
 
     <div class="col text-center">
 
-      <%= image_tag @user.get_profile_image,size:"150x150" %>
+      <%= image_tag @user.get_profile_image,size:"100x100" %>
 
       <%= @user.name %>
 
@@ -41,11 +41,14 @@
       <% end %><br>
 
       <h1 class="d-inline-block"><%= @user.name %>さんの投稿/ブックマーク</h1>
-      <div class="modal-user text-center d-inline-block">
+      
        <%= link_to  "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-user" do %>
-        <i class="fa-solid fa-circle-plus fa-3x"></i><br>
-        <p class="icon-text-user_show d-inline-block">新規投稿</p>
-      </div>
+       
+        <div class="modal-user text-center d-inline-block">
+          <i class="fa-solid fa-circle-plus fa-3x"></i><br>
+          <p class="icon-text-user_show d-inline-block">新規投稿</p>
+        </div>
+      
        <% end %><br>
       <!--タブ部分-->
       <div class="wrap">
@@ -57,7 +60,6 @@
         </ul>
         <!--タブごとのページ遷移先-->
         <div id = "tab-contents">
-
           <div id = "tab1" class="tab">
             <%= render "member/users/show", posts: @posts %>
           </div>
@@ -65,7 +67,6 @@
           <div id = "tab2" class="tab">
             <%= render "member/users/bookmark_posts",bookmarked_posts: @bookmarked_posts %>
           </div>
-
         </div>
 
       </div>

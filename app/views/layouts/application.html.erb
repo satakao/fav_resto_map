@@ -42,7 +42,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <%= link_to users_path(current_user), class: 'nav-link mr-5 text-center' do %>
+                    <%= link_to users_path, class: 'nav-link mr-5 text-center' do %>
                     <i class="fa-solid fa-users fa-2x"></i><br>
                     <p class="logo-text">ユーザー 一覧</p>
                     <% end %>
@@ -156,11 +156,7 @@
 
     </main>
 
-    <span id="top-scroll">
-    <a href="">
-　　  <%= image_tag asset_path("top-scroll.png"), date: {"turbolinks"=>false}, class: "arrow" %>
-　  </a>
-    </span>
+    
     <footer></footer>
 
   </body>
