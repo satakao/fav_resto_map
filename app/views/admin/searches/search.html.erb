@@ -25,7 +25,7 @@
                     <%= image_tag user.get_profile_image, size: '100x100' %>
                   <% end %>
                 </td>
-                
+
                 <td>
                   <%=link_to admin_user_path(user) do %>
                     <%= user.name %>
@@ -99,3 +99,8 @@
   </div>
 
 </div>
+<span id="top-scroll">
+  <a href="">
+　  <%= image_tag asset_path("top-scroll.png"), turbolinks: false, class: "arrow" %>
+　</a>
+</span>
