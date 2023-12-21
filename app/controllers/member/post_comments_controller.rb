@@ -17,7 +17,7 @@ class Member::PostCommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @post_comment = current_user.post_comments.find_by(post_id: @post.id)
     @post_comment = PostComment.find(params[:id]).destroy
-
+    redirect_to request.referer , notice:"コメントを削除しました"
   end
 
   private

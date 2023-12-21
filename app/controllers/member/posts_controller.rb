@@ -16,10 +16,6 @@ class Member::PostsController < ApplicationController
 
   end
 
-  def destroy
-
-  end
-
   def update
     @post = Post.find(params[:id])
     tag_list=params[:post][:name].split(',')
@@ -55,9 +51,14 @@ class Member::PostsController < ApplicationController
       @posts = Post.all
       redirect_to posts_path,notice:"投稿完了しました"
     else
-      @user =current_user
+      @user=current_user
       render "member/users/mypage"
     end
+  end
+
+  def destroy
+    @post=Post.find(params[:id]).destroy
+    redirect_to posts_path,notice:"投稿を削除しました"
   end
 
   def search

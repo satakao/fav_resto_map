@@ -1,17 +1,27 @@
 <div class="container">
 
+  <div class="d-inline-block">
+    <p id="notice"><%= notice %></p>
+  </div>
+
+  <div class="tags text-center">
+
+    <p class="d-inline-block">タグリスト:</p>
+
+    <% @tag_list.each do |list|%>
+
+      <%=link_to list.name,post_search_tag_path(list) %>
+
+      <%="(#{list.posts.count})" %>
+
+    <% end %>
+
+  </div>
+
   <div class="row justify-content-center align-items-center">
 
     <div class="col-6 text-center">
       <!--タグリスト-->
-      <p class="d-inline-block">タグリスト:</p>
-      <% @tag_list.each do |list|%>
-
-        <%=link_to list.name,post_search_tag_path(list) %>
-
-        <%="(#{list.posts.count})" %>
-
-      <% end %>
 
       <% @posts.each do |post| %>
 
@@ -38,11 +48,11 @@
             <!--配列に入っているタグを１つずつnameの型にして表示させる-->
             <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i><br>
 
-            <%= post.address %><br>
+            <%= post.store_name.truncate(15) %><br>
 
-            <%= post.store_name %><br>
+            <%= post.address.truncate(15) %><br>
 
-            <%= post.description %><br>
+            <%= post.description.truncate(20) %><br>
 
         </div>
 

@@ -1,5 +1,6 @@
 <div class="container">
-
+  <p id="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
   <div class="row justify-content-center align-items-center">
 
     <div class="col-6 text-center">
@@ -25,11 +26,11 @@
            &emsp;<i class="fa-regular fa-comment"></i>コメント数:<%= post.post_comments.count %>
         </div>
 
-        <%= post.store_name %><br>
+        <%= post.store_name.truncate(15) %><br>
 
-        <%= post.address %><br>
+        <%= post.address.truncate(15) %><br>
 
-        <%= post.description %><br>
+        <%= post.description.truncate(20) %><br>
 
       </div>
 

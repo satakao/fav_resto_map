@@ -1,7 +1,6 @@
   <div class="container-fluid">
 
     <p id="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
     <%= render "layouts/errors", obj: @post %>
 
@@ -90,7 +89,7 @@
                        <p>店名/料理名：${post_data.store_name}</p>
                        <p>説明：${post_data.description}</p>
                        <p>住所：${post_data.address}</p>
-                       <img src="${post_data.image_url}" width="150" height="100">
+                       <img src="${post_data.image_url}" width="150" height="150">
                     </div>`
                   );
                 }

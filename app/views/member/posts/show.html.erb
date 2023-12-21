@@ -15,7 +15,7 @@
       <%=link_to user_path(@user) do %>
         <%= image_tag @user.get_profile_image %>
 
-        <%= @user.name %>
+        <%= @user.name %><br>
       <% end %>
 
       <% if @post.user == current_user %>
@@ -25,6 +25,8 @@
         </button>
 
         <%= render 'member/posts/form', post: @post %>
+
+        <%= link_to "投稿削除",post_path, method: :delete, class:"btn btn-danger", data: { confirm: "この店名：#{@post.store_name}の投稿を削除しますか？"}%>
 
       <% end %><br>
 
@@ -44,6 +46,7 @@
          <i class="fas fa-tag"><%= link_to tag.name,post_search_tag_path(tag)%></i>(総タグ数：<%= tag.posts.count %>)
 
       <% end %><br>
+
 
       <%= @post.address %><br>
 

@@ -13,16 +13,18 @@
 
 <% end %>
 
-<div id="comments_errors">
-  <%= render "layouts/errors", obj: @post_comment %>
-</div>
+<% if @post.user != current_user %>
 
-<%= form_with model: post_comment, url: post_post_comments_path(post), method: :post, local: false do |f| %>
-
-  <div class="form-group">
-    <%=f.text_area :comment,placeholder: "コメントをここに",cols:80,rows:5, id: "comment_textarea", class:"form_control" %>
+  <div id="comments_errors">
+    <%= render "layouts/errors", obj: @post_comment %>
   </div>
 
-  <%=f.submit "送信"%>
+  <%= form_with model: post_comment, url: post_post_comments_path(post), method: :post, local: false do |f| %>
+    <div class="form-group">
+      <%=f.text_area :comment,placeholder: "コメントをここに",cols:80,rows:5, id: "comment_textarea", class:"form_control" %>
+    </div>
+
+    <%=f.submit "送信"%>
+  <% end %>
 
 <% end %>

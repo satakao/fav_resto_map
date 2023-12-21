@@ -55,7 +55,11 @@
             <% @posts.each do |post| %>
 
             <tr>
-              <td><%= image_tag post.user.get_profile_image, size: '100x100' %></td>
+              <td>
+                <%=link_to admin_user_path(post.user) do %>
+                  <%= image_tag post.user.get_profile_image, size: '100x100' %>
+                <% end %>
+              </td>
 
               <td>
                 <%=link_to admin_user_path(post.user) do %>
@@ -76,9 +80,7 @@
               </td>
 
               <td>
-                <div id="bookmark_button_<%= post.id %>">
-                  <%= render "member/bookmarks/bookmark_btn", post: post %>
-                </div>
+                <i class="fa-regular fa-bookmark"></i>ブックマーク数:<%= post.bookmarks.count %>
               </td>
 
               <td>

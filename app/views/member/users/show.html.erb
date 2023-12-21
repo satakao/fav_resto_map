@@ -1,6 +1,6 @@
-<p class="pt-5" id="notice"><%= notice %></p>
-
 <div class="container-fluid">
+
+  <p id="notice"><%= notice %></p>
 
   <div class="row">
 
@@ -41,14 +41,14 @@
       <% end %><br>
 
       <h1 class="d-inline-block"><%= @user.name %>さんの投稿/ブックマーク</h1>
-      
+
        <%= link_to  "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-user" do %>
-       
+
         <div class="modal-user text-center d-inline-block">
           <i class="fa-solid fa-circle-plus fa-3x"></i><br>
           <p class="icon-text-user_show d-inline-block">新規投稿</p>
         </div>
-      
+
        <% end %><br>
       <!--タブ部分-->
       <div class="wrap">
