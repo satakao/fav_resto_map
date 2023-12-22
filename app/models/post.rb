@@ -50,14 +50,20 @@ class Post < ApplicationRecord
     end
   end
 
-  def self.looks(search,word)
-    if user_signed_in?
-      if search == "perfect_match"
-        @post = Post.where(is_published: true).where("store_name LIKE ?","#{word}")
-      elsif search == "partial_match"
-        @post = Post.where(is_published: true).where("store_name LIKE ?", "%#{word}%")
-      end
-    elsif
+  def self.valid_looks(search,word)
+    if search == "perfect_match"
+      @post = Post.where(is_published: true).where("store_name LIKE ?","#{word}")
+    elsif search == "partial_match"
+      @post = Post.where(is_published: true).where("store_name LIKE ?", "%#{word}%")
+    end
+  end
+
+   def self.looks(search,word)
+    if search == "perfect_match"
+      @post = Post.where("store_name LIKE ?","#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("store_name LIKE ?", "%#{word}%")
+    end
   end
 
 end
