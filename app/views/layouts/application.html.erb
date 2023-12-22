@@ -55,6 +55,23 @@
                     <% end %>
                   </li>
 
+                  <li class="nav-item md">
+                    <%= link_to users_mypage_path, class: 'nav-link mr-5 text-center' do %>
+                      <i class="fa-solid fa-circle-user fa-2x"></i><br>
+                      <p class="logo-text-side">マイページ</p>
+                    <% end %>
+                  </li>
+
+                   <!--各viewから中身を呼び出し-->
+                  <% if content_for? :add_content %>
+                    <li class="nav-item md">
+                      <%= link_to user_path(@user), class: "nav-link mr-5 text-center" do %>
+                         <i class="fa-solid fa-house-user fa-2x"></i><br>
+                         <p class="logo-text-side">ユーザー<br>投稿</p>
+                       <% end %>
+                    </li>
+                  <% end %>
+
                 <% elsif admin_signed_in? %>
 
                   <li class="nav-item">

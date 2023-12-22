@@ -108,10 +108,14 @@ main{
   border-bottom: groove 6px;
 }
 
-// var関連 992px以下のサイズでstyleを無効化
+// var関連 992px以上のサイズでstyleを有効化
 @media screen and (min-width: 992px) {
   .container-fluid{
     padding-left: 110px;
+  }
+  .nav-item.md{
+    display: none;
+    margin-right: 30px;
   }
 }
 

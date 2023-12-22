@@ -20,8 +20,8 @@
 
       <!--サイドバーにこのmypageを表示した時のみ表示させる-->
       <% content_for :add_content do %>
-      <li class="nav-side-link2">
-         <%= link_to user_path(@user), class: "nav-link mt-5 mb-4" do %>
+      <li class="nav-side-link2 pt-5 pb-4">
+         <%= link_to user_path(@user), class: "nav-link " do %>
            <i class="fa-solid fa-house-user fa-2x"></i><br>
            <p class="logo-text-side">ユーザー<br>投稿</p>
          <% end %>
