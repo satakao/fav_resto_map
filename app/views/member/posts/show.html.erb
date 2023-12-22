@@ -1,16 +1,15 @@
 <div class="container">
 
+  <div class="d-inline-block">
+    <p id="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </div>
+
   <div class="row">
 
     <%= render "layouts/errors", obj: @post %>
 
     <div class="col text-center">
-
-      <div class="d-inline-block">
-
-        <p id="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </div>
 
       <%=link_to user_path(@user) do %>
         <%= image_tag @user.get_profile_image %>
@@ -26,7 +25,7 @@
 
         <%= render 'member/posts/form', post: @post %>
 
-        <%= link_to "投稿削除",post_path, method: :delete, class:"btn btn-danger", data: { confirm: "この店名：#{@post.store_name}の投稿を削除しますか？"}%>
+        <%= link_to "投稿削除",post_path, method: :delete, class:"btn btn-danger", data: { confirm: "店名/料理名：#{@post.store_name}の投稿を削除しますか？"}%>
 
       <% end %><br>
 

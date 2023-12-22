@@ -5,14 +5,14 @@
     <div class="col text-center">
 
       <!--ユーザー-->
-      <%= link_to admin_user_path do %>
+      <%= link_to admin_user_path(@user) do %>
         <%= image_tag @user.get_profile_image %>
 
         <%= @user.name %><br>
       <% end %>
 
       <!--投稿内容-->
-      <%= link_to "投稿削除",admin_post_path, method: :delete, class:"btn btn-danger mt-3 mb-5 pr-5 pl-5", data: { confirm: "この店名：#{@post.store_name}の投稿を管理者権限で削除しますか?" }%><br>
+      <%= link_to "投稿削除",admin_post_path, method: :delete, class:"btn btn-danger mt-3 mb-5 pr-5 pl-5", data: { confirm: "店名/料理名：#{@post.store_name}の投稿を管理者権限で削除しますか?" }%><br>
 
       <h3><%= @post.store_name %></h3>
 

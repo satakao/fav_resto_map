@@ -23,7 +23,7 @@
         <div class="form-group d-inline-block">
           <%= f.submit "ユーザー情報更新", class: 'btn btn-success' %>
         </div>
-        <%=link_to "退会する",user_path(@user.id), method: :delete, data: { confirm: "この#{@user.name}のアカウントを削除しますか？"}, class:"btn btn-danger pr-5 pl-5 d-inline-block float-right" %>
+        <%=link_to "アカウント削除",user_path(@user.id), method: :delete, data: { confirm: "#{@user.name}のアカウントを削除しますか？"}, class:"btn btn-danger pr-5 pl-5 d-inline-block float-right" %>
       <% end %>
 
     </div>

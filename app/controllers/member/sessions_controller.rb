@@ -26,8 +26,7 @@ class Member::SessionsController < Devise::SessionsController
     # emailの一致するuserに対してパスワードが一致しない場合この処理を終了する
     return unless user.valid_password?(params[:user][:password])
     return if user.is_active
-    flash[:error] = "制限がかけられているためこのアカウントは使用できません。"
-    redirect_to new_user_session_path
+    redirect_to new_user_session_path,alert: "制限がかけられているためこのアカウントは使用できません。"
   end
 
 

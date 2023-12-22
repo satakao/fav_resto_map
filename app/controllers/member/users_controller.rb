@@ -3,21 +3,22 @@ class Member::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :update, :destroy, ]
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.all
     @post = Post.new
+    @posts = @user.posts.all
     @bookmarked_posts = Post.bookmarked_post(current_user)
   end
 
   def mypage
     @user = current_user
     @post = Post.new
+    @tags = @post.tags.pluck(:name).join(', ')
     posts = current_user.bookmarked_posts
     @latlngs =latlngs(posts)
     # 投稿住所から変換して緯度と経度に変換、格納する
   end
 
   def index
-    @users = User.all
+    @users = User.where(users: { is_active: true})
   end
 
   def edit

@@ -11,7 +11,7 @@ class Post < ApplicationRecord
   validates :store_name, presence:true, length: { maximum: 20 }
   validates :description, presence:true, length: {maximum:100}
   # validates :is_published, presence:true
-  validates :address, presence:true, length: { minimum: 3, maximum: 50 }
+  validates :address, presence:true, length: { minimum: 2, maximum: 50 }
   validates :image, presence: true
 
   # 指定したユーザーがいいねしているかの確認
@@ -28,25 +28,22 @@ class Post < ApplicationRecord
 
   # 新しいタグの保存
   def save_tag(sent_tags)
-  # タグが存在していれば、タグの名前を配列として全て取得
-    current_tags = self.tags.pluck(:name) unless self.tags.nil?
-    # 現在取得したタグから送られてきたタグを除いてoldtagとする
-    old_tags = current_tags - sent_tags
-    # 送信されてきたタグから現在存在するタグを除いたタグをnewとする
-    new_tags = sent_tags - current_tags
+    self.transaction do
+      # Retrieve current tags
+      current_tags = self.tags.pluck(:name) unless self.tags.nil?
 
-    # 古いタグを消す
-    old_tags.each do |old|
-      tag = Tag.find_by(name: old)
+      # Calculate old and new tags
+      old_tags = current_tags - sent_tags
+      new_tags = sent_tags - current_tags
 
-     # タグが見つかった場合は削除
-      tag.destroy if tag.present? && self.tags.exists?(tag.id)
-    end
+      # Delete old tags with a single query
+      Tag.where(name: old_tags).destroy_all
 
-    # 新しいタグを保存
-    new_tags.each do |new|
-      new_post_tag = Tag.find_or_create_by(name: new)
-      self.tags << new_post_tag
+      # Create or find new tags and associate them with the post
+      new_tags.each do |new|
+        new_post_tag = Tag.find_or_create_by(name: new)
+        self.tags << new_post_tag
+      end
     end
   end
 
@@ -58,7 +55,7 @@ class Post < ApplicationRecord
     end
   end
 
-   def self.looks(search,word)
+  def self.looks(search,word)
     if search == "perfect_match"
       @post = Post.where("store_name LIKE ?","#{word}")
     elsif search == "partial_match"

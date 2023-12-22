@@ -4,12 +4,14 @@ class Member::PostsController < ApplicationController
   def index
     # 利用有効になっているユーザーで、そのユーザーの投稿で表示にしている投稿一覧を表示
     @posts = Post.includes(:user).where(users: { is_active: true }).where(is_published: true)
-    @tag_list=Tag.all
+    # ユーザー利用中、投稿公開中のタグのみ引っ張ってくる
+    @tag_list=Tag.includes(posts: :user).where(posts: {is_published: true, users: {is_active: true} })
   end
 
   def show
     @post = Post.find(params[:id])
     @user = @post.user
+    @tags = @post.tags.pluck(:name).join(', ')
     @post_comment = PostComment.new
     @post_comments = @post.post_comments
     @post_tags = @post.tags
@@ -94,11 +96,12 @@ class Member::PostsController < ApplicationController
   def search_tag
 
     #検索結果画面でもタグ一覧表示
-    @tag_list=Tag.all
+    @tag_list=Tag.includes(posts: :user).where(posts: {is_published: true, users: {is_active: true} })
     #検索されたタグを受け取る
     @tag=Tag.find(params[:id])
-    #検索されたタグに紐づく投稿を表示
-    @posts=@tag.posts
+    @posts = @tag.posts.includes(:user).where(is_published: true, users: { is_active: true })
+
+
 
   end
 

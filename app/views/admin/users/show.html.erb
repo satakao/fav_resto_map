@@ -3,11 +3,10 @@
   <div class="row">
 
     <div class="col text-center">
-      <%=link_to user_path do %>
-        <%= image_tag @user.get_profile_image %>
 
-        <%= @user.name %>
-      <% end %>
+      <%= image_tag @user.get_profile_image %>
+
+      <%= @user.name %>
 
       フォロワー<%=  @user.followers.count %>人
 
@@ -16,10 +15,10 @@
       <!--ユーザー利用可否状態の確認-->
       <% if @user.is_active %>
         <%= "「ユーザー利用中」" %><br>
-        <%= link_to "ユーザーを利用停止にする", admin_user_deactivate_path(@user), method: :patch, class:"btn btn-danger mt-3 mb-3", data: { confirm: "このユーザーを管理者権限で利用停止にしますか?" } %>
+        <%= link_to "ユーザーを利用停止にする", admin_user_deactivate_path(@user), method: :patch, class:"btn btn-danger mt-3 mb-3", data: { confirm: "#{@user.name}のアカウントを管理者権限で利用停止にしますか?" } %>
       <% else %>
         <%= "「ユーザー利用停止中」" %><br>
-        <%= link_to "ユーザーの利用停止を解除する", admin_user_activate_path(@user), method: :patch, class:"btn btn-success mt-3 mb-3", data: { confirm: "このユーザーの利用停止を管理者権限で解除しますか?" } %>
+        <%= link_to "ユーザーの利用停止を解除する", admin_user_activate_path(@user), method: :patch, class:"btn btn-success mt-3 mb-3", data: { confirm: "アカウント#{@user.name}の利用停止を管理者権限で解除しますか?" } %>
 
       <% end %>
 
