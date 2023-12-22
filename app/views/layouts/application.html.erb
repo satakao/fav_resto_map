@@ -34,7 +34,7 @@
               <ul class="navbar-nav ml-auto">
                 <% if user_signed_in? %>
 
-                  <li class="nav-item">
+                  <li data-turbolinks="false" class="nav-item">
                     <%= link_to posts_path, class: 'nav-link mr-5 text-center' do %>
                     <i class="fa-solid fa-house fa-2x"></i><br>
                     <p class="logo-text">投稿一覧</p>
@@ -74,7 +74,7 @@
 
                 <% elsif admin_signed_in? %>
 
-                  <li class="nav-item">
+                  <li data-turbolinks="false" class="nav-item">
                     <%= link_to admin_path, class: 'nav-link admin text-light mr-5 text-center' do %>
                     <i class="fa-solid fa-house fa-2x"></i><br>
                     <p class="logo-text">投稿一覧</p>
@@ -147,7 +147,7 @@
               <ul class="nav flex-column text-center">
 
                 <% if user_signed_in? %>
-                  <li class="nav-side-link1">
+                  <li data-turbolinks="false" class="nav-side-link1">
                     <%= link_to users_mypage_path, class: 'nav-link mt-5 mb-4' do %>
                       <i class="fa-solid fa-circle-user fa-2x"></i><br>
                       <p class="logo-text-side">マイページ</p>

@@ -34,104 +34,99 @@
       <div id="display"></div>
       <div id='map'></div>
 
+      <script data-turbolinks="false">
+        let map;
+        let infowindow;
+        const markers = [];
+        let marker;
 
+        function initMap() {
+          geocoder = new google.maps.Geocoder();
 
-    <!-- 他のHTMLコード -->
+          // マップを初期化。map変数に割り付け
+          let map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 35.6894807, lng: 139.6916863 },
+            zoom: 12,
+          });
 
-        <script>
-          let map;
-          let infowindow;
-          const markers = [];
+          infowindow = new google.maps.InfoWindow();
 
-          function initMap() {
-            geocoder = new google.maps.Geocoder();
+          let latLngArray = <%= raw @latlngs.to_json %>;
 
-            map = new google.maps.Map(document.getElementById('map'), {
-              center: { lat: 35.6894807, lng: 139.6916863 },
-              zoom: 12,
+          latLngArray.forEach(function (latlng, index) {
+            let marker = new google.maps.Marker({
+              position: { lat: latlng[0], lng: latlng[1] },
+              map: map,
+              id: index, // マーカーに一意のIDを付与
             });
 
-            infowindow = new google.maps.InfoWindow();
+            markers.push(marker); // マーカーを配列に保存
 
-            let latLngArray = <%= raw @latlngs.to_json %>;
+            google.maps.event.addListener(marker, 'click', function (event) {
+              showInfoWindow(marker);
+            });
+          });
+        }
 
-            latLngArray.forEach(function (latlng, index) {
+        function showInfoWindow(marker) {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', "/latlngsearch/" + marker.position.lat() + "/" + marker.position.lng() + ".json", true);
+          xhr.send(null);
+
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              let post_datas = JSON.parse(xhr.responseText);
+
+              if (post_datas.length === 0) {
+                infowindow.setContent('投稿データがありません');
+              } else {
+                let post_data = post_datas[0];
+                infowindow.setContent(
+                  `<div>
+                     <p>投稿者：${post_data.user_name}</p>
+                     <p>店名/料理名：${post_data.store_name}</p>
+                     <p>説明：${post_data.description}</p>
+                     <p>住所：${post_data.address}</p>
+                     <img src="${post_data.image_url}" width="150" height="150">
+                  </div>`
+                );
+              }
+
+              // 吹き出しをクリックしたマーカーに紐付けて表示
+              infowindow.open(map, marker);
+            }
+          };
+        }
+
+        let geocoder;
+
+        function codeAddress() {
+          let inputAddress = document.getElementById('address').value;
+
+          geocoder.geocode({ 'address': inputAddress }, function (results, status) {
+            if (status == 'OK') {
+              map.setCenter(results[0].geometry.location);
+              マップのマーカーを作成
               let marker = new google.maps.Marker({
-                position: { lat: latlng[0], lng: latlng[1] },
                 map: map,
-                id: index, // マーカーに一意のIDを付与
+                position: results[0].geometry.location,
               });
 
-              markers.push(marker); // マーカーを配列に保存
-
+              // 新しく追加されたマーカーにもイベントリスナーを設定
               google.maps.event.addListener(marker, 'click', function (event) {
                 showInfoWindow(marker);
               });
-            });
-          }
 
-          function showInfoWindow(marker) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', "/latlngsearch/" + marker.position.lat() + "/" + marker.position.lng() + ".json", true);
-            xhr.send(null);
-
-            xhr.onreadystatechange = function () {
-              if (xhr.readyState === 4 && xhr.status === 200) {
-                let post_datas = JSON.parse(xhr.responseText);
-
-                if (post_datas.length === 0) {
-                  infowindow.setContent('投稿データがありません');
-                } else {
-                  let post_data = post_datas[0];
-                  infowindow.setContent(
-                    `<div>
-                       <p>投稿者：${post_data.user_name}</p>
-                       <p>店名/料理名：${post_data.store_name}</p>
-                       <p>説明：${post_data.description}</p>
-                       <p>住所：${post_data.address}</p>
-                       <img src="${post_data.image_url}" width="150" height="150">
-                    </div>`
-                  );
-                }
-
-                // 吹き出しをクリックしたマーカーに紐付けて表示
-                infowindow.open(map, marker);
-              }
-            };
-          }
-
-          let geocoder;
-
-          function codeAddress() {
-            let inputAddress = document.getElementById('address').value;
-
-            geocoder.geocode({ 'address': inputAddress }, function (results, status) {
-              if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
-                let marker = new google.maps.Marker({
-                  map: map,
-                  position: results[0].geometry.location,
-                });
-
-                // 新しく追加されたマーカーにもイベントリスナーを設定
-                google.maps.event.addListener(marker, 'click', function (event) {
-                  showInfoWindow(marker);
-                });
-
-                display.textContent = "検索結果：" + results[0].geometry.location;
-              } else {
-                alert('該当する結果がありませんでした：' + status);
-              }
-            });
-          }
-        </script>
-
-<!-- 他のHTMLコード -->
-
+              display.textContent = "検索結果：" + results[0].geometry.location;
+            } else {
+              alert('該当する結果がありませんでした：' + status);
+            }
+          });
+        }
+      </script>
 
       <!--scriptタグが止まれた後にcallback=initMap関数が実行される-->
        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
-
 
       <%= render 'member/posts/form', post: @post %>
 

@@ -1,6 +1,6 @@
 // ユーザー詳細画面、投稿/ブックマークの切り替え
 //turbolinksの無効化
-$(document).on('turbolinks:load', function() {
+$(document).on(function() {
   /* global $*/
     // tab1以外を非表示
     $('#tab2').hide();
