@@ -86,6 +86,7 @@ class Member::PostsController < ApplicationController
       latitude: post.latitude,
       longitude: post.longitude,
       address: post.address,
+      is_published: post.is_published,
       image_url: image_url,
       # Add more attributes as needed
     })

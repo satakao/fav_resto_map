@@ -19,15 +19,18 @@
 
       <% if @post.user == current_user %>
 
+        <h4><%= @post.is_published ? "『投稿公開中』" : "『投稿非公開中』" %></h4>
+
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
          投稿編集
         </button>
 
         <%= render 'member/posts/form', post: @post %>
 
-        <%= link_to "投稿削除",post_path, method: :delete, class:"btn btn-danger", data: { confirm: "店名/料理名：#{@post.store_name}の投稿を削除しますか？"}%>
+        &emsp;<%= link_to "投稿削除",post_path, method: :delete, class:"btn btn-danger", data: { confirm: "店名/料理名：#{@post.store_name}の投稿を削除しますか？"}%>
 
       <% end %><br>
+
 
       <h3><%= @post.store_name %></h3>
       <%= image_tag @post.image, size:"300x300" %><br>

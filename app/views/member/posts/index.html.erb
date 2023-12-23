@@ -33,6 +33,8 @@
             <%= post.user.name %>
           <% end %><br>
 
+          <h5><%= post.store_name.truncate(15) %></h5>
+
           <%=link_to post_path(post.id) do %>
             <%= image_tag post.image, size:"300x300" %><br>
           <% end %>
@@ -47,8 +49,6 @@
 
             <!--配列に入っているタグを１つずつnameの型にして表示させる-->
             <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i><br>
-
-            <%= post.store_name.truncate(15) %><br>
 
             <%= post.address.truncate(15) %><br>
 

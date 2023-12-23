@@ -15,6 +15,8 @@
           <%= post.user.name %>
         <% end %><br>
 
+        <h5><%= post.store_name.truncate(15) %></h5>
+
         <%= link_to admin_post_path(post) do%>
           <%= image_tag post.image, size:"300x300" %><br>
         <% end %>
@@ -25,8 +27,6 @@
            <i class="fa-regular fa-bookmark"></i>ブックマーク数:<%= post.bookmarks.count%>
            &emsp;<i class="fa-regular fa-comment"></i>コメント数:<%= post.post_comments.count %>
         </div>
-
-        <%= post.store_name.truncate(15) %><br>
 
         <%= post.address.truncate(15) %><br>
 

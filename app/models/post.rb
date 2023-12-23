@@ -28,22 +28,20 @@ class Post < ApplicationRecord
 
   # 新しいタグの保存
   def save_tag(sent_tags)
-    self.transaction do
-      # Retrieve current tags
-      current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    # Retrieve current tags
+    current_tags = self.tags.pluck(:name) unless self.tags.nil?
 
-      # Calculate old and new tags
-      old_tags = current_tags - sent_tags
-      new_tags = sent_tags - current_tags
+    # Calculate old and new tags
+    old_tags = current_tags - sent_tags
+    new_tags = sent_tags - current_tags
 
-      # Delete old tags with a single query
-      Tag.where(name: old_tags).destroy_all
+    # Delete old tags with a single query
+    Tag.where(name: old_tags).destroy_all
 
-      # Create or find new tags and associate them with the post
-      new_tags.each do |new|
-        new_post_tag = Tag.find_or_create_by(name: new)
-        self.tags << new_post_tag
-      end
+    # Create or find new tags and associate them with the post
+    new_tags.each do |new|
+      new_post_tag = Tag.find_or_create_by(name: new)
+      self.tags << new_post_tag
     end
   end
 

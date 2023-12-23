@@ -11,6 +11,8 @@
         <%= @user.name %><br>
       <% end %>
 
+      <h4><%= @post.is_published ? "『投稿公開中』" : "『投稿非公開中』" %></h4>
+
       <!--投稿内容-->
       <%= link_to "投稿削除",admin_post_path, method: :delete, class:"btn btn-danger mt-3 mb-5 pr-5 pl-5", data: { confirm: "店名/料理名：#{@post.store_name}の投稿を管理者権限で削除しますか?" }%><br>
 

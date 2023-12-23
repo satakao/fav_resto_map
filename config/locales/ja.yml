@@ -13,8 +13,6 @@ ja:
         longitude: 経度
         address: 住所
         is_published: 投稿ステータス
-          # true: 公開
-          # false: 非公開
         image: 画像
       post_comment:
         comment: コメント
