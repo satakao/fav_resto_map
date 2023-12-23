@@ -9,11 +9,13 @@
 
       <div class="post-card">
 
-        <%= image_tag post.user.get_profile_image %>
+        <div class="user-icon pl-2 pt-2 d-flex justify-content-start align-items-center">
+          <%= image_tag post.user.get_profile_image, class:"rounded-circle", size:"60x60" %>
 
-        <%=link_to admin_user_path(post.user) do %>
-          <%= post.user.name %>
-        <% end %><br>
+          <%=link_to admin_user_path(post.user),class:"ml-2" do %>
+            <%= post.user.name %>
+          <% end %>
+        </div>
 
         <h5><%= post.store_name.truncate(15) %></h5>
 
@@ -21,7 +23,7 @@
           <%= image_tag post.image, size:"300x300" %><br>
         <% end %>
 
-        <p class="post-solid" ></p>
+        <p class="post-solid mt-2" ></p>
 
         <div class="icon">
            <i class="fa-regular fa-bookmark"></i>ブックマーク数:<%= post.bookmarks.count%>

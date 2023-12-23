@@ -4,7 +4,7 @@
 
     <div class="col text-center">
 
-      <%= image_tag @user.get_profile_image %>
+      <%= image_tag @user.get_profile_image, class:"rounded-circle", size:"80x80" %>
 
       <%= @user.name %>
 
@@ -23,21 +23,21 @@
       <% end %>
 
       <h1><%= @user.name %>さんの投稿内容</h1>
-      
+
       <% if @posts.exists? %>
-      
+
         <% @posts.each do |post| %>
-  
+
           <%=link_to admin_post_path(post.id) do %>
             <%=image_tag post.image, size:'100x100' %>
           <% end %>
-  
+
         <% end %>
-        
+
       <% else %>
-      
+
         <p>投稿はありません</p>
-      
+
       <% end %>
 
     </div>

@@ -6,7 +6,7 @@
 
       <!--ユーザー-->
       <%= link_to admin_user_path(@user) do %>
-        <%= image_tag @user.get_profile_image %>
+        <%= image_tag @user.get_profile_image, class:"rounded-circle", size:"80x80" %>
 
         <%= @user.name %><br>
       <% end %>

@@ -24,12 +24,11 @@ h1 {
 
 #tab-menu {
   display: flex;
-  width: 1600px;
 }
 
 #tab-menu li {
   list-style-type: none;
-  width: 25%;
+  width: 50%;
 }
 
 #tab-menu li a {
@@ -55,7 +54,8 @@ h1 {
 
 #tab-contents .tab {
   width: 100%;
-  padding-bottom: 300px;
+  padding: 15px 15px 250px 15px;
+
   background: orange;
   border: 1px solid #000;
 }
@@ -65,18 +65,7 @@ h1 {
   line-height: 2.5;
 }
 
-p.post-icon-text{
-  font-size: 20px;
-}
-
-.modal-mypage,.icon-text{
-
-  // padding-left: 1500px;
-}
 .user-cog {
   padding: 15px 250px;
 }
 
-.map-title{
-  border-bottom: 8px solid rgb(255,165,0,0.5);
-}

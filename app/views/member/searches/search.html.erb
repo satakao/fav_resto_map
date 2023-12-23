@@ -22,7 +22,7 @@
                 <tr>
                   <td>
                     <%=link_to user_path(user.id) do %>
-                      <%= image_tag user.get_profile_image, size: '100x100' %>
+                      <%= image_tag user.get_profile_image, class:"rounded-circle", size:"80x80" %>
                     <% end %>
                   </td>
 
@@ -52,7 +52,7 @@
             <% @posts.each do |post| %>
 
             <tr>
-              <td><%= image_tag post.user.get_profile_image, size: '100x100' %></td>
+              <td><%= image_tag post.user.get_profile_image, class:"rounded-circle", size:"60x60" %></td>
 
               <td>
                 <%=link_to user_path(post.user.id) do %>

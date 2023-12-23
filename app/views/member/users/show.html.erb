@@ -6,7 +6,7 @@
 
     <div class="col text-center">
 
-      <%= image_tag @user.get_profile_image,size:"100x100" %>
+      <%= image_tag @user.get_profile_image, class:"rounded-circle text-black", size:"80x80" %>
 
       <%= @user.name %>
 
@@ -40,13 +40,13 @@
 
       <% end %><br>
 
-      <h1 class="d-inline-block"><%= @user.name %>さんの投稿/ブックマーク</h1>
+      <h1 class="contents-title d-inline-block mb-4"><%= @user.name %>さんの投稿/ブックマーク</h1>
 
        <%= link_to  "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-user" do %>
 
         <div class="modal-user text-center d-inline-block">
           <i class="fa-solid fa-circle-plus fa-3x"></i><br>
-          <p class="icon-text-user_show d-inline-block">新規投稿</p>
+          <p class="d-sm-none d-inline-block">新規投稿</p>
         </div>
 
        <% end %><br>
@@ -72,7 +72,7 @@
       </div>
 
       <%= render "member/posts/form", post: @post %>
-      
+
     </div>
 
   </div>
