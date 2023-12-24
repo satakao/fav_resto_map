@@ -27,7 +27,7 @@ main{
 }
 
 .sign_up,.log_in{
-  margin: 100px 0 0 300px;
+  margin-top: 100px;
 }
 
 .table td{
@@ -36,6 +36,12 @@ main{
 
 .contents{
   margin-top: 200px;
+}
+
+.form_control{
+  width: 100%;
+  height: 100px;
+  margin-right: 15px;
 }
 
 // ユーザー関連
@@ -134,36 +140,60 @@ main{
    .contents-title{
   border-bottom: 8px solid rgb(255,165,0,0.5);
   }
+
   // var関連
   .nav-item.md{
     display: none;
     margin-right: 30px;
   }
+  // 投稿関連
+  .lg-none{
+  display: none !important;
+  }
 
 }
 
-// 992px以下のサイズでstyleを有効化
+// 992px以下のサイズでstyleを適用
 @media screen and (max-width: 992px) {
    // 共通
-  .d-sm-none{
-    display: none;
+  .contents-title{
+  font-size: 20px;
+  border-bottom: 8px solid rgb(255,165,0,0.5);
   }
-   .contents-title{
-     font-size: 20px;
-     border-bottom: 8px solid rgb(255,165,0,0.5);
+
+ .rounded-circle{
+     width: 40px;
+     height: 40px;
   }
-  // 投稿カード
-    .post-card{
-    margin : 20px;
-    width: 350px;
-    height: auto;
-    background-color: rgba(255,165,0,0.3);
+
+  // 投稿関連
+  .post-card{
+  margin : 20px;
+  width: 350px;
+  height: auto;
+  background-color: rgba(255,165,0,0.3);
   }
-    td{
-      font-size: 10px;
-    }
-    .rounded-circle{
-       width: 40px;
-       height: 40px;
-    }
+
+ .sm-none{
+  display: none !important;
+  }
+
+  th{
+    font-size: 10px;
+     padding: 2px !important;
+  }
+
+  td{
+    font-size: 8px;
+    padding: 2px !important;
+  }
+  .td-image{
+    width: 50px;
+    height: 50px;
+  }
+  .comment{
+  margin-bottom: 0px;
+
+}
+
 }

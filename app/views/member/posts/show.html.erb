@@ -5,59 +5,74 @@
     <p class="alert"><%= alert %></p>
   </div>
 
-  <div class="row">
+  <div class="row justify-content-center">
 
     <%= render "layouts/errors", obj: @post %>
 
-    <div class="col text-center">
+    <div class="col-12-fluid text-center">
 
-      <%=link_to user_path(@user) do %>
-        <%= image_tag @user.get_profile_image, class:"rounded-circle", size:"60x60" %>
+      <div class="post-card">
 
-        <%= @user.name %><br>
-      <% end %>
+        <!--ユーザー-->
+        <div class="user-icon pl-2 pt-2 d-flex justify-content-start align-items-center">
+          <%=link_to user_path(@user) do %>
+            <%= image_tag @user.get_profile_image, class:"rounded-circle", size:"60x60" %>
 
-      <% if @post.user == current_user %>
+            <%= @user.name %><br>
+          <% end %>
+        </div>
 
-        <h4><%= @post.is_published ? "『投稿公開中』" : "『投稿非公開中』" %></h4>
+        <!--投稿編集・削除ボタン-->
+        <% if @post.user == current_user %>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-         投稿編集
-        </button>
+          <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#exampleModal">
+           投稿編集
+          </button>
 
-        <%= render 'member/posts/form', post: @post %>
+          <%= render 'member/posts/form', post: @post %>
 
-        &emsp;<%= link_to "投稿削除",post_path, method: :delete, class:"btn btn-danger", data: { confirm: "店名/料理名：#{@post.store_name}の投稿を削除しますか？"}%>
+          &emsp;<%= link_to "投稿削除",post_path, method: :delete, class:"btn btn-danger mt-3 mb-3",
+          data: { confirm: "店名/料理名：#{@post.store_name}の投稿を削除しますか？"}%>
 
-      <% end %><br>
+        <% end %><br>
+
+        <!--投稿内容-->
+        <h3><%= @post.store_name %></h3>
+
+        <% if @post.user == current_user %>
+          <h4><%= @post.is_published ? "『投稿公開中』" : "『投稿非公開中』" %></h4>
+        <% end %>
+
+        <%= image_tag @post.image, size:"300x300" %><br>
+
+        <div class="d-inline-block" id="bookmark_button_<%= @post.id %>">
+          <%= render "member/bookmarks/bookmark_btn", post: @post %>
+        </div>
+
+         <div class="d-inline-block" id="post_comments_count">
+          <%= render 'member/post_comments/count', post: @post %>
+        </div><br>
+
+        <% @post_tags.each do |tag| %>
+
+           <i class="fas fa-tag"><%= link_to tag.name,post_search_tag_path(tag)%></i>(総タグ数：<%= tag.posts.count %>)
+
+        <% end %><br>
 
 
-      <h3><%= @post.store_name %></h3>
-      <%= image_tag @post.image, size:"300x300" %><br>
+        <%= @post.address %><br>
 
-      <div class="d-inline-block" id="bookmark_button_<%= @post.id %>">
-        <%= render "member/bookmarks/bookmark_btn", post: @post %>
+        <%= @post.description %><br>
       </div>
 
-       <div class="d-inline-block" id="post_comments_count">
-        <%= render 'member/post_comments/count', post: @post %>
-      </div><br>
+    </div>
 
-      <% @post_tags.each do |tag| %>
+    <!--コメント-->
+    <div class="col-12 text-center">
 
-         <i class="fas fa-tag"><%= link_to tag.name,post_search_tag_path(tag)%></i>(総タグ数：<%= tag.posts.count %>)
-
-      <% end %><br>
-
-
-      <%= @post.address %><br>
-
-      <%= @post.description %><br>
-
-
-      <div id="post_comments_index">
-        <%= render "member/post_comments/post_comment", post: @post, post_comment: @post_comment %>
-      </div>
+       <div id="post_comments_index">
+         <%= render "member/post_comments/post_comment", post: @post, post_comment: @post_comment %>
+       </div>
 
     </div>
 

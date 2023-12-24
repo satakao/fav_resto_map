@@ -1,50 +1,72 @@
 <div class="container">
 
-  <div class="row">
+  <div class="row justify-content-center">
 
-    <div class="col text-center">
+    <div class="col-12-fluid text-center">
 
-      <!--ユーザー-->
-      <%= link_to admin_user_path(@user) do %>
-        <%= image_tag @user.get_profile_image, class:"rounded-circle", size:"80x80" %>
+      <div class="post-card">
+        <!--ユーザー-->
+        <div class="user-icon pl-2 pt-2 d-flex justify-content-start align-items-center">
+          <%= link_to admin_user_path(@user) do %>
+            <%= image_tag @user.get_profile_image, class:"rounded-circle", size:"80x80" %>
 
-        <%= @user.name %><br>
-      <% end %>
+            <%= @user.name %><br>
+          <% end %>
+        </div>
 
-      <h4><%= @post.is_published ? "『投稿公開中』" : "『投稿非公開中』" %></h4>
+        <!--投稿内容-->
+        <%= link_to "投稿削除",admin_post_path, method: :delete, class:"btn btn-danger mt-3 mb-3 pr-5 pl-5", data: { confirm: "店名/料理名：#{@post.store_name}の投稿を管理者権限で削除しますか?" }%><br>
 
-      <!--投稿内容-->
-      <%= link_to "投稿削除",admin_post_path, method: :delete, class:"btn btn-danger mt-3 mb-5 pr-5 pl-5", data: { confirm: "店名/料理名：#{@post.store_name}の投稿を管理者権限で削除しますか?" }%><br>
+        <h3><%= @post.store_name %></h3>
 
-      <h3><%= @post.store_name %></h3>
+        <h4><%= @post.is_published ? "『投稿公開中』" : "『投稿非公開中』" %></h4>
 
-      <%= image_tag @post.image, size:"300x300" %><br>
+        <%= image_tag @post.image, size:"300x300" %><br>
 
-      <div class="icon">
-        <i class="fa-regular fa-bookmark"></i>ブックマーク<%= @post.bookmarks.count %>
-        &emsp;<i class="fa-regular fa-comment"></i>コメント：<%= @post_comments.count %>
+        <div class="icon">
+          <i class="fa-regular fa-bookmark"></i>ブックマーク<%= @post.bookmarks.count %>
+          &emsp;<i class="fa-regular fa-comment"></i>コメント：<%= @post_comments.count %>
+        </div>
+
+        <%= @post.address %><br>
+
+        <%= @post.description %><br>
+
       </div>
 
-      <%= @post.address %><br>
-
-      <%= @post.description %><br>
+    </div>
 
       <!--投稿コメント-->
       <% @post_comments.each do |post_comment| %>
+      <div class="col-12 d-flex justify-content-center">
 
-        <%=link_to admin_user_path(post_comment.user_id) do %>
-          <%= image_tag post_comment.user.get_profile_image %>
-          <%= post_comment.user.name %>
-        <% end %>
+        <div class="comment d-flex justify-content-start align-items-center">
 
-        コメント：<%= post_comment.comment %>
+          <%=link_to admin_user_path(post_comment.user_id) do %>
+            <%= image_tag post_comment.user.get_profile_image, class:"rounded-circle", size:"60x60" %>
+            <%= post_comment.user.name %>
+          <% end %>
 
-        <%=link_to "削除する", admin_post_post_comment_path(@post,post_comment.id), method: :delete, class:"btn btn-danger",data: { confirm: "#{@user.name}のコメントを管理者権限で削除しますか?" } %><br>
+
+          &emsp;コメント：<%= post_comment.comment %>
+
+
+          <%=link_to "削除する", admin_post_post_comment_path(@post,post_comment.id), method: :delete,
+          class:"btn btn-danger sm-none ml-4",data: { confirm: "#{@user.name}のコメントを管理者権限で削除しますか?" } %><br>
+
+        </div>
+
+      </div>
+        <div class="lg-none">
+          <%=link_to "削除する", admin_post_post_comment_path(@post,post_comment.id), method: :delete,
+            class:"btn btn-danger mb-4 ml-4",data: { confirm: "#{@user.name}のコメントを管理者権限で削除しますか?" } %><br>
+        </div>
+
 
       <% end %>
       <p id="notice"><%= notice %></p>
 
-    </div>
+
 
   </div>
 

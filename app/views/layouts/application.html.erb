@@ -28,6 +28,7 @@
             <a href="/" class="navbar-brand"><%= image_tag('fav_resto_map.png', size: "70x70") %></a>
 
             <!--ユーザープロフィール-->
+
             <% if user_signed_in? %>
               <%= link_to user_path(current_user) do %>
                  &emsp;<%= image_tag current_user.get_profile_image, class:"rounded-circle", size:"50x50" %>

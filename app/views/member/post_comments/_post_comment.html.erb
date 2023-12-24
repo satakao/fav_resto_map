@@ -1,14 +1,28 @@
 <% post.post_comments.each do |post_comment| %>
 
-  <%=link_to user_path(post_comment.user_id), remote: true do %>
-    <%= image_tag post_comment.user.get_profile_image %>
-    <%= post_comment.user.name %>
-  <% end %>
+  <div class="col-12 d-flex justify-content-center">
 
-  コメント：<%= post_comment.comment %>
+    <div class="comment d-flex justify-content-start align-items-center">
+
+      <%=link_to user_path(post_comment.user_id), remote: true do %>
+        <%= image_tag post_comment.user.get_profile_image, class:"rounded-circle", size:"60x60" %>
+        <%= post_comment.user.name %>
+      <% end %>
+
+      コメント：<%= post_comment.comment %>
+
+      <%if post_comment.user_id == current_user.id %>
+        <%=link_to "削除する", post_post_comment_path(post,post_comment.id), method: :delete, remote: true, class:"btn btn-danger sm-none ml-4" %>
+      <% end %>
+
+    </div>
+
+  </div>
 
   <%if post_comment.user_id == current_user.id %>
-    <%=link_to "削除する", post_post_comment_path(post,post_comment.id), method: :delete, remote: true, class:"btn btn-danger" %>
+  <div class="lg-none">
+    <%=link_to "削除する", post_post_comment_path(post,post_comment.id), method: :delete, remote: true,class:"btn btn-danger mb-4 ml-4"%><br>
+  </div>
   <% end %><br>
 
 <% end %>
@@ -21,7 +35,7 @@
 
   <%= form_with model: post_comment, url: post_post_comments_path(post), method: :post, local: false do |f| %>
     <div class="form-group">
-      <%=f.text_area :comment,placeholder: "コメントをここに",cols:80,rows:5, id: "comment_textarea", class:"form_control" %>
+      <%=f.text_area :comment,placeholder: "コメントをここに", id: "comment_textarea", class:"form_control" %>
     </div>
 
     <%=f.submit "送信"%>

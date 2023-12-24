@@ -1,15 +1,13 @@
 <div class="container-fluid">
-  
-   <p id="notice"><%= notice %></p>
+
+  <p id="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
-  <div class="row">
+  <div class="row justify-content-center">
 
-    <div class="col-4"></div>
+    <div class="log_in col-12-fluid text-center">
 
-    <div class="log_in-form col-4 mt-5">
-
-      <h2>管理者ログイン</h2>
+      <h2 class="contents-title d-flex justify-content-start align-items-center mr-4 ml-4">管理者ログイン</h2>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
         <div class="field">

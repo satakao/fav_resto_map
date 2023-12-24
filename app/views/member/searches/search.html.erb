@@ -2,11 +2,11 @@
 
   <div class="row justify-content-center align-items-center mt-4">
 
-    <div class="col-8">
-      <h1>検索結果 "<span><%= @search %></span>"</h1>
+    <div class="col-8 text-center">
+     <h2 class="contents-title">検索結果 "<span><%= @search %></span>"</h2>
     </div>
 
-    <div class="col-8">
+    <div class="col-12">
 
       <table class="table table-hover table-inverse">
         <% if @range == "User" %>
@@ -46,7 +46,6 @@
               <th>店名/料理名</th>
               <th>投稿画像</th>
               <th>ブックマーク</th>
-              <th>説明</th>
             </tr>
 
             <% @posts.each do |post| %>
@@ -68,7 +67,7 @@
 
               <td>
                 <%=link_to post_path(post.id) do %>
-                  <%= image_tag post.image, size:"100x100" %>
+                  <%= image_tag post.image, class:"td-image", size:"100x100" %>
                 <% end %>
               </td>
 
@@ -78,9 +77,6 @@
                 </div>
               </td>
 
-              <td>
-                <%= post.description %>
-              </td>
             </tr>
 
             <% end %>

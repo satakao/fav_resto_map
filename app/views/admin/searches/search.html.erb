@@ -2,11 +2,11 @@
 
   <div class="row justify-content-center align-items-center mt-4">
 
-    <div class="col-8">
-      <h1>検索結果 "<span><%= @search %></span>"</h1>
+    <div class="col-8 text-center">
+      <h2 class="contents-title">検索結果 "<span><%= @search %></span>"</h2>
     </div>
 
-    <div class="col-8">
+    <div class="col-12">
 
       <table class="table table-hover table-inverse">
         <% if @range == "User" %>
@@ -33,7 +33,7 @@
                 </td>
 
                 <td>
-                  <p>利用ステータス: <%= user.is_active ? '利用中' : '利用停止中' %></p>
+                    利用ステータス: <%= user.is_active ? '利用中' : '利用停止中' %>
                 </td>
               </tr>
 
@@ -49,7 +49,6 @@
               <th>店名/料理名</th>
               <th>投稿画像</th>
               <th>ブックマーク</th>
-              <th>説明</th>
             </tr>
 
             <% @posts.each do |post| %>
@@ -75,7 +74,7 @@
 
               <td>
                 <%=link_to admin_post_path(post) do %>
-                  <%= image_tag post.image, size:"100x100" %>
+                  <%= image_tag post.image, class:"td-image", size:"100x100" %>
                 <% end %>
               </td>
 
@@ -83,9 +82,6 @@
                 <i class="fa-regular fa-bookmark"></i>ブックマーク数:<%= post.bookmarks.count %>
               </td>
 
-              <td>
-                <%= post.description %>
-              </td>
             </tr>
 
             <% end %>

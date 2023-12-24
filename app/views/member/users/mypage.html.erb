@@ -6,15 +6,15 @@
 
     <div class="mypage_main row">
 
-      <div class="col-1 d-inline-block"></div>
-      <div class="col-9 col-sm-4 text-center">
+      <div class="col-1"></div>
+      <div class="col-9 text-center">
         <h2 class="contents-title"><%= @user.name %>さんのresto_map</h2>
       </div>
 
-      <div class="col-1 text-center">
+      <div class="col-2 text-center">
         <%= link_to "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-mypage ml-auto" do %>
           <i class="fa-solid fa-circle-plus fa-3x"></i><br>
-          <p class="d-sm-none">新規投稿</p><br>
+          <p class="sm-none">新規投稿</p><br>
         <% end %>
       </div>
 
@@ -31,13 +31,14 @@
         </li>
       <% end %>
 
+      <div class="col-12">
+        <input id="address" type="textbox" value="東京都庁">
+        <input type="button" value="Encode" onclick="codeAddress()">
+        <div id="display"></div>
+        <div id='map'></div>
+      </div>
 
-      <input id="address" type="textbox" value="東京都庁">
-      <input type="button" value="Encode" onclick="codeAddress()">
-      <div id="display"></div>
-      <div id='map'></div>
-
-      <script data-turbolinks="false">
+      <script>
         let map;
         let infowindow;
         const markers = [];

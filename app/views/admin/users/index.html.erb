@@ -3,7 +3,7 @@
   <div class="row justify-content-center align-items-center">
 
     <div class="col-12 text-center">
-      <h2>全ユーザー 一覧</h2>
+      <h2 class="contents-title d-inline-block">全ユーザー 一覧</h2>
     </div>
 
     <div class="col-12">
@@ -28,15 +28,15 @@
           </td>
 
           <td>
-              <p>フォロワー<%=  user.followings.count %>人</p>
+              フォロワー<%=  user.followings.count %>人
           </td>
 
           <td>
-              <p>フォロー<%=  user.followers.count %>人</p>
+              フォロー<%=  user.followers.count %>人
           </td>
 
           <td>
-            <p>利用ステータス: <%= user.is_active ? '利用中' : '利用停止中' %></p>
+            利用ステータス: <%= user.is_active ? '利用中' : '利用停止中' %>
           </td>
 
         </tr>
