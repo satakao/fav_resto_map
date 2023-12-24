@@ -53,19 +53,32 @@
       <!--タブ部分-->
       <div class="wrap">
         <ul id = "tab-menu">
-          <li><a href="#tab1" class="active">My_post</a></li>
+          <% if current_user == @user %>
+            <li><a href="#tab1" class="active">公開投稿</a></li>
 
-          <li><a href="#tab2" class="">Bookmark</a></li>
+            <li><a href="#tab2" class="">非公開投稿</a></li>
+          <% else %>
+            <li><a href="#tab1" class="active">投稿内容</a></li>
+
+          <% end %>
+
+          <li><a href="#tab3" class="">ブックマーク</a></li>
 
         </ul>
         <!--タブごとのページ遷移先-->
         <div id = "tab-contents">
           <div id = "tab1" class="tab">
-            <%= render "member/users/show", posts: @posts %>
+            <%= render "member/posts/publish_posts", publish_posts: @publish_posts %>
           </div>
 
-          <div id = "tab2" class="tab">
-            <%= render "member/users/bookmark_posts",bookmarked_posts: @bookmarked_posts %>
+          <% if current_user == @user %>
+            <div id = "tab2" class="tab">
+            　 <%= render "member/posts/private_posts", private_posts: @private_posts %>
+            </div>
+          <% end %>
+
+          <div id = "tab3" class="tab">
+             <%= render "member/posts/bookmark_posts", bookmarked_posts: @bookmarked_posts %>
           </div>
         </div>
 

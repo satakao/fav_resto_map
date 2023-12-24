@@ -3,7 +3,7 @@
 $(document).on('turbolinks:load', function() {
   /* global $*/
       // tab1以外を非表示
-      $('#tab2').hide();
+      $('#tab2,#tab3').hide();
         // .tabがクリックされたとき処理を実行
       $('#tab-menu a').on('click', function(event) {
       // 全てのタグ内を一旦非表示

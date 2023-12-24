@@ -1,11 +1,16 @@
 <div class="container">
-  <div class="row">
-    <div class="log_in col">
+
+  <div class="row justify-content-center">
+
+    <div class="log_in col-12-fluid">
+
       <p id="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <h2>ログイン</h2>
+
+      <h2 class="contents-title d-flex justify-content-start align-items-center">ログイン</h2>
 
       <%= form_with model: @user,url: user_session_path, local: true do |f| %>
+      
         <div class="field">
           <%= f.label :email,"メールアドレス" %><br />
           <%= f.email_field :email, size:"40*20", autofocus: true,placeholder:"sample@example.com", autocomplete: "email" %>

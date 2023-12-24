@@ -5,23 +5,24 @@
 
   <div class="row justify-content-center">
 
-    <div class="log_in col-12-fluid text-center">
+    <div class="log_in col-12-fluid">
 
       <h2 class="contents-title d-flex justify-content-start align-items-center mr-4 ml-4">管理者ログイン</h2>
+      
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-        <div class="field">
-          <%= f.label :メールアドレス, style: 'margin-right: 40px;' %>
+        <div class="field mr-3 ml-3">
+          <%= f.label :email,"メールアドレス" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com", style: 'width: 300px;' %>
         </div>
 
-        <div class="field mt-3">
-          <%= f.label :パスワード, style: 'margin-right: 70px;' %>
-          <%= f.password_field :password, autocomplete: "current-password", style: 'width: 300px;' %>
+        <div class="field mr-3 ml-3 mt-3">
+          <%= f.label :password,"パスワード" %>
+          <%= f.password_field :password, autocomplete: "current-password", style: 'width: 330px;' %>
         </div>
 
         <% if devise_mapping.rememberable? %>
-          <div class="field">
+          <div class="field mr-3 ml-3">
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me %>
           </div>

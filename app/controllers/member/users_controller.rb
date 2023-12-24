@@ -1,11 +1,13 @@
 class Member::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:edit, :update, :destroy, ]
+
   def show
     @user = User.find(params[:id])
     @post = Post.new
-    @posts = @user.posts.all
-    @bookmarked_posts = Post.bookmarked_post(current_user)
+    @publish_posts = Post.includes(:user).where(users: {id: @user.id}).where(posts: {is_published: true})
+    @private_posts = Post.includes(:user).where(users: {id: @user.id}).where(posts: {is_published: false})
+    @bookmarked_posts = Post.bookmarked_post(@user)
   end
 
   def mypage
@@ -55,7 +57,7 @@ class Member::UsersController < ApplicationController
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.guest_user?
-      redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+      redirect_to user_path(current_user) , notice: "他のユーザー編集画面への遷移、またはゲストユーザーはプロフィール編集画面へ遷移できません。"
     end
   end
   private
