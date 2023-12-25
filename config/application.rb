@@ -10,6 +10,8 @@ module RestaurantMap
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    require 'dotenv'
+    Dotenv.load('.env.production') if Rails.env.production?
 
     # 日本語の言語設定
     config.i18n.default_locale = :ja
