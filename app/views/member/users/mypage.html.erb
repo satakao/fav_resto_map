@@ -48,7 +48,7 @@
           geocoder = new google.maps.Geocoder();
 
           // マップを初期化。map変数に割り付け
-          let map = new google.maps.Map(document.getElementById('map'), {
+          map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 35.6894807, lng: 139.6916863 },
             zoom: 12,
           });
@@ -110,13 +110,13 @@
           geocoder.geocode({ 'address': inputAddress }, function (results, status) {
             if (status == 'OK') {
               map.setCenter(results[0].geometry.location);
-              マップのマーカーを作成
+              // マップのマーカーを作成
               let marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location,
               });
 
-              // 新しく追加されたマーカーにもイベントリスナーを設定
+              //新しく追加されたマーカーにもイベントリスナーを設定
               google.maps.event.addListener(marker, 'click', function (event) {
                 showInfoWindow(marker);
               });
