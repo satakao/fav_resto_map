@@ -7,19 +7,19 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags, source: :tag
 
   has_one_attached :image
-  
-  
+
+
 
   validates :store_name, presence:true, length: { maximum: 20 }
   validates :description, presence:true, length: {maximum:100}
   # validates :is_published, presence:true
   validates :address, presence:true, length: { minimum: 2, maximum: 50 }
-  #validates :image, presence: true
+  validates :image, presence: true
 
   # 指定したユーザーがいいねしているかの確認
 
   scope :published, -> { where(is_published: true) }
-  
+
   def bookmarked_by?(user)
     bookmarks.exists?(user_id: user.id)
   end

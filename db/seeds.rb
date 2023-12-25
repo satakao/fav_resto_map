@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "seedの実行を開始"
+puts "ADMIN_EMAIL: #{ENV['ADMIN_EMAIL']}"
+puts "ADMIN_PASSWORD: #{ENV['ADMIN_PASSWORD']}"
 
 # 管理者側ログインデータ作成
 Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
@@ -58,7 +60,7 @@ def create_posts_for_user_with_ordered_dates(user, count, is_publishes_options, 
   # 各投稿のタイトル、本文、リンク、ステータス、タグを設定します。
     store_name = "お店#{i + 1}"
     description = "サンプルの投稿#{i + 1}。お店の説明文。"
-    address = "東京都千代田区永田町1丁目"
+    address = "東京都千代田区"
     is_published = is_publishes_options.sample
     tag_list = tags.sample(2) # ランダムなタグを2つ選択します。
 
@@ -76,9 +78,9 @@ def create_posts_for_user_with_ordered_dates(user, count, is_publishes_options, 
       p.description = description
       p.address = address
       p.is_published = is_published
-      p.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/r.jpeg"), filename:"b.jpeg")
+      p.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/curry.jpeg"), filename:"curry.jpeg")
 
-      
+
      # p.tag_names = tags.sample(2)
     end
     # olivia = User.find_or_create_by!(email: "olivia@example.com") do |user|
@@ -86,8 +88,8 @@ def create_posts_for_user_with_ordered_dates(user, count, is_publishes_options, 
     #   user.password = "password"
     #   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")
     # end
-    
-    
+
+
   tag_list.each do |tag_name|
     tag = Tag.find_or_create_by(name: tag_name)
     post.tags << tag
@@ -104,7 +106,7 @@ end
 
 User.where.not(name: 'guest').each do |user|
   is_publishes_options = [true] * 6 + [false] * 2
-  create_posts_for_user_with_ordered_dates(user, 2, is_publishes_options, tags) 
+  create_posts_for_user_with_ordered_dates(user, 2, is_publishes_options, tags)
 end
 
 
