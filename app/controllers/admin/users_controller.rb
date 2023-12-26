@@ -12,12 +12,12 @@ class Admin::UsersController < ApplicationController
   def activate
     @user = User.find(params[:user_id])
     @user.update(is_active: true)
-    redirect_to request.referer, notice: 'User activated successfully.'
+    redirect_to request.referer, notice: 'ユーザーステータスを利用可に変更しました'
   end
 
   def deactivate
     @user = User.find(params[:user_id])
     @user.update(is_active: false)
-    redirect_to request.referer, notice: 'User deactivated successfully.'
+    redirect_to request.referer, notice: 'ユーザーステータスを利用不可に変更しました.'
   end
 end
