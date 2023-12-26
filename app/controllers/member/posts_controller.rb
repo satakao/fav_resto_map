@@ -40,13 +40,6 @@ class Member::PostsController < ApplicationController
     # postに紐づいているtagを配列で取り出す
     tag_list = params[:post][:name].split(',')
     # 住所から緯度経度に変換
-    results = Geocoder.search(post_params[:address])
-    # 緯度経度の変換結果があれば配列から変数に代入
-    if results.present?
-      coordinates = results.first.coordinates
-      @post.latitude = coordinates[0]
-      @post.longitude = coordinates[1]
-    end
 
     if @post.save
       @post.save_tag(tag_list)

@@ -8,7 +8,9 @@ class Post < ApplicationRecord
 
   has_one_attached :image
 
-
+  # 自動でgeocodeをaddressが保存された際にaddressに対して実行する
+  geocoded_by :address
+  after_validation :geocode
 
   validates :store_name, presence:true, length: { maximum: 20 }
   validates :description, presence:true, length: {maximum:100}

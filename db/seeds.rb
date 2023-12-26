@@ -10,8 +10,8 @@ puts "ADMIN_EMAIL: #{ENV['ADMIN_EMAIL']}"
 puts "ADMIN_PASSWORD: #{ENV['ADMIN_PASSWORD']}"
 
 # 管理者側ログインデータ作成
-Admin.find_or_create_by!(email: 'fav_resto_map@sto') do |admin|
-  admin.password = 'testtest1'
+Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
+  admin.password = ENV['ADMIN_PASSWORD']
 end
 
 names = ['satou', 'gotou']
@@ -47,9 +47,6 @@ end
 tags = %w(焼肉 寿司)
 tags.each { |tag_name| Tag.find_or_create_by(name: tag_name) }
 
-
-
-
 # 投稿作成
 def create_posts_for_user_with_ordered_dates(user, count, is_publishes_options, tags)
   # 日付の設定(現在の日付)
@@ -79,17 +76,11 @@ def create_posts_for_user_with_ordered_dates(user, count, is_publishes_options, 
       p.address = address
       p.is_published = is_published
       p.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/curry.jpeg"), filename:"curry.jpeg")
-
-
-     # p.tag_names = tags.sample(2)
+      
     end
-    # olivia = User.find_or_create_by!(email: "olivia@example.com") do |user|
-    #   user.name = "Olivia"
-    #   user.password = "password"
-    #   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")
-    # end
-
-
+  # 2秒の遅延
+  sleep(2)
+  
   tag_list.each do |tag_name|
     tag = Tag.find_or_create_by(name: tag_name)
     post.tags << tag
