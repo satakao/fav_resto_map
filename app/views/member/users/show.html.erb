@@ -34,9 +34,15 @@
 
       <% if (@user == current_user) && !(@user.guest_user?)%>
 
-        <%= link_to edit_user_path(@user.id), class: "user-cog btn btn-outline-secondary" do %>
+        <!--PCサイズで表示-->
+        <%= link_to edit_user_path(@user.id), class: "user-cog sm-none btn btn-outline-secondary" do %>
           <i class="fas fa-user-cog fa-2x"></i>
         <% end %>
+
+        <!--スマホサイズで表示-->
+         <%= link_to edit_user_path(@user.id), class: "user-cog lg-none btn btn-outline-secondary" do %>
+           <i class="fas fa-user-cog "></i>
+         <% end %>
 
       <% end %><br>
 
