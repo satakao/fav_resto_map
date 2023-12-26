@@ -3,7 +3,7 @@ class Member::PostsController < ApplicationController
 
   def index
     # 利用有効になっているユーザーで、そのユーザーの投稿で表示にしている投稿一覧を表示
-    @posts = Post.includes(:user).where(users: { is_active: true }).published
+    @posts = Post.includes(:user).where(is_published: true,users: { is_active: true })
     # ユーザー利用中、投稿公開中のタグのみ引っ張ってくる
     @tag_list=Tag.includes(posts: :user).where(posts: {is_published: true, users: {is_active: true} })
   end

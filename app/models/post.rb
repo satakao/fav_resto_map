@@ -18,7 +18,7 @@ class Post < ApplicationRecord
 
   # 指定したユーザーがいいねしているかの確認
 
-  scope :published, -> { where(is_published: true) }
+  # scope :published, -> { where(is_published: true) }
 
   def bookmarked_by?(user)
     bookmarks.exists?(user_id: user.id)

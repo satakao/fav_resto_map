@@ -16,7 +16,7 @@
 
         <%=link_to list.name,post_search_tag_path(list) %>
 
-        <%="(#{list.posts.count})" %>
+        <%= "(#{list.posts.where(is_published: true).count})" %>
 
       <% end %>
 
