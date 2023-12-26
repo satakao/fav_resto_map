@@ -10,8 +10,8 @@ puts "ADMIN_EMAIL: #{ENV['ADMIN_EMAIL']}"
 puts "ADMIN_PASSWORD: #{ENV['ADMIN_PASSWORD']}"
 
 # 管理者側ログインデータ作成
-Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
-  admin.password= ENV['ADMIN_PASSWORD']
+Admin.find_or_create_by!(email: 'fav_resto_map@sto') do |admin|
+  admin.password = 'testtest1'
 end
 
 names = ['satou', 'gotou']
