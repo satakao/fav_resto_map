@@ -32,6 +32,7 @@ class Member::PostsController < ApplicationController
   end
 
   def edit
+     @post = Post.find(params[:id])
   end
 
   def create
@@ -102,6 +103,6 @@ class Member::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:store_name, :address, :description, :is_published, :image)
+    params.require(:post).permit(:store_name, :address, :description, :is_published, :image, :star)
   end
 end

@@ -31,6 +31,8 @@
 
           <i class="fa-regular fa-bookmark"></i>ブックマーク数:<%= post.bookmarks.count %><br>
 
+          <%= render "member/posts/static_rate", post: post %>
+
           <%= post.address.truncate(10) %><br>
 
           <%= post.description.truncate(15) %>

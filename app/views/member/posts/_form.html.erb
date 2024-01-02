@@ -12,7 +12,7 @@
         </button>
       </div>
 
-      <%= form_with model:post,local:true do |f| %>
+      <%= form_with model:post,local:false do |f| %>
 
       <div class="modal-body">
 
@@ -42,6 +42,31 @@
           <%= f.label :description, "説明文" %>
           <%= f.text_area :description, class:"form-control " %>
         </div>
+
+         <!--starについての記述-->
+        <% if post.id.nil? %>
+          <div class="form-group" id="star">
+            <%= f.label :star %>
+            <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
+            <div id="post_raty"></div>
+          </div>
+
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elem = document.querySelector('#post_raty');
+              if (elem == null) return;
+
+              elem.innerHTML = ""
+              let opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                scoreName: 'post[star]',
+              };
+              raty(elem, opt);
+            });
+          </script>
+        <% end %>
 
         <div class="form-group">
           <%= f.radio_button :is_published, true, checked: f.object.is_published %>

@@ -15,6 +15,7 @@
 
         <!--ユーザー-->
         <div class="user-icon pl-2 pt-2 d-flex justify-content-start align-items-center">
+
           <%=link_to user_path(@user) do %>
             <%= image_tag @user.get_profile_image, class:"rounded-circle", size:"60x60" %>
 
@@ -28,6 +29,7 @@
           <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#exampleModal">
            投稿編集
           </button>
+
 
           <%= render 'member/posts/form', post: @post %>
 
@@ -45,9 +47,11 @@
 
         <%= image_tag @post.image, size:"300x300" %><br>
 
+
         <div class="d-inline-block" id="bookmark_button_<%= @post.id %>">
           <%= render "member/bookmarks/bookmark_btn", post: @post %>
         </div>
+
 
          <div class="d-inline-block" id="post_comments_count">
           <%= render 'member/post_comments/count', post: @post %>
@@ -59,10 +63,13 @@
 
         <% end %><br>
 
+         <!--５段階評価-->
+        <%= render "member/posts/static_rate", post: @post %>
 
         <%= @post.address %><br>
 
         <%= @post.description %><br>
+
       </div>
 
     </div>
@@ -75,6 +82,7 @@
        </div>
 
     </div>
+
 
   </div>
 

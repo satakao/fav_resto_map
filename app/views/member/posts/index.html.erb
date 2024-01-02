@@ -48,6 +48,9 @@
             <%= render "member/bookmarks/bookmark_btn", post: post %>
           </div>
 
+          <!--５段階評価-->
+          <%= render "member/posts/static_rate", post: post %>
+
           &emsp;<i class="fa-regular fa-comment"></i>コメント数：<%= post.post_comments.count %><br>
 
             <!--配列に入っているタグを１つずつnameの型にして表示させる-->
