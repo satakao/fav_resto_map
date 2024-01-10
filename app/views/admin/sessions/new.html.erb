@@ -8,8 +8,8 @@
     <div class="log_in col-12-fluid">
 
       <h2 class="contents-title d-flex justify-content-start align-items-center mr-4 ml-4">管理者ログイン</h2>
-      
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+      <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
 
         <div class="field mr-3 ml-3">
           <%= f.label :email,"メールアドレス" %>

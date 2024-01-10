@@ -1,8 +1,12 @@
 <div class="container-fluid">
+  
   <p id="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+  
   <div class="row">
+    
     <div class="col text-center">
+      
       <h1>fav_resto_map</h1>
       <%= link_to "ゲストログイン（閲覧用）", member_guest_sign_in_path, class: "guest btn btn-secondary mt-5 sign_in", method: :post %><br>
       <%=link_to"ユーザー登録して始める", new_user_registration_path, class:"user btn btn-success mt-5" %><br>

@@ -10,7 +10,8 @@ class Admin::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     admin_session_path
   end
-
+  
+  # ユーザーがログインしている状態だとadminのページに遷移させない
   def redirect_if_user_signed_in
     if user_signed_in?
       redirect_to root_path, alert: 'ユーザーログアウトしてから管理者にログインしてください.'

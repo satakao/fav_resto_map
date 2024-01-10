@@ -11,7 +11,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-
+      
+      <!--投稿フォーム-->
       <%= form_with model:post,local:false do |f| %>
 
       <div class="modal-body">
@@ -43,7 +44,7 @@
           <%= f.text_area :description, class:"form-control " %>
         </div>
 
-         <!--starについての記述-->
+        <!--５段階評価についての記述-->
         <% if post.id.nil? %>
           <div class="form-group" id="star">
             <%= f.label :star %>
@@ -67,7 +68,8 @@
             });
           </script>
         <% end %>
-
+        
+        <!--投稿表示/非表示-->
         <div class="form-group">
           <%= f.radio_button :is_published, true, checked: f.object.is_published %>
           <%= f.label :is_published_true, "表示" %>
