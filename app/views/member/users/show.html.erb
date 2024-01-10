@@ -32,7 +32,7 @@
 
       <% end %><br>
 
-      <% if (@user == current_user) && !(@user.guest_user?)%>
+      <% if current_user?(@user) && !(@user.guest_user?)%>
 
         <!--PCサイズで表示-->
         <%= link_to edit_user_path(@user.id), class: "user-cog sm-none btn btn-outline-secondary" do %>
@@ -48,7 +48,7 @@
 
       <h1 class="contents-title d-inline-block mb-4"><%= @user.name %>さんの投稿/ブックマーク</h1>
 
-      <% if @user == current_user %>
+      <% if current_user?(@user) %>
 
        <%= link_to  "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-user" do %>
 
@@ -62,7 +62,7 @@
       <!--タブ部分-->
       <div class="wrap">
         <ul id = "tab-menu">
-          <% if current_user == @user %>
+          <% if current_user?(@user) %>
             <li><a href="#tab1" class="active">公開投稿</a></li>
 
             <li><a href="#tab2" class="">非公開投稿</a></li>
@@ -80,7 +80,7 @@
             <%= render "member/posts/publish_posts", publish_posts: @publish_posts %>
           </div>
 
-          <% if current_user == @user %>
+          <% if current_user?(@user) %>
             <div id = "tab2" class="tab">
             　 <%= render "member/posts/private_posts", private_posts: @private_posts %>
             </div>
