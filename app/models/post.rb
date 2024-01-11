@@ -60,19 +60,15 @@ class Post < ApplicationRecord
     end
   end
 
-  def self.valid_looks(search,word)
-    if search == "perfect_match"
-      @post = Post.where(is_published: true).where("store_name LIKE ?","#{word}")
-    elsif search == "partial_match"
-      @post = Post.where(is_published: true).where("store_name LIKE ?", "%#{word}%")
+  def self.valid_looks(word)
+    if word.present?
+      @post = Post.where(is_published: true).where("store_name LIKE ?","#{word}%")
     end
   end
 
-  def self.looks(search,word)
-    if search == "perfect_match"
-      @post = Post.where("store_name LIKE ?","#{word}")
-    elsif search == "partial_match"
-      @post = Post.where("store_name LIKE ?", "%#{word}%")
+  def self.looks(word)
+    if word.present?
+      @post = Post.where("store_name LIKE ?","#{word}%")
     end
   end
 

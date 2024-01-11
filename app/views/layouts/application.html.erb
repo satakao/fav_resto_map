@@ -21,14 +21,12 @@
       <% if admin_signed_in?%>
         <nav class="navbar navbar-admin navbar-expand-lg navbar-light fixed-top bg-light shadow rounded" >
       <% else %>
-        <!--nav class="navbar-user navbar-expand-lg fixed-top shadow rounded" -->
         <nav class="navbar navbar-user navbar-expand-lg navbar-light fixed-top bg-light shadow rounded">
       <% end %>
           <div class="container-fluid">
             <a href="/" class="navbar-brand"><%= image_tag('fav_resto_map.png', size: "70x70") %></a>
 
             <!--ユーザープロフィール-->
-
             <% if user_signed_in? %>
               <%= link_to user_path(current_user) do %>
                  &emsp;<%= image_tag current_user.get_profile_image, class:"rounded-circle", size:"50x50" %>
@@ -42,6 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
               <ul class="navbar-nav ml-auto">
+                
                 <% if user_signed_in? %>
 
                   <li data-turbolinks="false" class="nav-item">
@@ -122,8 +121,6 @@
 
                 <%= form_with url: searches_search_path, method: :get, class:"text-right" do |f| %>
                   <%= f.text_field :word %>
-                  <%= f.select :range, options_for_select([["User"],["Post"]]) %>
-                  <%= f.select :search, options_for_select([["完全一致","perfect_match"],["部分一致","partial_match"]]) %>
                   <%= f.submit "検索" %>
                 <% end %>
 
@@ -131,8 +128,6 @@
 
                 <%= form_with url: admin_searches_search_path, method: :get, class:"text-right" do |f| %>
                   <%= f.text_field :word %>
-                  <%= f.select :range, options_for_select([["User"],["Post"]]) %>
-                  <%= f.select :search, options_for_select([["完全一致","perfect_match"],["部分一致","partial_match"]]) %>
                   <%= f.submit "検索" %>
                 <% end %>
 

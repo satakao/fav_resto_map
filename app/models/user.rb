@@ -52,20 +52,17 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-
-  def self.valid_looks(search,word)
-    if search == "perfect_match"
-      @user = User.where(is_active: true).where("name LIKE ?","#{word}")
-    elsif search == "partial_match"
-      @user = User.where(is_active: true).where("name LIKE ?", "%#{word}%")
+  # member側検索
+  def self.valid_looks(word)
+    if word.present?
+      @user = User.where(is_active: true).where("name LIKE ?","#{word}%")
     end
   end
-
-  def self.looks(search,word)
-    if search == "perfect_match"
-      @user = User.where("name LIKE ?","#{word}")
-    elsif search == "partial_match"
-      @user = User.where("name LIKE ?", "%#{word}%")
+  
+  #admin側検索
+  def self.looks(word)
+    if word.present?
+      @user = User.where("name LIKE ?","#{word}%")
     end
   end
 end

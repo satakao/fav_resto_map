@@ -9,7 +9,9 @@
     <div class="col-12">
 
       <table class="table table-hover table-inverse">
-        <% if @range == "User" %>
+        
+        <!--検索でヒットしたのがUserか(User配列か)の確認-->
+         <% if @results.all? { |result| result.is_a?(User) } %>
 
             <tbody>
               <tr>
@@ -17,73 +19,71 @@
                 <th>名前</th>
               </tr>
 
-              <% @users.each do |user| %>
-
+              <% @results.each do |result| %>
                 <tr>
                   <td>
-                    <%=link_to user_path(user.id) do %>
-                      <%= image_tag user.get_profile_image, class:"rounded-circle", size:"80x80" %>
+                    <%=link_to user_path(result.id) do %>
+                      <%= image_tag result.get_profile_image, class:"rounded-circle", size:"80x80" %>
                     <% end %>
                   </td>
 
                   <td>
-                    <%=link_to user_path(user.id) do %>
-                      <%= user.name %>
+                    <%=link_to user_path(result.id) do %>
+                      <%= result.name %>
                     <% end %>
                   </td>
                 </tr>
+              <% end %>
 
+            </tbody>
+          
+          <!--検索でヒットしたのがPostか(Post配列か)の確認-->
+          <% elsif @results.all? { |result| result.is_a?(Post) } %>
+
+           <tbody>
+
+              <tr>
+                <th>ユーザー画像</th>
+                <th>名前</th>
+                <th>店名/料理名</th>
+                <th>投稿画像</th>
+                <th>ブックマーク</th>
+              </tr>
+
+              <% @results.each do |result| %>
+                <tr>
+                  <td><%= image_tag result.user.get_profile_image, class:"rounded-circle", size:"60x60" %></td>
+
+                  <td>
+                    <%=link_to user_path(result.user.id) do %>
+                      <%= result.user.name %>
+                    <% end %>
+                  </td>
+
+                  <td>
+                    <%=link_to post_path(result.id) do %>
+                      <%= result.store_name %>
+                    <% end %>
+                  </td>
+
+                  <td>
+                    <%=link_to post_path(result.id) do %>
+                      <%= image_tag result.image, class:"td-image", size:"100x100" %>
+                    <% end %>
+                  </td>
+
+                  <td>
+                    <div id="bookmark_button_<%= result.id %>">
+                      <%= render "member/bookmarks/bookmark_btn", post: result %>
+                    </div>
+                  </td>
+
+                </tr>
               <% end %>
 
             </tbody>
 
-        <% elsif @range == "Post"%>
-
-         <tbody>
-            <tr>
-              <th>ユーザー画像</th>
-              <th>名前</th>
-              <th>店名/料理名</th>
-              <th>投稿画像</th>
-              <th>ブックマーク</th>
-            </tr>
-
-            <% @posts.each do |post| %>
-
-            <tr>
-              <td><%= image_tag post.user.get_profile_image, class:"rounded-circle", size:"60x60" %></td>
-
-              <td>
-                <%=link_to user_path(post.user.id) do %>
-                  <%= post.user.name %>
-                <% end %>
-              </td>
-
-              <td>
-                <%=link_to post_path(post.id) do %>
-                  <%= post.store_name %>
-                <% end %>
-              </td>
-
-              <td>
-                <%=link_to post_path(post.id) do %>
-                  <%= image_tag post.image, class:"td-image", size:"100x100" %>
-                <% end %>
-              </td>
-
-              <td>
-                <div id="bookmark_button_<%= post.id %>">
-                  <%= render "member/bookmarks/bookmark_btn", post: post %>
-                </div>
-              </td>
-
-            </tr>
-
-            <% end %>
-
-          </tbody>
-
-        <% end %>
+          <% end %>
 
       </table>
 
