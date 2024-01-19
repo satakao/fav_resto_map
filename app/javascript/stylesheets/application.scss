@@ -141,7 +141,7 @@ main{
     padding-left: 110px;
   }
    .contents-title{
-  border-bottom: 8px solid rgb(255,165,0,0.5);
+    border-bottom: 8px solid rgb(255,165,0,0.5);
   }
 
   // var関連
@@ -151,7 +151,7 @@ main{
   }
   // 投稿関連
   .lg-none{
-  display: none !important;
+    display: none !important;
   }
 
 }
@@ -160,30 +160,44 @@ main{
 @media screen and (max-width: 992px) {
    // 共通
   .contents-title{
-  font-size: 20px;
-  border-bottom: 8px solid rgb(255,165,0,0.5);
+    font-size: 20px;
+    border-bottom: 8px solid rgb(255,165,0,0.5);
   }
 
- .rounded-circle{
+  .rounded-circle{
      width: 40px;
      height: 40px;
   }
 
   // 投稿関連
   .post-card{
-  margin : 20px;
-  width: 350px;
-  height: auto;
-  background-color: rgba(255,165,0,0.3);
+    margin : 20px;
+    width: 350px;
+    height: auto;
+    background-color: rgba(255,165,0,0.3);
   }
 
- .sm-none{
-  display: none !important;
+  .mini-post-card{
+    font-size: 8px;
+  }
+
+  .mini-post-image{
+    width: 80px;
+    height: 80px;
+  }
+
+  // .raty-stars img{
+  //   width: 10px;
+  //   height: 10px;
+  // }
+
+  .sm-none{
+    display: none !important;
   }
 
   th{
     font-size: 10px;
-     padding: 2px !important;
+    padding: 2px !important;
   }
 
   td{
@@ -195,13 +209,13 @@ main{
     height: 50px;
   }
   .comment{
-  margin-bottom: 0px;
+    margin-bottom: 0px;
   }
   #tab-menu li{
     font-size: 10px;
   }
-  
+
   .user-cog {
-  padding: 0 80px;
-}
+    padding: 0 80px;
+  }
 }

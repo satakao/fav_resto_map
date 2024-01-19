@@ -1,7 +1,7 @@
 <div class="container-fluid text-center">
 
   <p class="d-inline-block">タグリスト:</p>
-  <!--タグリスト-->
+  <!--タグ名リスト-->
   <% @tag_list.each do |tag|%>
 
     <%=link_to tag.name,post_search_tag_path(tag) %>
@@ -10,7 +10,7 @@
 
   <% end %>
 
-  <h3>タグ：<%=@tag.name%>に関する投稿一覧</h3>
+  <h3 class="contents-title">タグ：[<%=@tag.name%>] に関する投稿一覧</h3>
 
   <p>店名/料理名:</p>
 
@@ -25,13 +25,12 @@
           <%=link_to post_path(post.id) do %>
 
             <%= post.store_name.truncate(10) %><br>
-            <%= image_tag post.image,size:"150x150" %><br>
+            <%= image_tag post.image, class: "mini-post-image", size:"150x150" %><br>
 
           <% end %>
 
           <i class="fa-regular fa-bookmark"></i>ブックマーク数:<%= post.bookmarks.count %><br>
 
-          <!--５段階評価-->
           <%= render "member/posts/static_rate", post: post %>
 
           <%= post.address.truncate(10) %><br>
@@ -47,5 +46,3 @@
   </div>
 
 </div>
-<!--<div class="pagination pagination-sm justify-content-center">-->
-<!--       </div>-->

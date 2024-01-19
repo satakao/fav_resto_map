@@ -9,7 +9,7 @@
 
     <div class="col-12 tags text-center">
 
-      <!--タグリスト-->
+      <!--タグ名リスト-->
       <p class="d-inline-block">タグリスト:</p>
 
       <% @tag_list.each do |list|%>
@@ -21,7 +21,8 @@
       <% end %>
 
     </div>
-
+    
+    <!--投稿一覧-->
     <div class="col-12-fluid text-center">
 
       <% @posts.each do |post| %>
@@ -29,7 +30,7 @@
         <div class="post-card">
 
           <div class="user-icon pl-2 pt-2 d-flex justify-content-start align-items-center">
-            <%= image_tag post.user.get_profile_image, class:"rounded-circle", size:"60x60" %>
+            <%= image_tag post.user.get_profile_image, class: "rounded-circle", size:"60x60" %>
 
             <%=link_to user_path(post.user),class:"ml-2" do  %>
               <%= post.user.name %>
@@ -43,22 +44,20 @@
           <% end %>
           <p class="post-solid mt-2" ></p>
 
-          <!--ブックマークボタン-->
           <div class="d-inline-block" id="bookmark_button_<%= post.id %>">
             <%= render "member/bookmarks/bookmark_btn", post: post %>
           </div>
 
-          <!--５段階評価-->
           <%= render "member/posts/static_rate", post: post %>
 
           &emsp;<i class="fa-regular fa-comment"></i>コメント数：<%= post.post_comments.count %><br>
 
-            <!--配列に入っているタグを１つずつnameの型にして表示させる-->
-            <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i><br>
+          <!--配列に入っているタグを１つずつnameの型にして表示させる-->
+          <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i><br>
 
-            <%= post.address.truncate(15) %><br>
+          <%= post.address.truncate(15) %><br>
 
-            <%= post.description.truncate(20) %><br>
+          <%= post.description.truncate(20) %><br>
 
         </div>
 
@@ -69,6 +68,7 @@
   </div>
 
 </div>
+
 <span id="top-scroll">
   <a href="">
 　  <%= image_tag asset_path("top-scroll.png"), turbolinks: false, class: "arrow" %>

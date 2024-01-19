@@ -12,7 +12,7 @@
       </div>
 
       <div class="col-2 text-center">
-        <%= link_to "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class:"modal-mypage ml-auto" do %>
+        <%= link_to "#exampleModal", data: { toggle: "modal", target: "#exampleModal" }, class: "modal-mypage ml-auto" do %>
           <i class="fa-solid fa-circle-plus fa-3x"></i><br>
           <p class="sm-none">新規投稿</p><br>
         <% end %>
@@ -31,6 +31,7 @@
         </li>
       <% end %>
 
+      <!--住所検索窓-->
       <div class="col-12">
         <input id="address" type="textbox" value="東京都庁">
         <input type="button" value="Encode" onclick="codeAddress()">

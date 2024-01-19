@@ -23,7 +23,7 @@
                 <tr>
                   <td>
                     <%=link_to user_path(result.id) do %>
-                      <%= image_tag result.get_profile_image, class:"rounded-circle", size:"80x80" %>
+                      <%= image_tag result.get_profile_image, class: "rounded-circle", size: "80x80" %>
                     <% end %>
                   </td>
 
@@ -52,7 +52,7 @@
 
               <% @results.each do |result| %>
                 <tr>
-                  <td><%= image_tag result.user.get_profile_image, class:"rounded-circle", size:"60x60" %></td>
+                  <td><%= image_tag result.user.get_profile_image, class: "rounded-circle", size:"60x60" %></td>
 
                   <td>
                     <%=link_to user_path(result.user.id) do %>
@@ -68,7 +68,7 @@
 
                   <td>
                     <%=link_to post_path(result.id) do %>
-                      <%= image_tag result.image, class:"td-image", size:"100x100" %>
+                      <%= image_tag result.image, class: "td-image", size: "100x100" %>
                     <% end %>
                   </td>
 
