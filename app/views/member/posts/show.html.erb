@@ -24,13 +24,12 @@
           <% end %>
         </div>
 
-        <!--投稿編集・削除ボタン-->
+        <!--投稿編集・フォーム・削除ボタン-->
         <% if current_user?(@post.user) %>
 
           <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#exampleModal">
            投稿編集
           </button>
-
 
           <%= render 'member/posts/form', post: @post %>
 
@@ -64,7 +63,6 @@
 
         <% end %><br>
 
-         <!--５段階評価-->
         <%= render "member/posts/static_rate", post: @post %>
 
         <%= @post.address %><br>
@@ -75,7 +73,7 @@
 
     </div>
 
-    <!--コメント-->
+    <!--投稿へのコメント-->
     <div class="col-12 text-center">
 
        <div id="post_comments_index">
