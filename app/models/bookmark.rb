@@ -4,6 +4,5 @@ class Bookmark < ApplicationRecord
 
   # bookmarksテーブルに変更があった際にgeocodeを実行させる
   # after_validation :geocode
-  validates :user_id, uniqueness: {scope: :post_id}
-
+  validates :user_id, uniqueness: { scope: :post_id }
 end

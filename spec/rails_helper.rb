@@ -3,10 +3,10 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
-require'devise'
-require File.expand_path("spec/support/controller_macros.rb")
+require 'devise'
+require File.expand_path('spec/support/controller_macros.rb')
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -42,7 +42,7 @@ RSpec.configure do |config|
   # test_helperとmacrosをcontroller内で使えるように
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
-  config.extend ControllerMacros, :type => :controller
+  config.extend ControllerMacros, type: :controller
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

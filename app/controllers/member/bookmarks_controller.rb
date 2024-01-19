@@ -4,7 +4,6 @@ class Member::BookmarksController < ApplicationController
     @post = Post.find(params[:post_id])
     bookmark = current_user.bookmarks.new(post_id: @post.id)
     bookmark.save
-
   end
 
   def destroy

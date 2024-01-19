@@ -10,14 +10,12 @@ class Member::PostCommentsController < ApplicationController
       @user = @post.user
       render 'error', status: :unprocessable_entity
     end
-
   end
 
   def destroy
     @post = Post.find(params[:post_id])
     @post_comment = current_user.post_comments.find_by(post_id: @post.id)
     @post_comment = PostComment.find(params[:id]).destroy
-
   end
 
   private

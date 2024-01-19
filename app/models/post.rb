@@ -26,10 +26,10 @@ class Post < ApplicationRecord
     bookmarks.exists?(user_id: user.id)
   end
 
-  def self.bookmarked_post(user) # 1. モデル内での操作を開始
-    includes(:bookmarks) # 2. post_favorites テーブルを結合
-      .where(bookmarks: { user_id: user.id }) # 3. ユーザーがいいねしたレコードを絞り込み
-      .order(created_at: :desc) # 4. 投稿を作成日時の降順でソート
+  def self.bookmarked_post(user) # モデル内での操作を開始
+    includes(:bookmarks) # post_favorites テーブルを結合
+      .where(bookmarks: { user_id: user.id }) # ユーザーがいいねしたレコードを絞り込み
+      .order(created_at: :desc) # 投稿を作成日時の降順でソート
   end
 
   def tag_names=(tag_names)

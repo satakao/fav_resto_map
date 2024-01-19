@@ -1,4 +1,7 @@
 AllCops:
+
+require:
+  - rubocop-rails   # rubocop-railsを適用
 # 除外するディレクトリ（自動生成されたファイル）
 # デフォルト設定にある"vendor/**/*"が無効化されないように記述
  Exclude:
@@ -83,6 +86,6 @@ Style/FrozenStringLiteralComment:
 Naming/MethodParameterName:
  MinNameLength: 1
  
- # 日本語のコメントを
+ # 日本語のコメントを許可
 Style/AsciiComments:
   Enabled: false

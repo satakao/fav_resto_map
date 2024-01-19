@@ -6,20 +6,20 @@ class Member::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     users_mypage_path(current_user)
   end
 
-  def after_sign_out_path_for(resource)
+  def after_sign_out_path_for(_resource)
     root_path
   end
+
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
- 
   # GET /resource/sign_up
   # def new
   #   super

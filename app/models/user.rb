@@ -4,14 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts,dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_posts, through: :bookmarks, source: :post
   has_many :post_comments, dependent: :destroy
-  #フォローする際の記述
-  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  #フォローフォロワー一覧表示する記述
-  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # フォローする際の記述
+  has_many :relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  # フォローフォロワー一覧表示する記述
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
@@ -19,13 +19,13 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
 
-  GUEST_USER_EMAIL = "guest@example.com"
+  GUEST_USER_EMAIL = 'guest@example.com'
 
   # ゲストユーザー情報の検索、なければ作成して渡す
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.name = "guestuser"
+      user.name = 'guestuser'
     end
   end
 
@@ -34,35 +34,35 @@ class User < ApplicationRecord
   end
 
   def get_profile_image
-    (profile_image.attached?) ? profile_image : 'no_image.jpg'
+    profile_image.attached? ? profile_image : 'no_image.jpg'
   end
 
-  #フォローする時の処理
+  # フォローする時の処理
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
 
-  #フォロー外す時の処理
+  # フォロー外す時の処理
   def unfollow(user_id)
     relationships.find_by(followed_id: user_id).destroy
   end
 
-  #フォローしているかの判定
+  # フォローしているかの判定
   def following?(user)
     followings.include?(user)
   end
 
   # member側検索
   def self.valid_looks(word)
-    if word.present?
-      @user = User.where(is_active: true).where("name LIKE ?","#{word}%")
-    end
+    return unless word.present?
+
+    @user = User.where(is_active: true).where('name LIKE ?', "#{word}%")
   end
-  
-  #admin側検索
+
+  # admin側検索
   def self.looks(word)
-    if word.present?
-      @user = User.where("name LIKE ?","#{word}%")
-    end
+    return unless word.present?
+
+    @user = User.where('name LIKE ?', "#{word}%")
   end
 end

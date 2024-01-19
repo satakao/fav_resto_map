@@ -1,8 +1,23 @@
-<% bookmarked_posts.each do |post| %>
+<% if current_user?(user) %>
 
-  <%=link_to post_path(post.id) do %>
-    <%=image_tag post.image, size:'100x100' %>
+  <% bookmarked_posts.each do |post| %>
+
+    <%=link_to post_path(post.id) do %>
+      <%=image_tag post.image, size:'100x100' %>
+    <% end %>
+
+  <% end %>
+
+<% else %>
+
+  <% bookmarked_posts_private.each do |post| %>
+
+    <%=link_to post_path(post.id) do %>
+      <%=image_tag post.image, size:'100x100' %>
+    <% end %>
+
   <% end %>
 
 <% end %>
+
 

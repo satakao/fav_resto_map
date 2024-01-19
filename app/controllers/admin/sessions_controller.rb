@@ -3,19 +3,19 @@
 class Admin::SessionsController < Devise::SessionsController
   before_action :redirect_if_user_signed_in
   # before_action :configure_sign_in_params, only: [:create]
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     admin_path
   end
 
-  def after_sign_out_path_for(resource)
+  def after_sign_out_path_for(_resource)
     admin_session_path
   end
-  
+
   # ユーザーがログインしている状態だとadminのページに遷移させない
   def redirect_if_user_signed_in
-    if user_signed_in?
-      redirect_to root_path, alert: 'ユーザーログアウトしてから管理者にログインしてください.'
-    end
+    return unless user_signed_in?
+
+    redirect_to root_path, alert: 'ユーザーログアウトしてから管理者にログインしてください.'
   end
 
   # GET /resource/sign_in

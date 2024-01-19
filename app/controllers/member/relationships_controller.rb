@@ -1,6 +1,6 @@
 class Member::RelationshipsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
     current_user.follow(params[:user_id])
     redirect_to request.referer
@@ -20,6 +20,4 @@ class Member::RelationshipsController < ApplicationController
   #   user = User.find(params[:user_id])
   #   @user = user.followers
   # end
-
 end
-
