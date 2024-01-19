@@ -34,7 +34,7 @@ group :development, :test do
   # RSpec関連
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'spring-commands-rspec'
+  # gem 'spring-commands-rspec'
 end
 
 group :development do
@@ -63,9 +63,11 @@ end
 gem 'devise'
 gem 'dotenv-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
 group :production do
   gem 'mysql2'
 end
+
 gem 'geocoder'
 gem 'jquery-rails'
 gem 'kaminari', '~> 1.2.1'
