@@ -12,12 +12,11 @@ class Post < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
-  validates :store_name, presence:true, length: { maximum: 20 }
-  validates :description, presence:true, length: {maximum:100}
+  validates :store_name, presence: true, length: { maximum: 20 }
+  validates :description, presence: true, length: { maximum: 100 }
   # validates :is_published, presence:true
-  validates :address, presence:true, length: { minimum: 2, maximum: 50 }
+  validates :address, presence: true, length: { minimum: 2, maximum: 50 }
   validates :image, presence: true
-
 
   def bookmarked_by?(user)
     bookmarks.exists?(user_id: user.id)
@@ -30,7 +29,7 @@ class Post < ApplicationRecord
   end
 
   def tag_names=(tag_names)
-    self.tags = tag_names.map { |name| Tag.find_or_create_by(name: name) }
+    self.tags = tag_names.map { |name| Tag.find_or_create_by(name:) }
   end
 
   # Method to retrieve tag names as a comma-separated string
@@ -40,8 +39,7 @@ class Post < ApplicationRecord
 
   # 新しいタグの保存
   def save_tag(sent_tags)
-
-    current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    current_tags = tags.pluck(:name) unless tags.nil?
 
     old_tags = current_tags - sent_tags
     new_tags = sent_tags - current_tags
@@ -50,21 +48,19 @@ class Post < ApplicationRecord
 
     new_tags.each do |new|
       new_post_tag = Tag.find_or_create_by(name: new)
-      self.tags << new_post_tag
+      tags << new_post_tag
     end
-    
   end
 
   def self.valid_looks(word)
-    if word.present?
-      @post = Post.where(is_published: true).where("store_name LIKE ?","#{word}%")
-    end
+    return unless word.present?
+
+    @post = Post.where(is_published: true).where('store_name LIKE ?', "#{word}%")
   end
 
   def self.looks(word)
-    if word.present?
-      @post = Post.where("store_name LIKE ?","#{word}%")
-    end
-  end
+    return unless word.present?
 
+    @post = Post.where('store_name LIKE ?', "#{word}%")
+  end
 end

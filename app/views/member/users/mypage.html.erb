@@ -44,20 +44,22 @@
         let infowindow;
         const markers = [];
         let marker;
-
+        
+        // マップのピン(検索)情報の初期化
         function initMap() {
           geocoder = new google.maps.Geocoder();
 
-          // マップを初期化。map変数に割り付け
+          // マップの生成(表示時の中心座標)
           map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 35.6894807, lng: 139.6916863 },
             zoom: 12,
           });
-
+          // マップ上で使用する情報ポップアップウィンドウの作成
           infowindow = new google.maps.InfoWindow();
 
           let latLngArray = <%= raw @latlngs.to_json %>;
-
+          
+          // マーカーの作成
           latLngArray.forEach(function (latlng, index) {
             let marker = new google.maps.Marker({
               position: { lat: latlng[0], lng: latlng[1] },

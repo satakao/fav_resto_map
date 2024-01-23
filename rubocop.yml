@@ -1,4 +1,5 @@
 AllCops:
+ DisplayCopNames: true
 
 require:
   - rubocop-rails   # rubocop-railsを適用
@@ -11,7 +12,7 @@ require:
    - "bin/*"
    - "node_modules/**/*"
    - "Gemfile"
-  
+
 
 
 # 1行あたりの文字数をチェックする
@@ -22,8 +23,8 @@ Layout/LineLength:
    - "Rakefile"
    - "spec/rails_helper.rb"
    - "spec/spec_helper.rb"
-   - "env"
-   - "gitignore"
+   - ".env"
+   - ".gitignore"
 
 # RSpecは1つのブロックあたりの行数が多くなるため、チェックの除外から外す
 # ブロック内の行数をチェックする
@@ -85,7 +86,3 @@ Style/FrozenStringLiteralComment:
 # メソッドパラメータ名の最小文字数を設定
 Naming/MethodParameterName:
  MinNameLength: 1
- 
- # 日本語のコメントを許可
-Style/AsciiComments:
-  Enabled: false

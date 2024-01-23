@@ -1,6 +1,5 @@
 class Member::SearchesController < ApplicationController
   def search
-
     @search = params[:word]
 
     if user_signed_in?
@@ -12,7 +11,5 @@ class Member::SearchesController < ApplicationController
       @results = User.looks(params[:word]) + Post.looks(params[:word])
 
     end
-
   end
-
 end
