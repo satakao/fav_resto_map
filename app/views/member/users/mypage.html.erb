@@ -18,7 +18,6 @@
         <% end %>
       </div>
 
-
       <!--サイドバーにこのmypageを表示した時のみ表示させる-->
       <% content_for :add_content do %>
         <li class="nav-side-link2 pt-5 pb-4">
@@ -44,7 +43,7 @@
         let infowindow;
         const markers = [];
         let marker;
-        
+
         // マップのピン(検索)情報の初期化
         function initMap() {
           geocoder = new google.maps.Geocoder();
@@ -58,7 +57,7 @@
           infowindow = new google.maps.InfoWindow();
 
           let latLngArray = <%= raw @latlngs.to_json %>;
-          
+
           // マーカーの作成
           latLngArray.forEach(function (latlng, index) {
             let marker = new google.maps.Marker({
@@ -69,21 +68,25 @@
 
             markers.push(marker); // マーカーを配列に保存
 
+            // クリック時にshowInfoWindow(marker)を呼び出し
             google.maps.event.addListener(marker, 'click', function (event) {
               showInfoWindow(marker);
             });
           });
         }
 
+        // 特定の緯度経度を取得してウィンドウ表示させる
         function showInfoWindow(marker) {
           const xhr = new XMLHttpRequest();
           xhr.open('GET', "/latlngsearch/" + marker.position.lat() + "/" + marker.position.lng() + ".json", true);
-          xhr.send(null);
+          xhr.send(null);//HTTPリクエスト
 
+          // サーバー受信成功時にrubyから投稿情報をjson形式に変換して格納
           xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
               let post_datas = JSON.parse(xhr.responseText);
 
+              // rubyからのデータが空ではない場合、ウィンドウ表示
               if (post_datas.length === 0) {
                 infowindow.setContent('投稿データがありません');
               } else {
@@ -107,9 +110,11 @@
 
         let geocoder;
 
+        // 入力フォームの値を取得
         function codeAddress() {
           let inputAddress = document.getElementById('address').value;
 
+          // 入力フォームの値を座標変換できたらピンを立てて座標中心のマップを表示
           geocoder.geocode({ 'address': inputAddress }, function (results, status) {
             if (status == 'OK') {
               map.setCenter(results[0].geometry.location);

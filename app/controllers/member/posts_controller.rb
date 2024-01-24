@@ -57,6 +57,7 @@ class Member::PostsController < ApplicationController
   end
 
   def search
+    # HTTPリクエストから緯度経度を取得
     lat = params[:lat].to_f
     lng = params[:lng].to_f
 
@@ -72,17 +73,15 @@ class Member::PostsController < ApplicationController
 
       # pushメソッドで配列に値を入れる
       @marker_arr.push({
-                         user_name: post.user.name,
-                         store_name: post.store_name,
-                         description: post.description,
-                         latitude: post.latitude,
-                         longitude: post.longitude,
-                         address: post.address,
-                         is_published: post.is_published,
-                         image_url:
-                         # Add more attributes as needed
-                       })
-      # @marker_arr.push(post)
+        user_name: post.user.name,
+        store_name: post.store_name,
+        description: post.description,
+        latitude: post.latitude,
+        longitude: post.longitude,
+        address: post.address,
+        is_published: post.is_published,
+        image_url:
+      })
     end
   end
 

@@ -34,6 +34,7 @@ group :development, :test do
   # RSpec関連
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  
 end
 
 group :development do
