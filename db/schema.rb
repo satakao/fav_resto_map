@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20_240_101_052_853) do
     t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness',
                                                     unique: true
   end
-
+  
   create_table 'active_storage_blobs', force: :cascade do |t|
     t.string 'key', null: false
     t.string 'filename', null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20_240_101_052_853) do
     t.datetime 'created_at', null: false
     t.index ['key'], name: 'index_active_storage_blobs_on_key', unique: true
   end
-
+  
   create_table 'active_storage_variant_records', force: :cascade do |t|
     t.bigint 'blob_id', null: false
     t.string 'variation_digest', null: false
