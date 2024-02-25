@@ -1,6 +1,7 @@
 class Member::PostsController < ApplicationController
   before_action :authenticate_user!
 
+
   def index
     # 利用有効になっているユーザーで、そのユーザーの投稿で表示にしている投稿一覧を表示
     @posts = Post.includes(:user).where(is_published: true, users: { is_active: true })
@@ -52,8 +53,13 @@ class Member::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id]).destroy
-    redirect_to posts_path, notice: '投稿を削除しました'
+    @post = Post.find(params[:id])
+    if current_user == @post.user
+      @post.destroy
+      redirect_to posts_path, notice: '投稿を削除しました'
+    else
+      redirect_to posts_path, alert: '他のユーザーの投稿は削除できません'
+    end
   end
 
   def search
